@@ -11,7 +11,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry:{
         bundle :[
-          Path.resolve(__dirname, 'src/index.js')
+            Path.resolve(__dirname, 'src/index.js')
         ]
     },
     output: {
@@ -40,46 +40,46 @@ module.exports = {
     },
     module: {
         loaders: [
-            {
-                test: /\.(jsx|js)$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                noParse: "/node_modules/",
-                include: Path.join(__dirname, 'src/')
-            },
-            {
-                test: /\.css$/,
-                loader: 'style-loader!css-loader'
-            },
-            {
-                test: /\.styl$/,
-                loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus-loader'
-            },
-            {
-                test: /\.json$/,
-                loader: 'json'
-            },
-            {
-                test: /\.(ttf|eot|png|gif|jpg|woff|woff2|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-                loader: "url-loader?limit=8192"
-            },
-            {
-                test: /\.(html|png)$/,
-                loader: "file?name=[path][name].[ext]&context=./src"
-            }
+        {
+            test: /\.(jsx|js)$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+            noParse: "/node_modules/",
+            include: Path.join(__dirname, 'src/')
+        },
+        {
+            test: /\.css$/,
+            loader: 'style-loader!css-loader'
+        },
+        {
+            test: /\.styl$/,
+            loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!stylus-loader'
+        },
+        {
+            test: /\.json$/,
+            loader: 'json'
+        },
+        {
+            test: /\.(ttf|eot|png|gif|jpg|woff|woff2|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: "url-loader?limit=8192"
+        },
+        {
+            test: /\.(html|png)$/,
+            loader: "file?name=[path][name].[ext]&context=./src"
+        }
         ]
     },
     plugins: [
         new webpack.DefinePlugin({
-          'process.env.NODE_ENV': '"production"'
+            'process.env.NODE_ENV': '"production"'
         }),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.UglifyJsPlugin(),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
         new HtmlWebpackPlugin({
-          template: 'src/index.ejs',
-          inject: 'body'
+            template: 'src/index.ejs',
+            inject: 'body'
         })
     ],
 };

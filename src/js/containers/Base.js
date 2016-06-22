@@ -9,29 +9,29 @@ import classNames from 'classnames';
 import * as BaseActions from '../actions/base';
 
 class Master extends Component {
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return (
-      <div>
-        Hello World
-        <Link to={`/test`}>not found</Link>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                Hello World
+                <Link to={`/test`}>not found</Link>
+            </div>
+        );
+    }
 }
 
 
 function mapStateToProps(state) {
-  return {
+    return {
 
-  };
+    };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(BaseActions, dispatch);
+    return bindActionCreators(BaseActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Master);
