@@ -14,3 +14,4 @@ tmp-bower-repo/
 tmp-docs-repo/
 .babel-cache/
 .coverage/
+*.*.sw[op]

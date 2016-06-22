@@ -19,7 +19,7 @@ module.exports = {
     },
     // require without Filename Extension
     resolve: {
-        extensions: ['', '.js', '.jsx', '.styl'],
+        extensions: ['', '.js', '.jsx', '.styl', '.html', '.ejs'],
         packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
     },
     module: {

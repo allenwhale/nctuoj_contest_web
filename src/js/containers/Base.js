@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Router, Route, Link, browserHistory } from 'react-router'
 
-import style from './Base.styl';
+//import style from './Base.styl';
 import classNames from 'classnames';
 
 import * as BaseActions from '../actions/base';

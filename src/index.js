@@ -9,10 +9,10 @@ const store = configureStore();
 if (typeof(document) !== 'undefined' && window) {
     window.onload = () => {
         return render(
-                <Provider store={store}>
+            <Provider store={store}>
                 <RootRouter/>
-                </Provider>,
-                document.getElementById('app')
-                );
+            </Provider>,
+            document.getElementById('app')
+        );
     };
 }

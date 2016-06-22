@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import rp from 'request-promise'
 
 
 const WebAPIUtil = {
