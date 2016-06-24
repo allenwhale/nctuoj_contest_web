@@ -8,7 +8,6 @@ import submitForm from './SubmitForm';
 export default combineReducers({
     base,
     login,
-    code,
     problem,
     submitForm,
     routing,

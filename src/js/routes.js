@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import App from './containers/App';
-import Base from './containers/Base';
 import NotFound from './components/NotFound';
 import Frame from './containers/Frame';
 import Contest from './containers/Contest';
