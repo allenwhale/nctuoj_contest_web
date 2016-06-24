@@ -6,7 +6,6 @@ import NotFound from './components/NotFound';
 import Frame from './containers/Frame';
 import Contest from './containers/Contest';
 import Problem from './containers/Problem';
-import Code from './containers/Code';
 
 function authenticate(nextState, replaceState) {
     /* do Authenticate

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
-import Code from './../containers/Code';
 import Codemirror from 'codemirror';
 import * as SubmitFormActions from './../actions/SubmitForm';
 require('codemirror/mode/clike/clike');
