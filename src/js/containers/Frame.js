@@ -93,11 +93,13 @@ class Frame extends Component {
 							<h3>Developer</h3>
 							<p>ChunKai, Chen @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
 							<p>Ho-Lun, Wu @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
+							<p>EASY @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
 						</Col>
 						<Col md={2}>
 							<h3>Contact us</h3>
 							<p><a href="mailto:wingemerald@gmail.com">wingemerald@gmail.com</a></p>
 							<p><a href="mailto:allencat850502@gmail.com">allencat850502@gmail.com</a></p>
+                            <p><a href="mailto:easy@easy.com">easy@easy.com</a></p>
 						</Col>
 						<Col md={3}>
 							<h3>Others</h3>
