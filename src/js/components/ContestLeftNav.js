@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import { Nav, NavItem } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -6,17 +7,23 @@ export default class Base extends Component {
 
     constructor(props) {
         super(props);
-        console.log('active', this.props.activeKey);
     }
 
     render() {
         return (
-            <Nav bsStyle="pills" stacked activeKey={ this.props.activeKey }>
-                <NavItem eventKey={0} href="/"> Home </NavItem>
+            <Nav bsStyle="pills" stacked>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
+                <li>
+                    <Link to="/submissions/">Submissions</Link>
+                </li>
                 {
                     this.props.problemList.map((row) => (
-                        <NavItem eventKey={ row.id }>{ row.title }</NavItem>
-                    ))
+                        <li>
+                            <Link to={`/problems/${row.id}/`}>{ row.title }</Link>
+                        </li>
+                        ))
                 }
             </Nav>
         );

@@ -24,12 +24,10 @@ function getFormValue(args, form) {
 class Problem extends Component {
     constructor(props) {
         super(props);
-        this.getProblemList = this.getProblemList.bind(this);
         this.getCurrentProblem = this.getCurrentProblem.bind(this);
         this.submit = this.submit.bind(this);
         this.openSubmitForm = this.openSubmitForm.bind(this);
         this.closeSubmitForm = this.closeSubmitForm.bind(this);
-        this.getProblemList();
         this.getCurrentProblem();
     }
 
@@ -39,10 +37,6 @@ class Problem extends Component {
         } else {
             setTimeout(this.getCurrentProblem, 100);
         }
-    }
-
-    getProblemList() {
-        this.props.dispatch(ProblemActions.getProblemList());
     }
 
     submit() {
@@ -64,85 +58,73 @@ class Problem extends Component {
     render() {
         return (
             <div>
-                <Grid fluid={true}>
-                    <Row>
-                        <Col md={2}> 
-                            <ContestLeftNav 
-                                problemList={ this.props.problem.problemList }
-                                activeKey={ this.props.params.id }
-                            />
-                        </Col>
-                        <Col md={10}>
-                            <h1 className={classNames('text-center')}>
-                                { this.props.problem.currentProblem.title }
-                            </h1>
-                            <Row>
-                                <Col md={2}>
-                                    <Button 
-                                        bsClass="btn btn-default btn-sm btn-block"
-                                        onClick={this.openSubmitForm}
-                                    >Submit</Button>
-                                </Col>
-                                <Col md={2}>
-                                    <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-                                    <iframe src={`http://140.113.89.233:9000/${this.props.params.id}.pdf`}
-                                        style={{width: '100%', height: '768px'}}
-                                    ></iframe>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-                                    <Panel header="Execute Type">
-                                        <Table responsive>
-                                            <thead>
-                                                <tr>
-                                                    <th>Lang</th>
-                                                    <th>Description</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>C</td>
-                                                    <td>Basic C</td>
-                                                </tr>
-                                            </tbody>
-                                        </Table>
-                                    </Panel>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12}>
-									<Panel header="Testdata">
-										<Table responsive>
-											<thead>
-												<tr>
-													<th>#</th>
-													<th>Time Limit</th>
-													<th>Memory Limit</th>
-													<th>Output Limit</th>
-													<th>Score</th>
-												</tr>
-											</thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>1000</td>
-                                                    <td>1000</td>
-                                                    <td>1000</td>
-                                                    <td>100</td>
-                                                </tr>
-                                            </tbody>
-										</Table> 
-                                    </Panel>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </Grid>
+                <h1 className={classNames('text-center')}>
+                    { this.props.problem.currentProblem.title }
+                </h1>
+                <Row>
+                    <Col md={2}>
+                        <Button 
+                            bsClass="btn btn-default btn-sm btn-block"
+                            onClick={this.openSubmitForm}
+                        >Submit</Button>
+                    </Col>
+                    <Col md={2}>
+                        <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <iframe src={`http://140.113.89.233:9000/${this.props.params.id}.pdf`}
+                            style={{width: '100%', height: '768px'}}
+                        ></iframe>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Panel header="Execute Type">
+                            <Table responsive>
+                                <thead>
+                                    <tr>
+                                        <th>Lang</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>C</td>
+                                        <td>Basic C</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Panel>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Panel header="Testdata">
+                            <Table responsive>
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Time Limit</th>
+                                        <th>Memory Limit</th>
+                                        <th>Output Limit</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>1000</td>
+                                        <td>1000</td>
+                                        <td>1000</td>
+                                        <td>100</td>
+                                    </tr>
+                                </tbody>
+                            </Table> 
+                        </Panel>
+                    </Col>
+                </Row>
                 <SubmitForm 
                     ref="submitForm" 
                     show={this.props.problem.submitFormShow} 

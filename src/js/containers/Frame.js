@@ -60,7 +60,7 @@ class Frame extends Component {
             <Navbar style={{margin: 0}}>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">Contest</a>
+                        <Link to="/">Contest</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
