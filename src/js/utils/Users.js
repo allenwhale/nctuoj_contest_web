@@ -10,10 +10,6 @@ const Users = {
     .then((res) => {
         return JSON.parse(res);
     })
-    //.catch((err) => {
-        //console.log('eror', err);
-        //return null;
-    //})
 };
 
 export default Users; 

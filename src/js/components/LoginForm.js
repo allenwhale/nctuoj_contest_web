@@ -7,10 +7,6 @@ export default class Base extends Component {
         super(props);
     }
 
-    Close() {
-        console.log('closeeee');
-    }
-
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
