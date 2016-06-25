@@ -26,9 +26,10 @@ class UserFrame extends Component {
                 <Grid fluid={true}>
                     <Row>
                         <Col md={2}>
+                            { this.props.login.account.isLOGIN ?
                             <ContestLeftNav 
                                 problemList={this.props.problem.problemList}
-                            />
+                            /> : null }
                         </Col> 
                         <Col md={10}>
                             { this.props.children }
@@ -43,6 +44,7 @@ class UserFrame extends Component {
 
 function mapStateToProps(state) {
     return {
+        login: state.login,
         problem: state.problem,
     };
 }

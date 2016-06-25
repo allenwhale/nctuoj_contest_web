@@ -11,13 +11,13 @@ import * as ProblemActions from './../actions/Problem';
 class SubmissionList extends Component {
     constructor(props) {
         super(props);
-        this.getSubmissions = this.getSubmissions.bind(this);
-        this.getSubmissions();
+        this.getSubmissionList = this.getSubmissionList.bind(this);
+        this.getSubmissionList();
     }
 
 
-    getSubmissions() {
-        this.props.dispatch(SubmissionActions.getSubmissions());
+    getSubmissionList() {
+        this.props.dispatch(SubmissionActions.getSubmissionList());
     }
 
     onClick(row) {
@@ -28,7 +28,7 @@ class SubmissionList extends Component {
     render() {
         return (
             <div>
-                <Table>
+                <Table responsive striped hover >
                     <thead>
                         <tr>
                             <th>#</th>

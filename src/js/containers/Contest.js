@@ -43,6 +43,7 @@ class Contest extends Component {
                         </Panel>
                     </Col> 
                 </Row>
+                { this.props.login.account.isLOGIN ? 
                 <Row>
                     <Col md={12}>
                         <Panel header="Problems">
@@ -55,7 +56,7 @@ class Contest extends Component {
                             </ListGroup> 
                         </Panel>
                     </Col> 
-                </Row>
+                </Row> : null }
             </div>
         );
     }
@@ -64,6 +65,7 @@ class Contest extends Component {
 
 function mapStateToProps(state) {
     return {
+        login: state.login,
         problem: state.problem,
     };
 }

@@ -17,6 +17,7 @@ export default handleActions({
     SIGN_IN: {
         next(state, action) {
             localStorage.setItem("account", JSON.stringify(action.payload['msg']));
+            window.location = window.location;
             return {
                 ...state,
                 account: action.payload['msg'],

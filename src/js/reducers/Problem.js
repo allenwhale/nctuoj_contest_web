@@ -4,7 +4,7 @@ import {
 
 const initialState = {
     problemList: [],
-    currentProblem: {},
+    problem: {},
     submitFormShow: false,
 };
 
@@ -13,7 +13,6 @@ export default handleActions({
 
     GET_PROBLEM_LIST: {
         next(state, action) {
-            console.log('test', action);
             return {
                 ...state,
                 problemList: action.payload['msg'],
@@ -27,18 +26,18 @@ export default handleActions({
         }
     },
 
-    GET_CURRENT_PROBLEM: (state, action) => {
-        const getCurrentProblem = () => {
-            for(var i in state.problemList){
-                if(state.problemList[i].id == action.payload){
-                    return state.problemList[i];
-                }
+    GET_PROBLEM: {
+        next(state, action) {
+            return {
+                ...state,            
+                problem: action.payload['msg'],
             }
-            return {};
-        };
-        return {
-            ...state,            
-            currentProblem: getCurrentProblem(),
+        },
+        throw(state, action) {
+            return {
+                ...state,
+                problem: {},
+            };
         }
     },
 

@@ -4,15 +4,29 @@ import {
 
 const initialState = {
     submissionList: [],
+    submission: {}
 };
 
 
 export default handleActions({
 
-    GET_SUBMISSIONS: (state, action) => {
-        return {
-            submissionList: action.payload['msg'],
-        };
+    GET_SUBMISSION: {
+
+    },
+
+    GET_SUBMISSION_LIST: {
+        next(state, action) {
+            return {
+                ...state,
+                submissionList: action.payload['msg'],
+            }
+        },
+        throw(state, action) {
+            return {
+                ...state,
+                submissionList: [],
+            };
+        }
     },
 
     default: (state, action) => {

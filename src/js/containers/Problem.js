@@ -24,19 +24,15 @@ function getFormValue(args, form) {
 class Problem extends Component {
     constructor(props) {
         super(props);
-        this.getCurrentProblem = this.getCurrentProblem.bind(this);
+        this.getProblem = this.getProblem.bind(this);
         this.submit = this.submit.bind(this);
         this.openSubmitForm = this.openSubmitForm.bind(this);
         this.closeSubmitForm = this.closeSubmitForm.bind(this);
-        this.getCurrentProblem();
+        this.getProblem();
     }
 
-    getCurrentProblem() {
-        if(this.props.problem.problemList.length){
-            this.props.dispatch(ProblemActions.getCurrentProblem(this.props.params.id));
-        } else {
-            setTimeout(this.getCurrentProblem, 100);
-        }
+    getProblem() {
+        this.props.dispatch(ProblemActions.getProblem({id: this.props.params.id}));
     }
 
     submit() {
@@ -59,7 +55,7 @@ class Problem extends Component {
         return (
             <div>
                 <h1 className={classNames('text-center')}>
-                    { this.props.problem.currentProblem.title }
+                    { this.props.problem.problem.title }
                 </h1>
                 <Row>
                     <Col md={2}>
