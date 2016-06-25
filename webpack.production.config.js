@@ -74,7 +74,11 @@ module.exports = {
             'process.env.NODE_ENV': '"production"'
         }),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            output: {
+                comments: false,
+            }
+        }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),
         new HtmlWebpackPlugin({
