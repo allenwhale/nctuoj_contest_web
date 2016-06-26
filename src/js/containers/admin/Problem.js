@@ -43,19 +43,30 @@ class Problem extends Component {
             <div>
                 <Grid fluid={true}>
                     <Row>
-                        <Col md={10} mdOffset={1}>
+                        <Col md={8} mdOffset={1}>
                             <h2>
-                                Problem Title
+                                { this.props.problem.problem.title }
                             </h2>
                         </Col> 
+                        <Col md={2}>
+                            <h2>
+                                <Link className="btn btn-default" to="/admin/problems/">Back to List</Link>
+                            </h2>
+                        </Col>
                     </Row>
+                    {Object.keys(this.props.problem.problem).length != 0 ?
                     <Row>
                         <Col md={10} mdOffset={1}>
-                                            { this.props.problem.errMsg != '' ? 
-                                                <Alert bsStyle="danger">
-                                                    { this.props.problem.errMsg }
-                                                </Alert> : null
-                                            }
+                            { this.props.problem.errMsg != '' ? 
+                                <Alert bsStyle="danger">
+                                    { this.props.problem.errMsg }
+                                </Alert> : null
+                            }
+                            { this.props.problem.successMsg != '' ? 
+                                <Alert bsStyle="success">
+                                    { this.props.problem.successMsg }
+                                </Alert> : null
+                            }
                             <Form ref="basic">
                                 <input type="hidden" name="token" value={this.props.login.account.token} />
                                 <input type="hidden" name="id" value={this.props.params.id} />
@@ -64,7 +75,7 @@ class Problem extends Component {
                                     <Col md={3}>
                                         <FormGroup>
                                             <ControlLabel>Title</ControlLabel>
-                                            <FormControl name="title" type="text" className="form-control" value="test" />
+                                            <input name="title" type="text" className="form-control" defaultValue={this.props.problem.problem.title} />
                                         </FormGroup>
                                     </Col>
                                     <Col md={3}>
@@ -76,7 +87,7 @@ class Problem extends Component {
                                     <Col md={3}>
                                         <FormGroup>
                                             <ControlLabel>Score Type</ControlLabel>
-                                            <select name="score_type" value={this.props.problem.problem.score_type} className="form-control">
+                                            <select name="score_type" defaultValue={this.props.problem.problem.score_type} className="form-control">
                                                 <option value="1">sum</option>
                                                 <option value="2">min</option>
                                             </select>
@@ -92,7 +103,7 @@ class Problem extends Component {
                             </Form>
                             <Button bsStyle="success" onClick={this.submitBasic}>Submit</Button>
                         </Col>
-                    </Row>
+                    </Row> : null }
                 </Grid>
             </div>
         );

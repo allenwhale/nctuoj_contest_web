@@ -7,18 +7,12 @@ const initialState = {
     problem: {},
     submitFormShow: false,
     newProblemFormShow: false,
-    errMsgShow: false,
+    errMsg: '',
+    successMsg: '',
 };
 
 
 export default handleActions({
-
-    CLOSE_PROBLEM_ERR_MSG: (state, action) => {
-        return {
-            ...state,
-            errMsg: '',
-        };
-    },
 
     GET_PROBLEM_LIST: {
         next(state, action) {
@@ -26,6 +20,7 @@ export default handleActions({
                 ...state,
                 problemList: action.payload.msg,
                 errMsg: '',
+                successMsg: '',
             };
         },
         throw(state, action) {
@@ -45,6 +40,7 @@ export default handleActions({
                 problemList: state.problemList.concat([action.payload.msg]),
                 newProblemFormShow: false,
                 errMsg: '',
+                successMsg: 'Success',
             };
         },
         throw(state, action) {
@@ -52,6 +48,7 @@ export default handleActions({
             return {
                 ...state,
                 errMsg: action.payload.msg,
+                successMsg: '',
             }
         }
     },
@@ -76,6 +73,7 @@ export default handleActions({
                 problemList: replcaeProblem(state.problemList, action.payload.msg),
                 newProblemFormShow: false,
                 errMsg: '',
+                successMsg: 'Update Successfully',
             };
         },
         throw(state, action) {
@@ -83,6 +81,7 @@ export default handleActions({
             return {
                 ...state,
                 errMsg: action.payload.msg,
+                successMsg: '',
             }
         }
     },
@@ -92,6 +91,7 @@ export default handleActions({
             return {
                 ...state,            
                 problem: action.payload.msg,
+                successMsg: '',
             }
         },
         throw(state, action) {
