@@ -77,7 +77,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             output: {
                 comments: false,
-            }
+            },
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),

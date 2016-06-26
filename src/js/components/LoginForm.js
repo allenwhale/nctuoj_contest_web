@@ -12,13 +12,13 @@ export default class Base extends Component {
             <Modal show={this.props.show} onHide={this.props.onHide}>
                 <Modal.Header>Login</Modal.Header>
                 <Modal.Body>
-                    <Form horizontal>
+                    <Form ref="form" horizontal>
                         <FormGroup controlId="formHorizontalEmail">
                             <Col componentClass={ControlLabel} sm={2}>
                                 Account
                             </Col>
                             <Col sm={10}>
-                                <FormControl type="account" placeholder="Account" ref="account"/>
+                                <input className="form-control" type="account" placeholder="Account" name="account"/>
                             </Col>
                         </FormGroup>
 
@@ -27,7 +27,7 @@ export default class Base extends Component {
                                 Password
                             </Col>
                             <Col sm={10}>
-                                <FormControl type="password" placeholder="Password" ref="password"/>
+                                <input className="form-control"  type="password" placeholder="Password" name="password"/>
                             </Col>
                         </FormGroup>
                         <FormGroup>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
 import Codemirror from 'codemirror';
-import * as SubmitFormActions from './../actions/SubmitForm';
 require('codemirror/mode/clike/clike');
 require('codemirror/mode/python/python');
 require('codemirror/keymap/vim');
@@ -82,6 +81,7 @@ export default class SubmitForm extends Component {
                                 this.props.onSubmit();
                             }}
                         >Submit</Button>
+                        <Button bsStyle="warning" onClick={this.props.onHide}>Cancel</Button>
                     </Modal.Body>
                 </Modal>
             </div>

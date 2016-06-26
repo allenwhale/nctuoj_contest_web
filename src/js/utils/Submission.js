@@ -1,13 +1,11 @@
-import rp from 'request-promise';
+import fetch from 'isomorphic-fetch';
+import qs from 'qs';
+import Config from './Config';
 
 const Submission = {
-
-    getSubmissionList: () => rp({
-        url: 'http://140.113.89.233:9000/submissions.json?' + (new Date()).toString(),
-        method: 'get',
-        withCredentials: false
-    })
-    .then((res) => (JSON.parse(res))),
+    
+    getSubmissionList: (data) => {
+    },
 
 };
 

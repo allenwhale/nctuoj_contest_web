@@ -1,15 +1,12 @@
-import rp from 'request-promise';
-const usersBaseUrl = 'http://140.113.89.233:3019/api/users';
+import fetch from 'isomorphic-fetch';
+import Config from './Config';
 const Users = {
-    signIn: (data) => rp({
-        url: `${usersBaseUrl}/signin/`,
+
+    signIn: (data) => fetch(`${Config.baseUrl}/api/users/signin/`, {
         method: 'POST',
-        form: data,
-        withCredentials: false,
-    })
-    .then((res) => {
-        return JSON.parse(res);
-    })
+        body: data,
+    }).then(Config.checkStatus),
+
 };
 
 export default Users; 

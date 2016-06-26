@@ -40,13 +40,13 @@ class Frame extends Component {
     }
 
     signIn() {
-        var args = ['account', 'password'];
-        var data = getFormValue(args, this.refs.loginForm);
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.loginForm.refs.form));
         this.props.dispatch(LoginActions.signIn(data));
     }
 
     signOut() {
         this.props.dispatch(LoginActions.signOut());
+        window.location = window.location;
     }
 
     checkAccount() {
