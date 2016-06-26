@@ -1,6 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
 
 import { Grid, Row, Col } from 'react-bootstrap';
 import * as ProblemActions from './../actions/Problem';
@@ -32,7 +32,7 @@ class UserFrame extends Component {
                             { this.props.login.account.isLOGIN ?
                             <ContestLeftNav 
                                 problemList={this.props.problem.problemList}
-                            /> : null }
+                            /> : "" }
                         </Col> 
                         <Col md={10}>
                             { this.props.children }

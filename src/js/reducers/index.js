@@ -11,5 +11,6 @@ export default combineReducers({
     login,
     problem,
     submission,
+    execute,
     routing,
 });

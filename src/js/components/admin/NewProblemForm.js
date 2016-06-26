@@ -15,7 +15,9 @@ export default class NewProblemForm extends Component {
             <div>
                 <Modal show={this.props.show} onHide={this.props.onHide}>
                     <Modal.Header>
-                        New Problem
+                        <Modal.Title>
+                            New Problem 
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Grid fluid={true}>

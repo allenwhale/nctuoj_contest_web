@@ -1,23 +1,14 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import DevTools from './DevTools';
 import ReactDOM from 'react-dom';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
 import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
 import { Grid, Row, Col } from 'react-bootstrap';
 import LoginForm from '../components/LoginForm';
 import classNames from 'classnames';
 
 import * as LoginActions from '../actions/Login';
-
-function getFormValue(args, form) {
-    var data = {};
-    for(var i in args){
-        data[args[i]] = ReactDOM.findDOMNode(form.refs[args[i]]).value;
-    }
-    return data;
-}
 
 
 class Frame extends Component {
@@ -46,7 +37,6 @@ class Frame extends Component {
 
     signOut() {
         this.props.dispatch(LoginActions.signOut());
-        window.location = window.location;
     }
 
     checkAccount() {
@@ -76,7 +66,6 @@ class Frame extends Component {
             </Navbar>
             <LoginForm 
                 ref="loginForm"
-                loginErr={this.props.login.loginErr}
                 show={this.props.login.loginFormShow} 
                 onHide={this.closeLoginForm}
                 signIn={this.signIn}
@@ -124,6 +113,5 @@ function mapStateToProps(state) {
         login: state.login,
     };
 }
-
 
 export default connect(mapStateToProps)(Frame);

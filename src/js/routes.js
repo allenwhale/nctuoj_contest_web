@@ -10,8 +10,10 @@ import Contest from './containers/Contest';
 import Problem from './containers/Problem';
 import SubmissionList from './containers/SubmissionList';
 import Submission from './containers/Submission';
+import AdminFrame from './components/admin/AdminFrame';
 import AdminProblemList from './containers/admin/ProblemList';
 import AdminProblem from './containers/admin/Problem';
+import AdminExecuteList from './containers/admin/ExecuteList';
 
 function authenticate(nextState, replaceState) {
     console.log(nextState);
@@ -39,8 +41,11 @@ export default class Root extends Component {
                         </Route>
                     </Route>
                     <Route path="admin/" component={NeedAdmin}>
-                        <Route path="problems/" component={AdminProblemList} />
-                        <Route path="problems/:id/" component={AdminProblem} />
+                        <Route path="" component={AdminFrame}>
+                            <Route path="problems/" component={AdminProblemList} />
+                            <Route path="problems/:id/" component={AdminProblem} />
+                            <Route path="executes/" component={AdminExecuteList}/>
+                        </Route>
                     </Route>
                     <Route path="special/" component={Special} />
                 </Route>

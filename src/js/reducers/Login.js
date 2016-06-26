@@ -1,14 +1,11 @@
 import {
     handleActions
 } from 'redux-actions';
-
-const emptyAccount = {
-};
+import swal from 'sweetalert';
 
 const initialState = {
-    account: emptyAccount,
+    account: {},
     loginFormShow: false,
-    loginErr: "",
 };
 
 
@@ -25,18 +22,19 @@ export default handleActions({
             };
         },
         throw(state, action) {
+            swal("Login Failed", action.payload.msg, "error");
             return {
                 ...state,
-                loginErr: JSON.parse(action.payload.error)['msg']
             };
         }
     },
 
     SIGN_OUT(state, action) {
         localStorage.clear();
+        window.location = window.location;
         return {
             ...state,
-            account: emptyAccount,
+            account: {},
         }
     },
 
@@ -46,10 +44,10 @@ export default handleActions({
             try{
                 account = JSON.parse(account);
             } catch(e) {
-                account = emptyAccount;
+                account = {};
             }
         } else {
-            account = emptyAccount;
+            account = {};
         }
         return {
             ...state,
@@ -60,7 +58,6 @@ export default handleActions({
     OPEN_LOGIN_FORM: (state, action) => ({
         ...state,
         loginFormShow: true,
-        loginErr: "",
     }),
 
     CLOSE_LOGIN_FORM: (state, action) => ({

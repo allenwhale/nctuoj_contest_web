@@ -1,14 +1,13 @@
 import {
     handleActions
 } from 'redux-actions';
+import swal from 'sweetalert';
 
 const initialState = {
     problemList: [],
     problem: {},
     submitFormShow: false,
     newProblemFormShow: false,
-    errMsg: '',
-    successMsg: '',
 };
 
 
@@ -19,36 +18,30 @@ export default handleActions({
             return {
                 ...state,
                 problemList: action.payload.msg,
-                errMsg: '',
-                successMsg: '',
             };
         },
         throw(state, action) {
+            swal('Problem List Error', action.payload.msg, "error");
             return {
                 ...state,
                 problemList: [],
-                errMsg: action.payload.msg,
             };
         }
     },
 
     POST_PROBLEM: {
         next(state, action) {
-            console.log('a', action);
+            swal("New Problem", "Add Problem Successfully", "success");
             return {
                 ...state,
                 problemList: state.problemList.concat([action.payload.msg]),
                 newProblemFormShow: false,
-                errMsg: '',
-                successMsg: 'Success',
             };
         },
         throw(state, action) {
-            console.log('e', action.payload);
+            swal("New Problem Error", action.payload.msg, "error");
             return {
                 ...state,
-                errMsg: action.payload.msg,
-                successMsg: '',
             }
         }
     },
@@ -67,21 +60,18 @@ export default handleActions({
                 }
                 return res;
             }
+            swal('Update Problem', 'Problem Updated Successfully', "success");
             return {
                 ...state,
                 problem: action.payload.msg,
                 problemList: replcaeProblem(state.problemList, action.payload.msg),
                 newProblemFormShow: false,
-                errMsg: '',
-                successMsg: 'Update Successfully',
             };
         },
         throw(state, action) {
-            console.log('e', action.payload);
+            swal('Update Problem Error', action.payload.msg, "error");
             return {
                 ...state,
-                errMsg: action.payload.msg,
-                successMsg: '',
             }
         }
     },
@@ -91,10 +81,10 @@ export default handleActions({
             return {
                 ...state,            
                 problem: action.payload.msg,
-                successMsg: '',
             }
         },
         throw(state, action) {
+            swal('Get Problem Error', action.payload.msg, "error");
             return {
                 ...state,
                 problem: {},

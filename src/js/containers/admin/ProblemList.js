@@ -1,24 +1,13 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import FormData from 'form-data';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router';
+import { Link } from 'react-router';
 import { Grid, Row, Col, Button } from 'react-bootstrap';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Alert } from 'react-bootstrap';
-import AdminNewProblemForm from './../../components/admin/NewProblemForm';
+import { Alert, Modal, Form, FormGroup, ControlLabel } from 'react-bootstrap';
 
 import classNames from 'classnames';
 import * as ProblemActions from './../../actions/Problem';
-import * as Config from './../../utils/Config';
-
-function getFormValue(args, form) {
-    var data = {};
-    for(var i in args){
-        data[args[i]] = ReactDOM.findDOMNode(form.refs[args[i]]).value;
-    }
-    return data;
-}
 
 class ProblemList extends Component {
     constructor(props) {
@@ -51,39 +40,69 @@ class ProblemList extends Component {
     }
 
     postProblem() {
-        var data = new FormData(ReactDOM.findDOMNode(this.refs.newProblem.refs.form));
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
         this.props.dispatch(ProblemActions.postProblem(data));
     }
 
     render() {
         return (
             <div>
-                <Grid fluid={true}>
-                    <Row>
-                        <Col md={8} mdOffset={2}>
-                            <Button onClick={this.openNewProblemForm}>New Problem</Button>
-                            <ListGroup>
-                                {
-                                    this.props.problem.problemList.map((row) => (
-                                        <ListGroupItem>
-                                            <Link to={`/admin/problems/${row.id}/`}>
-                                                {row.title}
-                                            </Link>
-                                        </ListGroupItem> 
-                                    ))
-                                }
-                            </ListGroup>
-                        </Col> 
-                    </Row> 
-                </Grid>
-                <AdminNewProblemForm 
-                    ref="newProblem"
-                    token={this.props.login.account.token}
-                    show={this.props.problem.newProblemFormShow}
+                <Row>
+                    <Button onClick={this.openNewProblemForm}>New Problem</Button>
+                    <ListGroup>
+                        {
+                            this.props.problem.problemList.map((row) => (
+                                <ListGroupItem>
+                                    <Link to={`/admin/problems/${row.id}/`}>
+                                        {row.title}
+                                    </Link>
+                                </ListGroupItem> 
+                            ))
+                        }
+                    </ListGroup>
+                </Row> 
+                <Modal 
+                    show={this.props.problem.newProblemFormShow} 
                     onHide={this.closeNewProblemForm}
-                    submit={this.postProblem}
-                    errMsg={this.props.problem.errMsg}
-                />
+                >
+                    <Modal.Header>
+                        <Modal.Title>
+                            New Problem 
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Grid fluid={true}>
+                            <Row>
+                                <Col md={10} mdOffset={1}>
+                                    <Form ref="form" horizontal>
+                                        <input type="hidden" name="token" value={this.props.login.account.token}/>
+                                        <FormGroup>
+                                            <ControlLabel>Title</ControlLabel>
+                                            <input className="form-control" name="title"></input>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <ControlLabel>Pdf</ControlLabel>
+                                            <input className="form-control" name="pdf" type="file">
+                                            </input>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <ControlLabel>Score Type</ControlLabel>
+                                            <select className="form-control" name="score_type" componentClass="select">
+                                                <option value="1">sum</option>
+                                                <option value="2">min</option>
+                                            </select>
+                                        </FormGroup>
+                                    </Form>
+                                </Col>
+                            </Row>
+                        </Grid>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button bsStyle="success" onClick={this.postProblem}>
+                            Submit
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }

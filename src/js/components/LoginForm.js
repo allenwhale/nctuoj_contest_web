@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
 
-export default class Base extends Component {
+export default class LoginForm extends Component {
 
     constructor(props) {
         super(props);
@@ -33,7 +33,6 @@ export default class Base extends Component {
                         <FormGroup>
                             <Col smOffset={2} sm={10}>
                                 <Button onClick={this.props.signIn}> Sign in </Button>
-                                <div style={{float: "right", color: "red"}}>{ this.props.loginErr }</div>
                             </Col>
                         </FormGroup>
                     </Form>
