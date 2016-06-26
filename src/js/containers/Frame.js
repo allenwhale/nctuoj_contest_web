@@ -9,7 +9,6 @@ import { Grid, Row, Col } from 'react-bootstrap';
 import LoginForm from '../components/LoginForm';
 import classNames from 'classnames';
 
-import * as BaseActions from '../actions/base';
 import * as LoginActions from '../actions/Login';
 
 function getFormValue(args, form) {

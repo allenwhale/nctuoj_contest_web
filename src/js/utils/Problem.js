@@ -1,22 +1,27 @@
-import rp from 'request-promise';
+import fetch from 'isomorphic-fetch';
+import qs from 'qs';
+import Config from './Config';
 
 const Problem = {
-    getProblemList: () => rp({
-        url: 'http://140.113.89.233:9000/problems.json?' + (new Date()).toISOString(),
-        method: 'get',
-        withCredentials: false,
-    })
-    .then((res) => {
-        console.log('util', JSON.parse(res));
-        return JSON.parse(res);
-    }),
 
-    getProblem: (data) => rp({
-        url: `http://140.113.89.233:9000/problem${data.id}.json?` + (new Date()).toISOString(),
-        method: 'get',
-        withCredentials: false,
-    })
-    .then((res) => (JSON.parse(res)))
+    getProblemList: (data) => fetch(`${Config.baseUrl}/api/problems/?${qs.stringify(data)}`, {
+        method: 'GET',
+    }) .then(Config.checkStatus),
+
+    getProblem: (data) => fetch(`${Config.baseUrl}/api/problems/${data.id}/?${qs.stringify(data)}`,{
+        method: 'GET',
+    }) .then(Config.checkStatus),
+
+    putProblem: (data) => fetch(`${Config.baseUrl}/api/problems/${data.get('id')}/`, {
+        method: 'PUT',
+        body: data,
+    }) .then(Config.checkStatus),
+
+    postProblem: (data) => fetch(`${Config.baseUrl}/api/problems/`, {
+        method: 'POST',
+        body: data,
+    }) .then(Config.checkStatus),
+
 };
 
 export default Problem;

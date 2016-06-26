@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Router, Route, Link, browserHistory } from 'react-router'
 
 import { Grid, Row, Col } from 'react-bootstrap';
-import * as Problem from './../actions/Problem';
+import * as ProblemActions from './../actions/Problem';
 import ContestLeftNav from './../components/ContestLeftNav';
 
 import classNames from 'classnames';
@@ -17,7 +17,10 @@ class UserFrame extends Component {
     }
 
     getProblemList() {
-        this.props.dispatch(Problem.getProblemList());
+        var data = {
+            token: this.props.login.account.token,
+        }
+        this.props.dispatch(ProblemActions.getProblemList(data));
     }
 
     render() {

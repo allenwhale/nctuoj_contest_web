@@ -32,7 +32,11 @@ class Problem extends Component {
     }
 
     getProblem() {
-        this.props.dispatch(ProblemActions.getProblem({id: this.props.params.id}));
+        var data = {
+            id: this.props.params.id,
+            token: this.props.login.account.token,
+        }
+        this.props.dispatch(ProblemActions.getProblem(data));
     }
 
     submit() {
@@ -135,6 +139,7 @@ class Problem extends Component {
 
 function mapStateToProps(state) {
     return {
+        login: state.login,
         problem: state.problem,
     };
 }
