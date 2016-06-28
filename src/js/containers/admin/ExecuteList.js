@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { Table, Button } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import swal from 'sweetalert';
+import AdminExecuteForm from '../../containers/admin/ExecuteForm';
 
 import classNames from 'classnames';
 import * as ExecuteActions from './../../actions/Execute';
@@ -14,6 +17,12 @@ class ExecuteList extends Component {
         super(props);
         this.getExecuteList = this.getExecuteList.bind(this);
         this.deleteExecute = this.deleteExecute.bind(this);
+        this.postExecute = this.postExecute.bind(this);
+        this.openNewExecute = this.openNewExecute.bind(this);
+        this.closeNewExecute = this.closeNewExecute.bind(this);
+    }
+
+    componentDidMount() {
         this.getExecuteList();
     }
 
@@ -47,16 +56,39 @@ class ExecuteList extends Component {
         });
     }
 
+    postExecute() {
+        var form = this.refs.executeForm.getWrappedInstance();
+        var data = new FormData(ReactDom.findDOMNode(form.refs.form));
+        console.log(data.get('token'), data.get('description'));
+        this.props.dispatch(ExecuteActions.postExecute(data));
+    }
+
+
     render() {
         return (
             <div>
                 <Modal
                     show={this.props.execute.newExecuteShow}
+                    onHide={this.closeNewExecute}
                 >
-                
+                    <Modal.Header>
+                        <Modal.Title>
+                            New Execute
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <AdminExecuteForm
+                            ref="executeForm"
+                            newExecute={true}
+                        />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button bsStyle="warning" onClick={this.closeNewExecute}>Close</Button>
+                        <Button bsStyle="success" onClick={this.postExecute}>Submit</Button>
+                    </Modal.Footer>
                 </Modal>
                 <Row>
-                    <Button>New Execute</Button> 
+                    <Button onClick={this.openNewExecute}>New Execute</Button> 
                 </Row>
                 <Row>
                     <Table responsive striped hover >
@@ -71,12 +103,12 @@ class ExecuteList extends Component {
                         <tbody>
                             {
                                 this.props.execute.executeList.map((row) => (
-                                    <tr>
+                                    <tr key={row.id}>
                                         <td>{ row.description }</td>
                                         <td>{ row.updated_at  }</td>
                                         <td>
                                             <Button bsSize="xs" >
-                                                View
+                                                <Link to={`/admin/executes/${row.id}/`}>View</Link>
                                             </Button>
                                         </td>
                                         <td>
@@ -105,4 +137,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(ExecuteList);
+export default connect(mapStateToProps, null, null, {withRef: true})(ExecuteList);

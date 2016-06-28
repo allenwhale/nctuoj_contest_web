@@ -7,19 +7,10 @@ import { Button } from 'react-bootstrap';
 import { Panel, Table } from 'react-bootstrap';
 import ContestLeftNav from '../components/ContestLeftNav';
 import SubmitForm from '../components/SubmitForm';
+import empty from 'is-empty';
 
 import classNames from 'classnames';
 import * as ProblemActions from './../actions/Problem';
-
-function getFormValue(args, form) {
-    console.log(form.refs);
-    var data = {};
-    for(var i in args){
-        console.log(args[i]);
-        data[args[i]] = ReactDOM.findDOMNode(form.refs[args[i]]).value;
-    }
-    return data;
-}
 
 class Problem extends Component {
     constructor(props) {
@@ -29,6 +20,7 @@ class Problem extends Component {
         this.openSubmitForm = this.openSubmitForm.bind(this);
         this.closeSubmitForm = this.closeSubmitForm.bind(this);
         this.getProblem();
+        this.retry = true;
     }
 
     getProblem() {
@@ -36,6 +28,7 @@ class Problem extends Component {
             id: this.props.params.id,
             token: this.props.login.account.token,
         }
+        console.log(data);
         this.props.dispatch(ProblemActions.getProblem(data));
     }
 
@@ -56,8 +49,14 @@ class Problem extends Component {
     }
 
     render() {
+        if( this.retry && this.props.problem.problem.id != this.props.params.id) {
+            this.getProblem();
+            this.retry = false;
+        } else {
+            this.retry = true;
+        }
         return (
-            <div>
+            <div key={this.props.problem.problem.id}>
                 <h1 className={classNames('text-center')}>
                     { this.props.problem.problem.title }
                 </h1>

@@ -3,15 +3,69 @@ import {
 } from 'redux-actions';
 import swal from 'sweetalert';
 
+const emptyProblem = {
+    id: 0,
+    title: '',
+    executes: [],
+};
+
 const initialState = {
     problemList: [],
-    problem: {},
+    problem: emptyProblem,
     submitFormShow: false,
     newProblemFormShow: false,
 };
 
 
 export default handleActions({
+
+    ADD_PROBLEM_EXECUTE: (state, action) => {
+        return {
+            ...state,
+            problem: {
+                ...state.problem,
+                executes: state.problem.executes.concat([action.payload]),
+            },
+        };
+    },
+
+    DELETE_PROBLEM_EXECUTE: (state, action) => {
+        const removeProblemExecute = (executes, execute) => {
+            var res = [];
+            for(var i in executes) {
+                if(executes[i].id != execute.id) {
+                    res.push(executes[i]);
+                }
+            }
+            return res;
+        };
+        return {
+            ...state,
+            problem: {
+                ...state.problem,
+                executes: removeProblemExecute(state.problem.executes, action.payload),
+            },
+        };
+    },
+
+    PUT_PROBLEM_EXECUTE: {
+        next(state, action) {
+            swal('Update Problem Execute', 'Update Problem Execute Successfully', "success");
+            return {
+                ...state,
+                problem: {
+                    ...state.problem,
+                    executes: action.payload.msg,
+                }
+            };
+        },
+        throw(state, action) {
+            swal("Update Problem Execute Error", action.payload.msg, "error");
+            return {
+                ...state,
+            };
+        }
+    },
 
     GET_PROBLEM_LIST: {
         next(state, action) {
@@ -42,6 +96,7 @@ export default handleActions({
             swal("New Problem Error", action.payload.msg, "error");
             return {
                 ...state,
+                problem: emptyProblem,
             }
         }
     },
@@ -87,7 +142,7 @@ export default handleActions({
             swal('Get Problem Error', action.payload.msg, "error");
             return {
                 ...state,
-                problem: {},
+                problem: emptyProblem,
             };
         }
     },
@@ -117,7 +172,6 @@ export default handleActions({
         return {
             ...state,
             newProblemFormShow: false,
-            errMsg: '',
         };
     },
 

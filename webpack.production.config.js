@@ -7,6 +7,7 @@
 var webpack = require('webpack');
 var Path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry:{
@@ -49,7 +50,8 @@ module.exports = {
         },
         {
             test: /\.css$/,
-            loader: 'style-loader!css-loader'
+            loader:  ExtractTextPlugin.extract("style-loader","css-loader")
+            //loader: 'style-loader!css-loader'
         },
         {
             test: /\.styl$/,
@@ -70,6 +72,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new ExtractTextPlugin("styles.css"),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
         }),
@@ -78,6 +81,12 @@ module.exports = {
             output: {
                 comments: false,
             },
+            compress: {
+                warnings: false,
+            },
+            mangle: {
+                except: ['$super', '$', 'exports', 'require']
+            }
         }),
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),

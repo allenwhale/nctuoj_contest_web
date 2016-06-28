@@ -9,7 +9,10 @@ import LoginForm from '../components/LoginForm';
 import classNames from 'classnames';
 
 import * as LoginActions from '../actions/Login';
-
+require('sweetalert/dist/sweetalert.css');
+require('codemirror/lib/codemirror.css');
+require('bootstrap/dist/css/bootstrap.min.css');
+require('bootstrap/dist/css/bootstrap-theme.min.css');
 
 class Frame extends Component {
     constructor(props) {
@@ -46,63 +49,63 @@ class Frame extends Component {
     render() {
         return (
             <div>
-            <Navbar style={{margin: 0}}>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <Link to="/">Contest</Link>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Nav pullRight>
-                        {
-                            this.props.login.account.name ? 
-                                [<NavItem>Hi { this.props.login.account.name }</NavItem>,
-                                <NavItem onClick={this.signOut}>Logout</NavItem>] : 
-                                <NavItem onClick={this.openLoginForm}>Login</NavItem>
-                        }
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
-            <LoginForm 
-                ref="loginForm"
-                show={this.props.login.loginFormShow} 
-                onHide={this.closeLoginForm}
-                signIn={this.signIn}
-            />
-			{ this.props.children }
-            <footer {...this.props} 
-                className={classNames(this.props.className, 'footer', 'text-center')}
-                style={{"background-color": "#E7E7E7"}}
-            >
-				<Grid fluid={true}>
-                    <Row>
-                        <Col md={3} mdOffset={2}>
-							<h3>Developer</h3>
-							<p>ChunKai, Chen @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
-							<p>Ho-Lun, Wu @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
-						</Col>
-						<Col md={2}>
-							<h3>Contact us</h3>
-							<p><a href="mailto:wingemerald@gmail.com">wingemerald@gmail.com</a></p>
-							<p><a href="mailto:allencat850502@gmail.com">allencat850502@gmail.com</a></p>
-						</Col>
-						<Col md={3}>
-							<h3>Others</h3>
-                            <p><Link to="/special/">Special Thanks</Link></p>
-							<p>Developer Diary</p>
-							<p>Privacy Policy</p>
-						</Col>
-					</Row>
-                    <Row>
-                        <Col md={12} className={classNames(this.props.className, 'text-center')}>
-                            Copyright @ 2015-2016. All rights reserved.
-                        </Col>
-                    </Row>
-				</Grid>
-			</footer>
-            { process.env.NODE_ENV !== 'production' ?  <DevTools /> : <div></div> }
-        </div>
+                <Navbar style={{margin: 0}}>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <Link to="/">Contest</Link>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            {
+                                this.props.login.account.name ? 
+                                    [<NavItem key="0">Hi { this.props.login.account.name }</NavItem>,
+                                        <NavItem key="1" onClick={this.signOut}>Logout</NavItem>] : 
+                                <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
+                                }
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
+                    <LoginForm 
+                        ref="loginForm"
+                        show={this.props.login.loginFormShow} 
+                        onHide={this.closeLoginForm}
+                        signIn={this.signIn}
+                    />
+                    { this.props.children }
+                    <footer {...this.props} 
+                        className={classNames(this.props.className, 'footer', 'text-center')}
+                        style={{backgroundColor: "#E7E7E7"}}
+                    >
+                        <Grid fluid={true}>
+                            <Row>
+                                <Col md={3} mdOffset={2}>
+                                    <h3>Developer</h3>
+                                    <p>ChunKai, Chen @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
+                                    <p>Ho-Lun, Wu @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
+                                </Col>
+                                <Col md={2}>
+                                    <h3>Contact us</h3>
+                                    <p><a href="mailto:wingemerald@gmail.com">wingemerald@gmail.com</a></p>
+                                    <p><a href="mailto:allencat850502@gmail.com">allencat850502@gmail.com</a></p>
+                                </Col>
+                                <Col md={3}>
+                                    <h3>Others</h3>
+                                    <p><Link to="/special/">Special Thanks</Link></p>
+                                    <p>Developer Diary</p>
+                                    <p>Privacy Policy</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={12} className={classNames(this.props.className, 'text-center')}>
+                                    Copyright @ 2015-2016. All rights reserved.
+                                </Col>
+                            </Row>
+                        </Grid>
+                    </footer>
+                    { process.env.NODE_ENV !== 'production' ?  <DevTools /> : <div></div> }
+                </div>
         );
     }
 }

@@ -22,6 +22,11 @@ const Problem = {
         body: data,
     }) .then(Config.checkStatus),
 
+    putProblemExecute: (data) => fetch(`${Config.baseUrl}/api/problems/${data.get('id')}/executes/`,{
+        method: 'PUT',
+        body: data,
+    }).then(Config.checkStatus),
+
 };
 
 export default Problem;

@@ -13,7 +13,6 @@ import * as Problem from './../actions/Problem';
 class Contest extends Component {
 
     constructor(props) {
-        console.log('contest');
         super(props);
     }
 
@@ -50,7 +49,7 @@ class Contest extends Component {
                             <ListGroup fill>
                                 {
                                     this.props.problem.problemList.map((row) => (
-                                        <ListGroupItem>{row.title}</ListGroupItem> 
+                                        <ListGroupItem key={row.id}>{row.title}</ListGroupItem> 
                                     ))
                                 }
                             </ListGroup> 

@@ -2,14 +2,15 @@ import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { Router, Route, Link, browserHistory } from 'react-router'
 
-class Master extends Component {
+class NeedAdmin extends Component {
     constructor(props) {
         super(props);
-        this.checkIsLogin = this.checkIsLogin.bind(this);
-        this.checkIsLogin();
+        this.checkIsAdmin = this.checkIsAdmin.bind(this);
+        this.checkIsAdmin();
     }
 
-    checkIsLogin() {
+    checkIsAdmin() {
+        console.log(this.props.login.account);
         if(!this.props.login.account.isADMIN) {
             console.log('not admin');
             browserHistory.push('/');
@@ -32,4 +33,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Master);
+export default connect(mapStateToProps)(NeedAdmin);

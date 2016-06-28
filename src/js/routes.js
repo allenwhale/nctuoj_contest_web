@@ -14,16 +14,7 @@ import AdminFrame from './components/admin/AdminFrame';
 import AdminProblemList from './containers/admin/ProblemList';
 import AdminProblem from './containers/admin/Problem';
 import AdminExecuteList from './containers/admin/ExecuteList';
-
-function authenticate(nextState, replaceState) {
-    console.log(nextState);
-    console.log(replaceState);
-    /* do Authenticate
-       ...
-       replaceState(null, '/login);
-       */
-    //replaceState('/');
-}
+import AdminExecute from './containers/admin/Execute';
 
 export const history = browserHistory;
 
@@ -45,6 +36,7 @@ export default class Root extends Component {
                             <Route path="problems/" component={AdminProblemList} />
                             <Route path="problems/:id/" component={AdminProblem} />
                             <Route path="executes/" component={AdminExecuteList}/>
+                            <Route path="executes/:id/" component={AdminExecute}/>
                         </Route>
                     </Route>
                     <Route path="special/" component={Special} />

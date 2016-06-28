@@ -1,8 +1,8 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 
-class Master extends Component {
+class NeedLogin extends Component {
     constructor(props) {
         super(props);
         this.checkIsLogin = this.checkIsLogin.bind(this);
@@ -11,7 +11,6 @@ class Master extends Component {
 
     checkIsLogin() {
         if(!this.props.login.account.isLOGIN) {
-            console.log('not login');
             browserHistory.push('/');
         }
     }
@@ -32,4 +31,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps)(Master);
+export default connect(mapStateToProps)(NeedLogin);

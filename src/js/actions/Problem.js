@@ -10,3 +10,6 @@ export const closeSubmitForm = createAction('CLOSE_SUBMIT_FORM');
 export const openNewProblemForm = createAction('OPEN_NEW_PROBLEM_FORM');
 export const closeNewProblemForm = createAction('CLOSE_NEW_PROBLEM_FORM');
 export const closeProblemErrMsg = createAction('CLOSE_PROBLEM_ERR_MSG');
+export const addProblemExecute = createAction('ADD_PROBLEM_EXECUTE');
+export const deleteProblemExecute = createAction('DELETE_PROBLEM_EXECUTE');
+export const putProblemExecute = createAction('PUT_PROBLEM_EXECUTE', Problem.putProblemExecute);
