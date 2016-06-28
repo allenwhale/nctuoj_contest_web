@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
+import { Panel, Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
+import classNames from 'classnames';
 import Codemirror from 'codemirror';
 require('codemirror/mode/clike/clike');
 require('codemirror/mode/python/python');
@@ -54,26 +55,51 @@ export default class SubmitForm extends Component {
                 >
                     <Modal.Header>Submit Code</Modal.Header>
                     <Modal.Body>
-                        <Form inline>
-                            <FormGroup>
-                                <ControlLabel>Execute Type</ControlLabel>
-                                <FormControl ref="execute_type" componentClass="select" onChange={this.changeExecuteType}>
-                                    <option value="C">C</option>
-                                    <option value="C++">C++</option>
-                                    <option value="Python">Python</option>
-                                </FormControl>
+                        <Form inline ref="form">
+                            <FormGroup className={classNames("margin-bottom")}>
+                                <ControlLabel>Execute Type: </ControlLabel>
+                                {' '}
+                                <select 
+                                    className="form-control"
+                                    name="execute_type_id" 
+                                    ref="execute_type"
+                                    onChange={this.changeExecuteType}
+                                >
+                                    {
+                                        this.props.executeList.map((row) => (
+                                            <option key={row.id} value={row.id}>{row.description}</option>
+                                        ))
+                                    }
+                                </select>
                             </FormGroup>
-                            <FormGroup>
-                                <ControlLabel>keyMap</ControlLabel>
-                                <FormControl componentClass="select" onChange={this.changeKeyMap}>
+                            {' '}
+                            <FormGroup className="margin-bottom">
+                                <ControlLabel>keyMap:</ControlLabel>
+                                {' '}
+                                <select onChange={this.changeKeyMap} className="form-control">
                                     <option value="default">Normal</option>
                                     <option value="vim">Vim</option>
                                     <option value="sublime">Sublime</option>
                                     <option value="emacs">Emacs</option>
-                                </FormControl>
+                                </select>
                             </FormGroup>
+                            {' '}
+                            <FormGroup>
+                                <ControlLabel>File:</ControlLabel>
+                                {' '}
+                                <input type="file" name="file" className="form-control"/>
+                            </FormGroup>
+                            <Panel header={
+                                <div>
+                                    <ControlLabel>File Name: </ControlLabel>
+                                    {' '}
+                                    <input name="file_name" className="form-control" />
+                                </div>
+                                }
+                            >
+                                <textarea className="form-control" name="code" ref="code"/>
+                            </Panel>
                         </Form>
-                        <textarea ref="code"/>
                         <Button 
                             bsStyle="success" 
                             onClick={() => {

@@ -13,6 +13,7 @@ require('sweetalert/dist/sweetalert.css');
 require('codemirror/lib/codemirror.css');
 require('bootstrap/dist/css/bootstrap.min.css');
 require('bootstrap/dist/css/bootstrap-theme.min.css');
+require('./../../assets/styles/core.sass');
 
 class Frame extends Component {
     constructor(props) {
@@ -48,32 +49,34 @@ class Frame extends Component {
 
     render() {
         return (
-            <div>
-                <Navbar style={{margin: 0}}>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <Link to="/">Contest</Link>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav pullRight>
-                            {
-                                this.props.login.account.name ? 
-                                    [<NavItem key="0">Hi { this.props.login.account.name }</NavItem>,
-                                        <NavItem key="1" onClick={this.signOut}>Logout</NavItem>] : 
-                                <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
-                                }
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Navbar>
-                    <LoginForm 
-                        ref="loginForm"
-                        show={this.props.login.loginFormShow} 
-                        onHide={this.closeLoginForm}
-                        signIn={this.signIn}
-                    />
-                    { this.props.children }
+            <div style={{height: '100%'}}>
+                <div className={classNames('body')}>
+                    <Navbar style={{margin: 0}}>
+                        <Navbar.Header>
+                            <Navbar.Brand>
+                                <Link to="/">Contest</Link>
+                            </Navbar.Brand>
+                            <Navbar.Toggle />
+                        </Navbar.Header>
+                        <Navbar.Collapse>
+                            <Nav pullRight>
+                                {
+                                    this.props.login.account.name ? 
+                                        [<NavItem key="0">Hi { this.props.login.account.name }</NavItem>,
+                                            <NavItem key="1" onClick={this.signOut}>Logout</NavItem>] : 
+                                    <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
+                                    }
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Navbar>
+                        <LoginForm 
+                            ref="loginForm"
+                            show={this.props.login.loginFormShow} 
+                            onHide={this.closeLoginForm}
+                            signIn={this.signIn}
+                        />
+                        { this.props.children }
+                    </div>
                     <footer {...this.props} 
                         className={classNames(this.props.className, 'footer', 'text-center')}
                         style={{backgroundColor: "#E7E7E7"}}

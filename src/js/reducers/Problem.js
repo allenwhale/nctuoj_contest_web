@@ -12,7 +12,6 @@ const emptyProblem = {
 const initialState = {
     problemList: [],
     problem: emptyProblem,
-    submitFormShow: false,
     newProblemFormShow: false,
 };
 
@@ -145,20 +144,6 @@ export default handleActions({
                 problem: emptyProblem,
             };
         }
-    },
-
-    OPEN_SUBMIT_FORM: (state, action) => {
-        return {
-            ...state,
-            submitFormShow: true,
-        };
-    },
-
-    CLOSE_SUBMIT_FORM: (state, action) => {
-        return {
-            ...state,
-            submitFormShow: false,
-        };
     },
 
     OPEN_NEW_PROBLEM_FORM: (state, action) => {

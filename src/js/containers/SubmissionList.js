@@ -6,7 +6,6 @@ import ContestLeftNav from '../components/ContestLeftNav';
 
 import classNames from 'classnames';
 import * as SubmissionActions from './../actions/Submission';
-import * as ProblemActions from './../actions/Problem';
 
 class SubmissionList extends Component {
     constructor(props) {
