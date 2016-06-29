@@ -22,8 +22,11 @@ class Problem extends Component {
         this.addProblemExecute = this.addProblemExecute.bind(this);
         this.deleteProblemExecute = this.deleteProblemExecute.bind(this);
         this.postTestdata = this.postTestdata.bind(this);
+        this.putTestdata = this.putTestdata.bind(this);
+        this.deleteTestdata = this.deleteTestdata.bind(this);
         this.getExecuteList();
         this.getProblem();
+        this.getTestdataList();
     }
 
     addProblemExecute(execute) {
@@ -56,9 +59,38 @@ class Problem extends Component {
         this.props.dispatch(ProblemActions.putProblemExecute(data));
     }
 
+    getTestdataList() {
+        var data = {
+            problem_id: this.props.params.id,
+            token: this.props.login.account.token,
+        };
+        this.props.dispatch(TestdataActions.getTestdataList(data));
+    }
+
     postTestdata() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.newTestdata));
         this.props.dispatch(TestdataActions.postTestdata(data));
+    }
+
+    putTestdata(id) {
+        var data = new FormData(ReactDOM.findDOMNode(this.refs[`testdata_${id}`]));
+        this.props.dispatch(TestdataActions.disableSubmit(Promise.resolve()))
+            .then(() => {
+                this.props.dispatch(TestdataActions.putTestdata(data))
+                    .then(() => {
+                        this.props.dispatch(TestdataActions.activeSubmit());
+                    });
+            });
+        //this.props.dispatch(TestdataActions.putTestdata(data));
+    }
+
+    deleteTestdata(id) {
+        var data = new FormData();
+        data.append('token', this.props.login.account.token);
+        data.append('id', id);
+        data.append('problem_id', this.props.params.id);
+        console.log('d', id);
+        this.props.dispatch(TestdataActions.deleteTestdata(data));
     }
 
     render() {
@@ -129,7 +161,7 @@ class Problem extends Component {
                                             >
                                                 {row.description}
                                             </MenuItem>
-                                        ))
+                                            ))
                                     }
                                 </DropdownButton>
                             </div>}
@@ -166,7 +198,7 @@ class Problem extends Component {
                                                         </Button>
                                                     </td>
                                                 </tr>
-                                            ))
+                                                ))
                                         }
                                     </tbody>
                                 </Table>
@@ -190,6 +222,137 @@ class Problem extends Component {
                             <input name="output_limit" value="64" />
                         </Form>
                         <Button bsStyle="success" onClick={this.postTestdata}>New Testdata</Button>
+                        <Table responsive striped hover >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th colSpan={2}>Input</th>
+                                    <th colSpan={2}>Output</th>
+                                    <th>Time(ms)</th>
+                                    <th>Memory(KB)</th>
+                                    <th>Output(KB)</th>
+                                    <th>Score</th>
+                                    <th colSpan={2}></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.props.testdata.testdataList.map((row, idx) => (
+                                        <tr key={row.id}>
+                                            <td>{idx + 1}</td>
+                                            <td>
+                                                <Button
+                                                    bsSize="sm"
+                                                    ref={`input_${row.id}_btn`} 
+                                                    onClick={() => 
+                                                        ReactDOM.findDOMNode(this.refs[`input_${row.id}`]).click()
+                                                    }
+                                                >
+                                                    上傳
+                                                </Button>
+                                            </td>
+                                            <td>
+                                                <Button bsSize="sm">下載</Button>
+                                            </td>
+                                            <td>
+                                                <Button
+                                                    bsSize="sm"
+                                                    ref={`output_${row.id}_btn`} 
+                                                    onClick={() => 
+                                                        ReactDOM.findDOMNode(this.refs[`output_${row.id}`]).click()
+                                                    }
+                                                >
+                                                    上傳
+                                                </Button>
+                                            </td>
+                                            <td>
+                                                <Button bsSize="sm">下載</Button>
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    defaultValue={row.time_limit} 
+                                                    className="form-control" 
+                                                    onChange={(e) => (ReactDOM.findDOMNode(this.refs[`time_limit_${row.id}`]).value = e.target.value)}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    defaultValue={row.memory_limit} 
+                                                    className="form-control" 
+                                                    onChange={(e) => (ReactDOM.findDOMNode(this.refs[`memory_limit_${row.id}`]).value = e.target.value)}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    defaultValue={row.output_limit} 
+                                                    className="form-control" 
+                                                    onChange={(e) => (ReactDOM.findDOMNode(this.refs[`output_limit_${row.id}`]).value = e.target.value)}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input 
+                                                    defaultValue={row.score} 
+                                                    className="form-control" 
+                                                    onChange={(e) => (ReactDOM.findDOMNode(this.refs[`score_${row.id}`]).value = e.target.value)}
+                                                />
+                                            </td>
+                                            <td>
+                                                <Button 
+                                                    bsStyle="success" 
+                                                    disabled={!this.props.testdata.activeSubmit}
+                                                    onClick={() => this.putTestdata(row.id)}
+                                                >
+                                                    Submit
+                                                </Button>
+                                                <form style={{display: 'none'}} ref={`testdata_${row.id}`}>
+                                                    <input name="id" value={row.id} />
+                                                    <input name="problem_id" value={this.props.params.id} />
+                                                    <input name="token" value={this.props.login.account.token} />
+                                                    <input 
+                                                        ref={`input_${row.id}`} 
+                                                        name="input" 
+                                                        type="file" 
+                                                        onChange={(e) => (ReactDOM.findDOMNode(this.refs[`input_${row.id}_btn`]).innerHTML = e.target.value)}
+                                                    /> 
+                                                    <input 
+                                                        ref={`output_${row.id}`}
+                                                        name="output" 
+                                                        type="file" 
+                                                        onChange={(e) => (ReactDOM.findDOMNode(this.refs[`output_${row.id}_btn`]).innerHTML = e.target.value)}
+                                                    /> 
+                                                    <input 
+                                                        ref={`time_limit_${row.id}`} 
+                                                        name="time_limit"  
+                                                        defaultValue={row.time_limit}
+                                                    />
+                                                    <input 
+                                                        ref={`memory_limit_${row.id}`}
+                                                        name="memory_limit" 
+                                                        defaultValue={row.memory_limit}
+                                                    />
+                                                    <input 
+                                                        ref={`output_limit_${row.id}`}
+                                                        name="output_limit" 
+                                                        defaultValue={row.output_limit}
+                                                    />
+                                                    <input
+                                                        ref={`score_${row.id}`}
+                                                        name="score" 
+                                                        defaultValue={row.score}
+                                                    />
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <Button 
+                                                    bsStyle="danger"
+                                                    onClick={() => this.deleteTestdata(row.id)} 
+                                                    disabled={!this.props.testdata.activeSubmit}>Delete</Button>
+                                            </td>
+                                        </tr>
+                                        ))
+                                }
+                            </tbody>
+                        </Table>
                     </Row>
                 </Grid>
             </div>
@@ -203,6 +366,7 @@ function mapStateToProps(state) {
         login: state.login,
         problem: state.problem,
         execute: state.execute,
+        testdata: state.testdata,
     };
 }
 

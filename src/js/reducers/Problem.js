@@ -103,7 +103,7 @@ export default handleActions({
     PUT_PROBLEM: {
         next(state, action) {
             console.log('a', action);
-            const replcaeProblem = (problemList, problem) => {
+            const replaceProblem = (problemList, problem) => {
                 var res = [];
                 for(var i in problemList){
                     if(problemList[i].id == problem.id){
@@ -118,7 +118,7 @@ export default handleActions({
             return {
                 ...state,
                 problem: action.payload.msg,
-                problemList: replcaeProblem(state.problemList, action.payload.msg),
+                problemList: replaceProblem(state.problemList, action.payload.msg),
                 newProblemFormShow: false,
             };
         },

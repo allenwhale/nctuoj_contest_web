@@ -12,6 +12,7 @@ import empty from 'is-empty';
 import classNames from 'classnames';
 import * as ProblemActions from './../actions/Problem';
 import * as SubmissionActions from './../actions/Submission';
+import * as TestdataActions from './../actions/Testdata';
 
 class Problem extends Component {
     constructor(props) {
@@ -20,7 +21,9 @@ class Problem extends Component {
         this.postSubmission = this.postSubmission.bind(this);
         this.openSubmitForm = this.openSubmitForm.bind(this);
         this.closeSubmitForm = this.closeSubmitForm.bind(this);
+        this.getTestdataList = this.getTestdataList.bind(this);
         this.getProblem();
+        this.getTestdataList();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -42,6 +45,14 @@ class Problem extends Component {
         data.append('token', this.props.login.account.token);
         this.props.dispatch(SubmissionActions.postSubmission(data))
             .then(() => browserHistory.push(`/submissions/?problem_id=${this.props.params.id}`));
+    }
+
+    getTestdataList() {
+        var data = {
+            problem_id: this.props.params.id,
+            token: this.props.login.account.token,
+        };
+        this.props.dispatch(TestdataActions.getTestdataList(data));
     }
 
     closeSubmitForm() {
@@ -103,13 +114,17 @@ class Problem extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>1000</td>
-                                        <td>1000</td>
-                                        <td>1000</td>
-                                        <td>100</td>
-                                    </tr>
+                                    {
+                                        this.props.testdata.testdataList.map((row, idx) => (
+                                            <tr>
+                                                <td>{idx + 1}</td>
+                                                <td>{row.time_limit}</td>
+                                                <td>{row.memory_limit}</td>
+                                                <td>{row.output_limit}</td>
+                                                <td>{row.score}</td>
+                                            </tr>
+                                        ))
+                                    }
                                 </tbody>
                             </Table> 
                         </Panel>
@@ -133,6 +148,7 @@ function mapStateToProps(state) {
         login: state.login,
         problem: state.problem,
         submission: state.submission,
+        testdata: state.testdata,
     };
 }
 

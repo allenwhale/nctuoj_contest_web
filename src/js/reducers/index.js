@@ -5,6 +5,7 @@ import login from './Login';
 import problem from './Problem';
 import submission from './Submission';
 import execute from './Execute';
+import testdata from './Testdata';
 
 export default combineReducers({
     base,
@@ -12,5 +13,6 @@ export default combineReducers({
     problem,
     submission,
     execute,
+    testdata,
     routing,
 });
