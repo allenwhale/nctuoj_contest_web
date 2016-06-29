@@ -1,0 +1,63 @@
+.monospace
+    font-family: "Courier New"
+
+.computer.only, .mobile.only, .tablet.only
+    display: none
+
+@mixin breakpoint($point)  
+    @if $point == computer
+        @media only screen and (min-width: 992px)
+            @content
+    @else if $point == tablet
+        @media only screen and (min-width: 768px) and (max-width: 992px)
+            @content
+    @else if $point == mobile
+        @media only screen and (max-width: 768px)
+            @content   
+
+
+
+.computer.only
+    @include breakpoint(computer)
+        display: inline-block
+.tablet.only
+    @include breakpoint(tablet)
+        display: inline-block
+.mobile.only
+    @include breakpoint(mobile)
+        display: inline-block
+
+//table
+td.computer.only, th.computer.only
+    @include breakpoint(computer)
+        display: table-cell
+td.tablet.only, th.tablet.only
+    @include breakpoint(tablet)
+        display: table-cell
+td.mobile.only, th.mobile.only
+    @include breakpoint(mobile)
+        display: table-cell
+
+.panel-body.edit
+    padding: 0px
+    textarea
+        border: 0px
+        resize: none
+            
+.margin-bottom
+    margin-bottom: 20px
+
+.footer
+    @include breakpoint(computer)
+        height: 180px
+        margin-top: -180px
+
+
+
+body, html, #app
+    height: 100%
+.body
+    min-height: 100%
+    margin-bottom: -180px
+    padding-bottom: 180px
+

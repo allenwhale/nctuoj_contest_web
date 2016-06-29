@@ -49,6 +49,9 @@ module.exports = {
             include: Path.join(__dirname, 'src/')
         },
         {
+            test: /\.sass$/, loader: "style!css!sass"
+        },
+        {
             test: /\.css$/,
             loader:  ExtractTextPlugin.extract("style-loader","css-loader")
             //loader: 'style-loader!css-loader'

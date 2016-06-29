@@ -40,7 +40,8 @@ class Problem extends Component {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.submitForm.refs.form));
         data.append('problem_id', this.props.params.id);
         data.append('token', this.props.login.account.token);
-        this.props.dispatch(SubmissionActions.postSubmission(data));
+        this.props.dispatch(SubmissionActions.postSubmission(data))
+            .then(() => browserHistory.push(`/submissions/?problem_id=${this.props.params.id}`));
     }
 
     closeSubmitForm() {

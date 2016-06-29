@@ -8,6 +8,7 @@ import { Panel, DropdownButton, MenuItem } from 'react-bootstrap';
 import empty from 'is-empty';
 import * as ProblemActions from './../../actions/Problem';
 import * as ExecuteActions from './../../actions/Execute';
+import * as TestdataActions from './../../actions/Testdata';
 
 import classNames from 'classnames';
 
@@ -20,6 +21,7 @@ class Problem extends Component {
         this.getExecuteList = this.getExecuteList.bind(this);
         this.addProblemExecute = this.addProblemExecute.bind(this);
         this.deleteProblemExecute = this.deleteProblemExecute.bind(this);
+        this.postTestdata = this.postTestdata.bind(this);
         this.getExecuteList();
         this.getProblem();
     }
@@ -52,6 +54,11 @@ class Problem extends Component {
     putProblemExecute() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.execute));
         this.props.dispatch(ProblemActions.putProblemExecute(data));
+    }
+
+    postTestdata() {
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.newTestdata));
+        this.props.dispatch(TestdataActions.postTestdata(data));
     }
 
     render() {
@@ -171,6 +178,18 @@ class Problem extends Component {
                         >
                             Submit
                         </Button>
+                    </Row>
+                    <Row>
+                        <h3>Testdata</h3>                
+                        <Form style={{display: 'none'}} ref="newTestdata">
+                            <input name="token" value={this.props.login.account.token}/>
+                            <input name="problem_id" value={this.props.problem.problem.id}/>
+                            <input name="score" value="0" />
+                            <input name="time_limit" value="1000" />
+                            <input name="memory_limit" value="262144" />
+                            <input name="output_limit" value="64" />
+                        </Form>
+                        <Button bsStyle="success" onClick={this.postTestdata}>New Testdata</Button>
                     </Row>
                 </Grid>
             </div>
