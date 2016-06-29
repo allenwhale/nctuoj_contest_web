@@ -15,6 +15,12 @@ export default class Base extends Component {
                 <li>
                     <Link to="/">Home</Link>
                 </li>
+                {
+                    this.props.isADMIN ?
+                    <li>
+                        <Link to="/admin/">Admin</Link>
+                    </li> : ""
+                }
                 <li>
                     <Link to="/submissions/">Submissions</Link>
                 </li>

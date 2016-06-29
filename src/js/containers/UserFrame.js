@@ -31,6 +31,7 @@ class UserFrame extends Component {
                         <Col md={2}>
                             { this.props.login.account.isLOGIN ?
                             <ContestLeftNav 
+                                isADMIN={this.props.login.account.isADMIN}
                                 problemList={this.props.problem.problemList}
                             /> : "" }
                         </Col> 
