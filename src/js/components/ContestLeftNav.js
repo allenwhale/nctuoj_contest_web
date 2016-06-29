@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Nav, NavItem } from 'react-bootstrap';
+import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import classNames from 'classnames';
+import { LinkContainer } from 'react-router-bootstrap'
 
 export default class Base extends Component {
 
@@ -11,25 +12,31 @@ export default class Base extends Component {
 
     render() {
         return (
-            <Nav bsStyle="pills" stacked>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
+            <Nav 
+                activeKey={-1} 
+                stacked
+            >
+                <LinkContainer to="/">
+                    <NavItem>Home</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/submissions/">
+                    <NavItem>Submissions</NavItem>
+                </LinkContainer>
+                <NavDropdown title="Problems" id="navDropdown">
+                    {
+                        this.props.problemList.map((row) => (
+                            <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
+                                <MenuItem>{row.title}</MenuItem>
+                            </LinkContainer>
+                            ))
+                    }
+
+                </NavDropdown>
                 {
-                    this.props.isADMIN ?
-                    <li>
-                        <Link to="/admin/">Admin</Link>
-                    </li> : ""
-                }
-                <li>
-                    <Link to="/submissions/">Submissions</Link>
-                </li>
-                {
-                    this.props.problemList.map((row) => (
-                        <li>
-                            <Link to={`/problems/${row.id}/`}>{ row.title }</Link>
-                        </li>
-                        ))
+                    this.props.isADMIN ? 
+                        <LinkContainer to="/admin/">
+                            <NavItem>Admin</NavItem>
+                        </LinkContainer> : ""
                 }
             </Nav>
         );

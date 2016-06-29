@@ -33,6 +33,7 @@ export default class Root extends Component {
                     </Route>
                     <Route path="admin/" component={NeedAdmin}>
                         <Route path="" component={AdminFrame}>
+                            <IndexRoute component={""}/>
                             <Route path="problems/" component={AdminProblemList} />
                             <Route path="problems/:id/" component={AdminProblem} />
                             <Route path="executes/" component={AdminExecuteList}/>
