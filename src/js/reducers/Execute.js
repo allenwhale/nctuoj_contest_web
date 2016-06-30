@@ -12,6 +12,7 @@ const emptyExecute = {
 
 const initialState = {
     executeList: {},
+    executeListStatus: false,
     execute: emptyExecute,
     newExecuteShow: false,
 };
@@ -137,14 +138,16 @@ export default handleActions({
         next(state, action) {
             return {
                 ...state,
-                executeList: action.payload.msg,
+                executeList: Config.mapArrayToObject(action.payload.msg),
+                executeListStatus: true,
             };
         },
         throw(state, action) {
             swal('Get Execute List Error', action.payload.msg, "error");
             return {
                 ...state,
-                executeList: [],
+                executeList: {},
+                executeListStatus: false,
             };
         }
     },

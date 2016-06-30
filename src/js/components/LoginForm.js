@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
-import { Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
+import { 
+    Modal, 
+    Form, 
+    FormGroup, 
+    Col, 
+    FormControl,
+    ControlLabel, 
+    Button, 
+    Label 
+} from 'react-bootstrap';
 
 export default class LoginForm extends Component {
 

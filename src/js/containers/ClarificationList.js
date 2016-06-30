@@ -1,9 +1,15 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
-import { Table, Modal, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import { Link, browserHistory } from 'react-router'
+import { 
+    Table, 
+    Modal, 
+    Button, 
+    Form, 
+    FormGroup, 
+    ControlLabel 
+} from 'react-bootstrap';
 
 import classNames from 'classnames';
 import * as ClarificationActions from '../actions/Clarification';
@@ -21,7 +27,7 @@ class ClarificationList extends Component {
 
     getClarificationList() {
         var data = {
-            token: this.props.login.account.token, 
+            token: this.props.user.account.token, 
         };
         this.props.dispatch(ClarificationActions.getClarificationList(data));
     }
@@ -57,7 +63,7 @@ class ClarificationList extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         <Form ref="form">
-                            <input type="hidden" name="token" value={this.props.login.account.token} />
+                            <input type="hidden" name="token" value={this.props.user.account.token} />
                             <FormGroup>
                                 <ControlLabel>分類</ControlLabel>
                                 <select
@@ -127,7 +133,7 @@ class ClarificationList extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         clarification: state.clarification,
         problem: state.problem,
     };

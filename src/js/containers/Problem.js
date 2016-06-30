@@ -1,14 +1,20 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
-import { Grid, Row, Col } from 'react-bootstrap';
-import { Button, ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Panel, Table } from 'react-bootstrap';
+import { Link, browserHistory } from 'react-router'
+import { 
+    Grid, 
+    Row, 
+    Col ,
+    Button,
+    ListGroup,
+    ListGroupItem,
+    Panel,
+    Table
+} from 'react-bootstrap';
 import ContestLeftNav from '../components/ContestLeftNav';
 import SubmitForm from '../components/SubmitForm';
 import empty from 'is-empty';
-
 import classNames from 'classnames';
 import * as ProblemActions from './../actions/Problem';
 import * as SubmissionActions from './../actions/Submission';
@@ -34,7 +40,7 @@ class Problem extends Component {
     getProblem(id) {
         var data = {
             id: id || this.props.params.id,
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         }
         this.props.dispatch(ProblemActions.getProblem(data));
     }
@@ -42,7 +48,7 @@ class Problem extends Component {
     postSubmission() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.submitForm.refs.form));
         data.append('problem_id', this.props.params.id);
-        data.append('token', this.props.login.account.token);
+        data.append('token', this.props.user.account.token);
         this.props.dispatch(SubmissionActions.postSubmission(data))
             .then(() => browserHistory.push(`/submissions/?problem_id=${this.props.params.id}`));
     }
@@ -50,7 +56,7 @@ class Problem extends Component {
     getTestdataList() {
         var data = {
             problem_id: this.props.params.id,
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         };
         this.props.dispatch(TestdataActions.getTestdataList(data));
     }
@@ -145,7 +151,7 @@ class Problem extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         problem: state.problem,
         submission: state.submission,
         testdata: state.testdata,

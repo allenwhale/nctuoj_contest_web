@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, FormGroup, ControlLabel } from 'react-bootstrap';
-import { Table, Button } from 'react-bootstrap';
+import { 
+    Form, 
+    FormGroup, 
+    ControlLabel,
+    Table,
+    Button
+} from 'react-bootstrap';
 import * as ExecuteActions from './../../actions/Execute';
 
 class ExecuteForm extends Component {
@@ -29,7 +34,7 @@ class ExecuteForm extends Component {
         return (
             <div key={this.props.execute.execute.id}>
                 <Form ref="form">
-                    <input type="hidden" name="token" value={this.props.login.account.token} />
+                    <input type="hidden" name="token" value={this.props.user.account.token} />
                     <FormGroup>
                         <ControlLabel>Description</ControlLabel> 
                         <input 
@@ -58,7 +63,7 @@ class ExecuteForm extends Component {
                             <tbody>
                                 {
                                     this.props.execute.execute.commands.mapArr((row) => (
-                                        <tr>
+                                        <tr key={row.id}>
                                             <td>
                                                 <input 
                                                     key={row.id}
@@ -94,7 +99,7 @@ class ExecuteForm extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         execute: state.execute,
     };
 }

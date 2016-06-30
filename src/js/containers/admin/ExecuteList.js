@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
-import { Table, Button } from 'react-bootstrap';
-import { Modal } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Form } from 'react-bootstrap';
+import { 
+    Table, 
+    Button,
+    Modal,
+    Row,
+    Form
+} from 'react-bootstrap';
 import swal from 'sweetalert';
 import AdminExecuteForm from '../../containers/admin/ExecuteForm';
 
@@ -15,22 +18,10 @@ import * as ExecuteActions from './../../actions/Execute';
 class ExecuteList extends Component {
     constructor(props) {
         super(props);
-        this.getExecuteList = this.getExecuteList.bind(this);
         this.deleteExecute = this.deleteExecute.bind(this);
         this.postExecute = this.postExecute.bind(this);
         this.openNewExecute = this.openNewExecute.bind(this);
         this.closeNewExecute = this.closeNewExecute.bind(this);
-    }
-
-    componentDidMount() {
-        this.getExecuteList();
-    }
-
-    getExecuteList() {
-        var data = {
-            token: this.props.login.account.token,
-        };
-        this.props.dispatch(ExecuteActions.getExecuteList());
     }
 
     openNewExecute() {
@@ -50,7 +41,7 @@ class ExecuteList extends Component {
             closeOnConfirm: false,
         }, () => {
             var data = new FormData();
-            data.append('token', this.props.login.account.token);
+            data.append('token', this.props.user.account.token);
             data.append('id', id);
             this.props.dispatch(ExecuteActions.deleteExecute(data));
         });
@@ -132,7 +123,7 @@ class ExecuteList extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         execute: state.execute,
     };
 }

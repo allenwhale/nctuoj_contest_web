@@ -1,15 +1,36 @@
 import {
     handleActions
 } from 'redux-actions';
+import Config from './Config';
 import swal from 'sweetalert';
 
 const initialState = {
     account: {},
+    userList: {},
     loginFormShow: false,
 };
 
 
 export default handleActions({
+
+    GET_USER_LIST: {
+        next(state, action) {
+            return {
+                ...state,
+                userList: Config.mapArrayToObject(action.payload.msg),
+                problemListStatus: true,
+                userListStatus: true,
+            };
+        },
+        throw(state, action) {
+            swal('Get User List Error', action.payload.msg, 'error');
+            return {
+                ...state,
+                userList: {},
+                userListStatus: false,
+            };
+        }
+    },
 
     SIGN_IN: {
         next(state, action) {

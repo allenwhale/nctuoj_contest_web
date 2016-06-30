@@ -3,12 +3,19 @@ import DevTools from './DevTools';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
-import { Navbar, Nav, NavItem, MenuItem, NavDropdown } from 'react-bootstrap';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { 
+    Navbar, 
+    Nav, 
+    NavItem, 
+    MenuItem, 
+    NavDropdown,
+    Grid,
+    Row,
+    Col
+} from 'react-bootstrap';
 import LoginForm from '../components/LoginForm';
 import classNames from 'classnames';
-
-import * as LoginActions from '../actions/Login';
+import * as UserActions from '../actions/User';
 import * as SystemActions from '../actions/System';
 require('sweetalert/dist/sweetalert.css');
 require('codemirror/lib/codemirror.css');
@@ -19,8 +26,13 @@ require('./../../assets/styles/core.sass');
 const UPDATE_INTERVAL = 60;
 Object.defineProperty(Object.prototype, 'mapArr', {
     value: function(f, ctx) {
-        var self = this, cnt = 0;
-        return Object.keys(self).map((x) => f.call(self, self[x], cnt++, x, self));
+        var self = this, res = [], cnt = 0;
+        for(var key in self) {
+            if(key !== "null" && key !== "undefined" ) {
+                res.push(f.call(self, self[key], cnt++, key, self));
+            }
+        }
+        return res;
     }
 });
 
@@ -52,7 +64,7 @@ class Frame extends Component {
 
     getTime() {
         var data = {
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         };
         this.props.dispatch(SystemActions.getTime(data));
     }
@@ -61,30 +73,33 @@ class Frame extends Component {
         var time = this.props.system.time;
         time.setSeconds(time.getSeconds() + 1);
         this.setState({
-            time
+            system: {
+                ...this.props.system,
+                time,
+            },
         });
         //this.props.dispatch(SystemActions.increaseTime());
     }
 
     closeLoginForm() {
-        this.props.dispatch(LoginActions.closeLoginForm());
+        this.props.dispatch(UserActions.closeUserForm());
     }
 
     openLoginForm() {
-        this.props.dispatch(LoginActions.openLoginForm());
+        this.props.dispatch(UserActions.openUserForm());
     }
 
     signIn() {
-        var data = new FormData(ReactDOM.findDOMNode(this.refs.loginForm.refs.form));
-        this.props.dispatch(LoginActions.signIn(data));
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.userForm.refs.form));
+        this.props.dispatch(UserActions.signIn(data));
     }
 
     signOut() {
-        this.props.dispatch(LoginActions.signOut());
+        this.props.dispatch(UserActions.signOut());
     }
 
     checkAccount() {
-        this.props.dispatch(LoginActions.checkAccount());
+        this.props.dispatch(UserActions.checkAccount());
     }
 
     render() {
@@ -104,8 +119,8 @@ class Frame extends Component {
                                     {this.props.system.time.toLocaleString()}
                                 </NavItem>
                                 {
-                                    this.props.login.account.name ? 
-                                        [<NavItem key="0">Hi { this.props.login.account.name }</NavItem>,
+                                    this.props.user.account.name ? 
+                                        [<NavItem key="0">Hi { this.props.user.account.name }</NavItem>,
                                             <NavItem key="1" onClick={this.signOut}>Logout</NavItem>] : 
                                     <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
                                     }
@@ -113,8 +128,8 @@ class Frame extends Component {
                             </Navbar.Collapse>
                         </Navbar>
                         <LoginForm 
-                            ref="loginForm"
-                            show={this.props.login.loginFormShow} 
+                            ref="userForm"
+                            show={this.props.user.userFormShow} 
                             onHide={this.closeLoginForm}
                             signIn={this.signIn}
                         />
@@ -159,7 +174,7 @@ class Frame extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         system: state.system,
     };
 }

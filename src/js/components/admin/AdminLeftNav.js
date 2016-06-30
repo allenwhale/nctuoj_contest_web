@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Nav, NavItem } from 'react-bootstrap';
+import { 
+    Nav, 
+    NavItem 
+} from 'react-bootstrap';
 import classNames from 'classnames';
+import { LinkContainer } from 'react-router-bootstrap';
 
 export default class Base extends Component {
 
@@ -11,16 +15,16 @@ export default class Base extends Component {
 
     render() {
         return (
-            <Nav bsStyle="pills" stacked>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/admin/problems/">Problems</Link>
-                </li>
-                <li>
-                    <Link to="/admin/executes/">Executes</Link>
-                </li>
+            <Nav stacked>
+                <LinkContainer to="/">
+                    <NavItem>Home</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/admin/problems/">
+                    <NavItem>Problems</NavItem> 
+                </LinkContainer>
+                <LinkContainer to="/admin/executes/">
+                    <NavItem>Executes</NavItem>
+                </LinkContainer>
             </Nav>
         );
     }

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { 
+    Nav, 
+    NavItem, 
+    NavDropdown, 
+    MenuItem 
+} from 'react-bootstrap';
 import classNames from 'classnames';
 import { LinkContainer } from 'react-router-bootstrap'
 

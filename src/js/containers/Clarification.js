@@ -1,10 +1,16 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
-import { Grid, Row, Col, Button } from 'react-bootstrap';
-import { Form, FormGroup, ControlLabel } from 'react-bootstrap';
-
+import { Link } from 'react-router'
+import { 
+    Grid, 
+    Row, 
+    Col, 
+    Button,
+    Form,
+    FormGroup,
+    ControlLabel
+} from 'react-bootstrap';
 import classNames from 'classnames';
 import * as ClarificationActions from './../actions/Clarification';
 
@@ -20,22 +26,20 @@ class Clarification extends Component {
     getClarification() {
         var data = {
             id: this.props.params.id,
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         };
         this.props.dispatch(ClarificationActions.getClarification(data));
     }
 
     putClarification() {
-        console.log('put');
         var data = new FormData(ReactDOM.findDOMNode(this.refs.form))
         this.props.dispatch(ClarificationActions.putClarification(data));
     }
 
     render() {
-        var replyable = this.props.login.account.isADMIN &&
+        var replyable = this.props.user.account.isADMIN &&
             typeof(this.props.clarification.clarification.reply) != 'undefined' && 
             this.props.clarification.clarification.reply.length == 0;
-        console.log(replyable);
         return (
             <div key={this.props.clarification.clarification.id}>
                 <Grid fluid={true}>
@@ -54,7 +58,7 @@ class Clarification extends Component {
                     <Row>
                         <Form ref="form">
                             <input name="id" type="hidden" value={this.props.params.id}/>
-                            <input name="token" type="hidden" value={this.props.login.account.token}/>
+                            <input name="token" type="hidden" value={this.props.user.account.token}/>
                             <FormGroup>
                                 <ControlLabel>Question</ControlLabel>
                                 <textarea 
@@ -79,7 +83,7 @@ class Clarification extends Component {
                                 <textarea 
                                     name="reply"
                                     className="form-control"
-                                    defaultValue={this.props.clarification.clarification.question}
+                                    defaultValue={this.props.clarification.clarification.reply}
                                     readOnly={!replyable}
                                 />
                             </FormGroup>
@@ -100,7 +104,7 @@ class Clarification extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         clarification: state.clarification,
     };
 }

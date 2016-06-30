@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Panel, Modal, Form, FormGroup, Col, FormControl, ControlLabel, Button, Label } from 'react-bootstrap';
+import { 
+    Panel,
+    Modal,
+    Form, 
+    FormGroup,
+    Col,
+    FormControl,
+    ControlLabel,
+    Button,
+    Label
+} from 'react-bootstrap';
 import classNames from 'classnames';
 import Codemirror from 'codemirror';
 require('codemirror/mode/clike/clike');

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
-import AdminLeftNav from './../../components/admin/AdminLeftNav';
+import { 
+    Grid, 
+    Row, 
+    Col 
+} from 'react-bootstrap';
+import AdminLeftNav from './AdminLeftNav';
 
 export default class AdminFrame extends Component {
 

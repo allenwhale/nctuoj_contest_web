@@ -12,6 +12,7 @@ const emptyProblem = {
 
 const initialState = {
     problemList: {},
+    problemListStatus: false,
     problem: emptyProblem,
     newProblemFormShow: false,
 };
@@ -67,6 +68,7 @@ export default handleActions({
             return {
                 ...state,
                 problemList: Config.mapArrayToObject(action.payload.msg),
+                problemListStatus: true,
             };
         },
         throw(state, action) {
@@ -74,6 +76,7 @@ export default handleActions({
             return {
                 ...state,
                 problemList: {},
+                problemListStatus: false,
             };
         }
     },

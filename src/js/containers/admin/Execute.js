@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'
-import { Button } from 'react-bootstrap';
+import { 
+    Link,
+    Button
+} from 'react-router'
 import AdminExecuteForm from './ExecuteForm';
 import classNames from 'classnames';
 import * as ExecuteActions from './../../actions/Execute';
@@ -12,14 +14,13 @@ class Execute extends Component {
         super(props);
         this.getExecute = this.getExecute.bind(this);
         this.putExecute = this.putExecute.bind(this);
-        this.retry = true;
         this.getExecute();
     }
 
     getExecute() {
         var data = {
             id: this.props.params.id,
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         };
         this.props.dispatch(ExecuteActions.getExecute(data));
     }
@@ -32,12 +33,6 @@ class Execute extends Component {
     }
 
     render() {
-        if(this.retry && this.props.execute.execute.id != this.props.params.id) {
-            this.getExecute();
-            this.retry = false;
-        } else {
-            this.retry = true;
-        }
         return (
             <div key={this.props.execute.execute.id}>
                 <h2>Execute #{this.props.execute.execute.id}</h2>
@@ -56,7 +51,7 @@ class Execute extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         execute: state.execute,
     };
 }

@@ -1,6 +1,9 @@
 const Config = {
     mapArrayToObject: (array, indexName="id") => {
-        var res = {};
+        var res = {
+            null: {},
+            undefined: {},
+        };
         array.map((x) => {
             res[x[indexName]] = x;
         });

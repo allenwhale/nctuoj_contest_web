@@ -8,6 +8,10 @@ const Submission = {
         method: 'GET',
     }).then(Config.checkStatus),
 
+    getSubmission: (data) => fetch(`${Config.baseUrl}/api/submissions/${data.id}/?${qs.stringify(data)}`, {
+        method: 'GET',
+    }).then(Config.checkStatus),
+
     postSubmission: (data) => fetch(`${Config.baseUrl}/api/submissions/`, {
         method: 'POST',
         body: data,

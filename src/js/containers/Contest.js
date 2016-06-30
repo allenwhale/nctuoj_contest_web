@@ -1,13 +1,17 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
-import { Grid, Row, Col } from 'react-bootstrap';
-import { Nav, NavItem } from 'react-bootstrap';
-import { Panel } from 'react-bootstrap';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { 
+    Grid, 
+    Row, 
+    Col,
+    Nav,
+    NavItem,
+    Panel,
+    ListGroup,
+    ListGroupItem
+} from 'react-bootstrap';
 import ContestLeftNav from './../components/ContestLeftNav';
 import classNames from 'classnames';
-
 import * as Problem from './../actions/Problem';
 
 class Contest extends Component {
@@ -42,7 +46,7 @@ class Contest extends Component {
                         </Panel>
                     </Col> 
                 </Row>
-                { this.props.login.account.isLOGIN ? 
+                { this.props.user.account.isLOGIN ? 
                 <Row>
                     <Col md={12}>
                         <Panel header="Problems">
@@ -64,7 +68,7 @@ class Contest extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         problem: state.problem,
     };
 }

@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
-import { Form, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-import { Grid, Row, Col, Button, Table } from 'react-bootstrap';
-import { Panel, DropdownButton, MenuItem } from 'react-bootstrap';
+import { 
+    Form,
+    FormGroup, 
+    FormControl,
+    ControlLabel,
+    Grid,
+    Row,
+    Col,
+    Button,
+    Table,
+    Panel,
+    DropdownButton,
+    MenuItem
+} from 'react-bootstrap';
 import empty from 'is-empty';
 import * as ProblemActions from './../../actions/Problem';
-import * as ExecuteActions from './../../actions/Execute';
 import * as TestdataActions from './../../actions/Testdata';
-
 import classNames from 'classnames';
 
 class Problem extends Component {
@@ -18,13 +27,11 @@ class Problem extends Component {
         this.putProblem = this.putProblem.bind(this);
         this.getProblem = this.getProblem.bind(this);
         this.putProblemExecute = this.putProblemExecute.bind(this);
-        this.getExecuteList = this.getExecuteList.bind(this);
         this.addProblemExecute = this.addProblemExecute.bind(this);
         this.deleteProblemExecute = this.deleteProblemExecute.bind(this);
         this.postTestdata = this.postTestdata.bind(this);
         this.putTestdata = this.putTestdata.bind(this);
         this.deleteTestdata = this.deleteTestdata.bind(this);
-        this.getExecuteList();
         this.getProblem();
         this.getTestdataList();
     }
@@ -37,14 +44,10 @@ class Problem extends Component {
         this.props.dispatch(ProblemActions.deleteProblemExecute(execute));
     }
 
-    getExecuteList() {
-        this.props.dispatch(ExecuteActions.getExecuteList());
-    }
-
     getProblem() {
         var data = {
             id: this.props.params.id,
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         }
         this.props.dispatch(ProblemActions.getProblem(data));
     }
@@ -62,7 +65,7 @@ class Problem extends Component {
     getTestdataList() {
         var data = {
             problem_id: this.props.params.id,
-            token: this.props.login.account.token,
+            token: this.props.user.account.token,
         };
         this.props.dispatch(TestdataActions.getTestdataList(data));
     }
@@ -86,7 +89,7 @@ class Problem extends Component {
 
     deleteTestdata(id) {
         var data = new FormData();
-        data.append('token', this.props.login.account.token);
+        data.append('token', this.props.user.account.token);
         data.append('id', id);
         data.append('problem_id', this.props.params.id);
         console.log('d', id);
@@ -111,7 +114,7 @@ class Problem extends Component {
                     </Row>
                     <Row>
                         <Form ref="basic">
-                            <input type="hidden" name="token" value={this.props.login.account.token} />
+                            <input type="hidden" name="token" value={this.props.user.account.token} />
                             <input type="hidden" name="id" value={this.props.params.id} />
                             <h3>Basic</h3> 
                             <Row>
@@ -168,7 +171,7 @@ class Problem extends Component {
                         >
                             <Form ref="execute">
                                 <input type="hidden" name="id" value={this.props.params.id} />
-                                <input type="hidden" name="token" value={this.props.login.account.token} />
+                                <input type="hidden" name="token" value={this.props.user.account.token} />
                                 <Table responsive striped hover >
                                     <thead>
                                         <tr>
@@ -214,7 +217,7 @@ class Problem extends Component {
                     <Row>
                         <h3>Testdata</h3>                
                         <Form style={{display: 'none'}} ref="newTestdata">
-                            <input name="token" value={this.props.login.account.token}/>
+                            <input name="token" value={this.props.user.account.token}/>
                             <input name="problem_id" value={this.props.problem.problem.id}/>
                             <input name="score" value="0" />
                             <input name="time_limit" value="1000" />
@@ -307,7 +310,7 @@ class Problem extends Component {
                                                 <form style={{display: 'none'}} ref={`testdata_${row.id}`}>
                                                     <input name="id" value={row.id} />
                                                     <input name="problem_id" value={this.props.params.id} />
-                                                    <input name="token" value={this.props.login.account.token} />
+                                                    <input name="token" value={this.props.user.account.token} />
                                                     <input 
                                                         ref={`input_${row.id}`} 
                                                         name="input" 
@@ -363,7 +366,7 @@ class Problem extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         problem: state.problem,
         execute: state.execute,
         testdata: state.testdata,

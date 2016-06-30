@@ -2,22 +2,28 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Grid, Row, Col, Button } from 'react-bootstrap';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import { Alert, Modal, Form, FormGroup, ControlLabel } from 'react-bootstrap';
-
+import { 
+    Grid, 
+    Row, 
+    Col, 
+    Button,
+    ListGroup,
+    ListGroupItem,
+    Modal,
+    Form,
+    FormGroup,
+    ControlLabel
+} from 'react-bootstrap';
 import classNames from 'classnames';
 import * as ProblemActions from './../../actions/Problem';
 
 class ProblemList extends Component {
     constructor(props) {
         super(props);
-        this.getProblemList = this.getProblemList.bind(this);
         this.postProblem = this.postProblem.bind(this);
         this.closeNewProblemForm = this.closeNewProblemForm.bind(this);
         this.openNewProblemForm = this.openNewProblemForm.bind(this);
         this.closeProblemErrMsg = this.closeProblemErrMsg.bind(this);
-        this.getProblemList();
     }
 
     closeProblemErrMsg() {
@@ -30,13 +36,6 @@ class ProblemList extends Component {
 
     openNewProblemForm() {
         this.props.dispatch(ProblemActions.openNewProblemForm());
-    }
-
-    getProblemList() {
-        var data = {
-            token: this.props.login.account.token,
-        }
-        this.props.dispatch(ProblemActions.getProblemList(data));
     }
 
     postProblem() {
@@ -75,7 +74,7 @@ class ProblemList extends Component {
                             <Row>
                                 <Col md={10} mdOffset={1}>
                                     <Form ref="form" horizontal>
-                                        <input type="hidden" name="token" value={this.props.login.account.token}/>
+                                        <input type="hidden" name="token" value={this.props.user.account.token}/>
                                         <FormGroup>
                                             <ControlLabel>Title</ControlLabel>
                                             <input className="form-control" name="title"></input>
@@ -111,7 +110,7 @@ class ProblemList extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
         problem: state.problem,
     };
 }

@@ -34,14 +34,14 @@ export default class Root extends Component {
                             <Route path="clarifications/" component={ClarificationList}/>
                             <Route path="clarifications/:id/" component={Clarification}/>
                         </Route>
-                    </Route>
-                    <Route path="admin/" component={NeedAdmin}>
-                        <Route path="" component={AdminFrame}>
-                            <IndexRoute component={""}/>
-                            <Route path="problems/" component={AdminProblemList} />
-                            <Route path="problems/:id/" component={AdminProblem} />
-                            <Route path="executes/" component={AdminExecuteList}/>
-                            <Route path="executes/:id/" component={AdminExecute}/>
+                        <Route path="admin/" component={NeedAdmin}>
+                            <Route path="" component={AdminFrame}>
+                                <IndexRoute component={""}/>
+                                <Route path="problems/" component={AdminProblemList} />
+                                <Route path="problems/:id/" component={AdminProblem} />
+                                <Route path="executes/" component={AdminExecuteList}/>
+                                <Route path="executes/:id/" component={AdminExecute}/>
+                            </Route>
                         </Route>
                     </Route>
                     <Route path="special/" component={Special} />

@@ -1,6 +1,6 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { browserHistory } from 'react-router'
 
 class NeedAdmin extends Component {
     constructor(props) {
@@ -10,8 +10,7 @@ class NeedAdmin extends Component {
     }
 
     checkIsAdmin() {
-        console.log(this.props.login.account);
-        if(!this.props.login.account.isADMIN) {
+        if(!this.props.user.account.isADMIN) {
             console.log('not admin');
             browserHistory.push('/');
         }
@@ -29,7 +28,7 @@ class NeedAdmin extends Component {
 
 function mapStateToProps(state) {
     return {
-        login: state.login,
+        user: state.user,
     };
 }
 
