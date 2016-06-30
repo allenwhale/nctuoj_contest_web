@@ -22,16 +22,16 @@ export default class Base extends Component {
                 <LinkContainer to="/submissions/">
                     <NavItem>Submissions</NavItem>
                 </LinkContainer>
-                <NavDropdown title="Problems" id="navDropdown">
-                    {
-                        this.props.problemList.map((row) => (
-                            <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
-                                <MenuItem>{row.title}</MenuItem>
-                            </LinkContainer>
-                            ))
-                    }
-
-                </NavDropdown>
+                {
+                    this.props.problemList.map((row) => (
+                        <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
+                            <NavItem>{row.title}</NavItem>
+                        </LinkContainer>
+                        ))
+                }
+                <LinkContainer to="/clarifications/">
+                    <NavItem>Clarification</NavItem>
+                </LinkContainer>
                 {
                     this.props.isADMIN ? 
                         <LinkContainer to="/admin/">

@@ -9,11 +9,14 @@ import LoginForm from '../components/LoginForm';
 import classNames from 'classnames';
 
 import * as LoginActions from '../actions/Login';
+import * as SystemActions from '../actions/System';
 require('sweetalert/dist/sweetalert.css');
 require('codemirror/lib/codemirror.css');
 require('bootstrap/dist/css/bootstrap.min.css');
 require('bootstrap/dist/css/bootstrap-theme.min.css');
 require('./../../assets/styles/core.sass');
+
+const UPDATE_INTERVAL = 60;
 
 class Frame extends Component {
     constructor(props) {
@@ -23,7 +26,38 @@ class Frame extends Component {
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
         this.checkAccount = this.checkAccount.bind(this);
+        this.getTime = this.getTime.bind(this);
+        this.increaseTime = this.increaseTime.bind(this);
+        this.updateTime = this.updateTime.bind(this);
         this.checkAccount();
+        this.timeUpdateCount = 0;
+        setInterval(this.updateTime, 1000);
+    }
+
+    updateTime() {
+        if(this.timeUpdateCount == 0) {
+            this.getTime();
+            this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
+        } else {
+            this.increaseTime();
+            this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
+        }
+    }
+
+    getTime() {
+        var data = {
+            token: this.props.login.account.token,
+        };
+        this.props.dispatch(SystemActions.getTime(data));
+    }
+
+    increaseTime() {
+        var time = this.props.system.time;
+        time.setSeconds(time.getSeconds() + 1);
+        this.setState({
+            time
+        });
+        //this.props.dispatch(SystemActions.increaseTime());
     }
 
     closeLoginForm() {
@@ -51,7 +85,7 @@ class Frame extends Component {
         return (
             <div style={{height: '100%'}}>
                 <div className={classNames('body')}>
-                    <Navbar style={{margin: 0}}>
+                    <Navbar>
                         <Navbar.Header>
                             <Navbar.Brand>
                                 <Link to="/">Contest</Link>
@@ -60,6 +94,9 @@ class Frame extends Component {
                         </Navbar.Header>
                         <Navbar.Collapse>
                             <Nav pullRight>
+                                <NavItem>
+                                    {this.props.system.time.toLocaleString()}
+                                </NavItem>
                                 {
                                     this.props.login.account.name ? 
                                         [<NavItem key="0">Hi { this.props.login.account.name }</NavItem>,
@@ -117,6 +154,7 @@ class Frame extends Component {
 function mapStateToProps(state) {
     return {
         login: state.login,
+        system: state.system,
     };
 }
 
