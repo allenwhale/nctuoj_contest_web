@@ -153,7 +153,7 @@ class Problem extends Component {
                                 <span>新增</span>
                                 <DropdownButton title="Execute List" id="dropdown">
                                     {
-                                        this.props.execute.executeList.map((row) => (
+                                        this.props.execute.executeList.mapArr((row) => (
                                             <MenuItem 
                                                 key={row.id} 
                                                 eventKey={row.id}
@@ -178,7 +178,7 @@ class Problem extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            this.props.problem.problem.executes.map((row) => (
+                                            this.props.problem.problem.executes.mapArr((row) => (
                                                 <tr key={row.id}>
                                                     <td>
                                                         {row.description}
@@ -237,7 +237,7 @@ class Problem extends Component {
                             </thead>
                             <tbody>
                                 {
-                                    this.props.testdata.testdataList.map((row, idx) => (
+                                    this.props.testdata.testdataList.mapArr((row, idx) => (
                                         <tr key={row.id}>
                                             <td>{idx + 1}</td>
                                             <td>

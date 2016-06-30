@@ -2,9 +2,9 @@ import {
     handleActions
 } from 'redux-actions';
 import swal from 'sweetalert';
-
+import Config from './Config';
 const initialState = {
-    testdataList: [],
+    testdataList: {},
     testdata: {},
     activeSubmit: true,
 };
@@ -16,23 +16,25 @@ export default handleActions({
         next(state, action) {
             return {
                 ...state,
-                testdataList: action.payload.msg,
+                testdataList: Config.mapArrayToObject(action.payload.msg),
             };
         },
         throw(state, action) {
             swal('Get Testdata List Error', action.payload.msg, 'error');
             return {
                 ...state,
-                testdataList: [],
+                testdataList: {},
             };
         }
     },
 
     POST_TESTDATA: {
         next(state, action) {
+            var testdataList = state.testdataList;
+            testdataList[action.payload.msg.id] = action.payload.msg;
             return {
                 ...state,
-                testdataList: state.testdataList.concat([action.payload.msg]),
+                testdataList,
             };
         },
         throw(state, action) {
@@ -45,21 +47,12 @@ export default handleActions({
 
     PUT_TESTDATA: {
         next(state, action) {
-            const replaceTestdata = (testdataList, testdata) => {
-                var res = [];
-                for(var i in testdataList) {
-                    if(testdataList[i].id == testdata.id) {
-                        res.push(testdata);
-                    } else {
-                        res.push(testdataList[i]);
-                    }
-                }
-                return res;
-            };
+            var testdataList = state.testdataList;
+            testdataList[action.payload.msg.id] = action.payload.msg;
             swal('Update Testdata', 'Update Testdata Successfully', 'success');
             return {
                 ...state,
-                testdataList: replaceTestdata(state.testdataList, action.payload.msg),
+                testdataList,
             };
         },
         throw(state, action) {
@@ -72,19 +65,11 @@ export default handleActions({
 
     DELETE_TESTDATA: {
         next(state, action) {
-            console.log('r', action.payload.msg);
-            const removeTestdata = (testdataList, testdata) => {
-                var res = [];
-                for(var i in testdataList) {
-                    if(testdataList[i].id != testdata.id) {
-                        res.push(testdataList[i]);
-                    }
-                }
-                return res;
-            };
+            var testdataList = state.testdataList;
+            delete testdataList[action.payload.msg.id];
             return {
                 ...state,
-                testdataList: removeTestdata(state.testdataList, action.payload.msg),
+                testdataList,
             };
         },
         throw(state, action) {

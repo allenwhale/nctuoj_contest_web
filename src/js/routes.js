@@ -10,7 +10,8 @@ import Contest from './containers/Contest';
 import Problem from './containers/Problem';
 import SubmissionList from './containers/SubmissionList';
 import Submission from './containers/Submission';
-import ClarificationList from './containers/Clarification';
+import ClarificationList from './containers/ClarificationList';
+import Clarification from './containers/Clarification';
 import AdminFrame from './components/admin/AdminFrame';
 import AdminProblemList from './containers/admin/ProblemList';
 import AdminProblem from './containers/admin/Problem';
@@ -31,6 +32,7 @@ export default class Root extends Component {
                             <Route path="submissions/" component={SubmissionList}/>
                             <Route path="submissions/:id/" component={Submission}/>
                             <Route path="clarifications/" component={ClarificationList}/>
+                            <Route path="clarifications/:id/" component={Clarification}/>
                         </Route>
                     </Route>
                     <Route path="admin/" component={NeedAdmin}>

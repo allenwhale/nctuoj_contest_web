@@ -66,7 +66,7 @@ export default class SubmitForm extends Component {
                                     onChange={this.changeExecuteType}
                                 >
                                     {
-                                        this.props.executeList.map((row) => (
+                                        this.props.executeList.mapArr((row) => (
                                             <option key={row.id} value={row.id}>{row.description}</option>
                                         ))
                                     }

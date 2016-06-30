@@ -51,7 +51,7 @@ class ProblemList extends Component {
                     <Button onClick={this.openNewProblemForm}>New Problem</Button>
                     <ListGroup>
                         {
-                            this.props.problem.problemList.map((row) => (
+                            this.props.problem.problemList.mapArr((row) => (
                                 <ListGroupItem>
                                     <Link to={`/admin/problems/${row.id}/`}>
                                         {row.title}

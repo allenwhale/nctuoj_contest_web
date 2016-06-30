@@ -57,7 +57,7 @@ class ExecuteForm extends Component {
                             </thead> 
                             <tbody>
                                 {
-                                    this.props.execute.execute.commands.map((row) => (
+                                    this.props.execute.execute.commands.mapArr((row) => (
                                         <tr>
                                             <td>
                                                 <input 

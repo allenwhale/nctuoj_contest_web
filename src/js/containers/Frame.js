@@ -17,6 +17,12 @@ require('bootstrap/dist/css/bootstrap-theme.min.css');
 require('./../../assets/styles/core.sass');
 
 const UPDATE_INTERVAL = 60;
+Object.defineProperty(Object.prototype, 'mapArr', {
+    value: function(f, ctx) {
+        var self = this, cnt = 0;
+        return Object.keys(self).map((x) => f.call(self, self[x], cnt++, x, self));
+    }
+});
 
 class Frame extends Component {
     constructor(props) {

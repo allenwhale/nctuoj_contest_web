@@ -23,7 +23,7 @@ export default class Base extends Component {
                     <NavItem>Submissions</NavItem>
                 </LinkContainer>
                 {
-                    this.props.problemList.map((row) => (
+                    this.props.problemList.mapArr((row) => (
                         <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
                             <NavItem>{row.title}</NavItem>
                         </LinkContainer>

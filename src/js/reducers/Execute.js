@@ -2,15 +2,16 @@ import {
     handleActions
 } from 'redux-actions';
 import swal from 'sweetalert';
+import Config from './Config';
 
 const emptyExecute = {
     description: '',
     file_name: '',
-    commands: [],
+    commands: {},
 }
 
 const initialState = {
-    executeList: [],
+    executeList: {},
     execute: emptyExecute,
     newExecuteShow: false,
 };
@@ -19,11 +20,12 @@ const initialState = {
 export default handleActions({
 
     ADD_COMMAND: (state, actions) => {
+        var commands = state.execute.commands;
+        var id = Math.max.apply(null, Object.keys(commands)) + 1;
+        commands[id] = {id};
         const execute = {
             ...state.execute,
-            commands: state.execute.commands.concat({
-                id: Math.floor(Math.random() * 100000),
-            })
+            commands,
         }
         return {
             ...state,
@@ -33,10 +35,12 @@ export default handleActions({
 
     GET_EXECUTE: {
         next(state, action) {
+            var cnt = 1;
             action.payload.msg.commands = action.payload.msg.commands.map((item) => ({
                 ...item,
-                id: Math.floor(Math.random() * 100000),
+                id: cnt++,
             }));
+            action.payload.msg.commands = Config.mapArrayToObject(action.payload.msg.commands);
             return {
                 ...state,
                 execute: action.payload.msg,
@@ -52,21 +56,11 @@ export default handleActions({
     },
 
     DELETE_COMMAND: (state, action) => {
-        const removeCommand = (commands, id) => {
-            var res = [];
-            for(var i in commands) {
-                if(commands[i].id != id) {
-                    res.push({
-                        ...commands[i],
-                        //id: Math.random() * 10000,
-                    });
-                }
-            }
-            return res;
-        };
+        var commands = state.execute.commands;
+        delete commands[action.payload];
         const execute = {
             ...state.execute,
-            commands: removeCommand(state.execute.commands, action.payload),
+            commands,
         };
         return {
             ...state,
@@ -76,21 +70,12 @@ export default handleActions({
 
     PUT_EXECUTE: {
         next(state, action) {
-            const replaceExecute = (executeList, execute) => {
-                var res = [];
-                for(var i in executeList) {
-                    if(executeList[i].id == execute.id) {
-                        res.push(execute);
-                    } else {
-                        res.push(executeList[i]);
-                    }
-                }
-                return res;
-            };
+            var executeList = state.executeList;
+            executeList[action.payload.msg.id] = action.payload.msg;
             swal("Update Execute", "Update Execute Successfully", "success");
             return {
                 ...state,
-                executeList: replaceExecute(state.executeList, action.payload.msg),
+                executeList,
             };
         },
         throw(state, action) {
@@ -104,9 +89,11 @@ export default handleActions({
     POST_EXECUTE: {
         next(state, action) {
             swal("New Execute", "Add Execute Successfully", "success");
+            var executeList = state.executeList;
+            executeList[action.payload.msg.id] = action.payload.msg;
             return {
                 ...state,
-                executeList: state.executeList.concat([action.payload.msg]),
+                executeList,
                 newExecuteShow: false,
             };
         },
@@ -119,22 +106,13 @@ export default handleActions({
     },
 
     UPDATE_COMMAND: (state, action) => {
-        const replaceCommand = (commands, command) => {
-            var res = [];
-            for(var i in commands) {
-                if(commands[i].id == command.id) {
-                    res.push(command);
-                } else {
-                    res.push(commands[i]);
-                }
-            }
-            return res;
-        };
+        var commands = state.execute.commands;
+        commands[action.payload.id] = action.payload;
         return {
             ...state,
             execute: {
                 ...state.execute,
-                commands: replaceCommand(state.execute.commands, action.payload),
+                commands,
             }
         };
     },

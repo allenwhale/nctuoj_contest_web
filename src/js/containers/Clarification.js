@@ -2,121 +2,96 @@ import React, { PropTypes, Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Router, Route, Link, browserHistory } from 'react-router'
-import { Table, Modal, Button, Form, FormGroup, ControlLabel } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Form, FormGroup, ControlLabel } from 'react-bootstrap';
 
 import classNames from 'classnames';
-import * as ClarificationActions from '../actions/Clarification';
+import * as ClarificationActions from './../actions/Clarification';
 
 
-class ClarificationList extends Component {
+class Clarification extends Component {
     constructor(props) {
         super(props);
-        this.getClarificationList = this.getClarificationList.bind(this);
-        this.postClarification = this.postClarification.bind(this);
-        this.openNewClarificationForm = this.openNewClarificationForm.bind(this);
-        this.closeNewClarificationForm = this.closeNewClarificationForm.bind(this);
-        this.getClarificationList();
+        this.getClarification = this.getClarification.bind(this);
+        this.putClarification = this.putClarification.bind(this);
+        this.getClarification();
     }
 
-    getClarificationList() {
+    getClarification() {
         var data = {
-            token: this.props.login.account.token, 
+            id: this.props.params.id,
+            token: this.props.login.account.token,
         };
-        this.props.dispatch(ClarificationActions.getClarificationList(data));
+        this.props.dispatch(ClarificationActions.getClarification(data));
     }
 
-    openNewClarificationForm() {
-        this.props.dispatch(ClarificationActions.openNewClarificationForm());
-    }
-
-    closeNewClarificationForm() {
-        this.props.dispatch(ClarificationActions.closeNewClarificationForm());
-    }
-
-    postClarification() {
-        var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
-        this.props.dispatch(ClarificationActions.postClarification(data));
+    putClarification() {
+        console.log('put');
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.form))
+        this.props.dispatch(ClarificationActions.putClarification(data));
     }
 
     render() {
+        var replyable = this.props.login.account.isADMIN &&
+            typeof(this.props.clarification.clarification.reply) != 'undefined' && 
+            this.props.clarification.clarification.reply.length == 0;
+        console.log(replyable);
         return (
-            <div>
-                <Button
-                    bsStyle="success"
-                    onClick={this.openNewClarificationForm}
-                >
-                    New
-                </Button>
-                <Modal
-                    show={this.props.clarification.newClarificationShow}
-                    onHide={this.closeNewClarificationForm}
-                >
-                    <Modal.Header>
-                        <Modal.Title>New Clarification</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
+            <div key={this.props.clarification.clarification.id}>
+                <Grid fluid={true}>
+                    <Row>
+                        <h2>
+                            Clarification {this.props.clarification.clarification.id}
+                            <Link 
+                                className="btn btn-default" 
+                                to="/clarifications/"
+                                style={{float: 'right'}}
+                            >
+                                Back to List
+                            </Link>
+                        </h2>
+                    </Row>
+                    <Row>
                         <Form ref="form">
-                            <input type="hidden" name="token" value={this.props.login.account.token} />
+                            <input name="id" type="hidden" value={this.props.params.id}/>
+                            <input name="token" type="hidden" value={this.props.login.account.token}/>
                             <FormGroup>
-                                <ControlLabel>分類</ControlLabel>
-                                <select
-                                    className="form-control"
-                                    name="problem_id"
-                                >
-                                    <option value="0">General</option>
-                                    {
-                                        this.props.problem.problemList.map((row) => (
-                                            <option key={row.id} value={row.id}>{`${row.id}. ${row.title}`}</option>
-                                            ))
-                                    }
-                                </select>
-                            </FormGroup>
-                            <FormGroup>
-                                <ControlLabel> Question </ControlLabel>
+                                <ControlLabel>Question</ControlLabel>
                                 <textarea 
                                     className="form-control"
-                                    name="question"
-                                /> 
+                                    defaultValue={this.props.clarification.clarification.question}
+                                    readOnly
+                                />
                             </FormGroup>
-
+                            <FormGroup>
+                                <ControlLabel>
+                                    <input name="reply_type" value="0" type="radio" defaultChecked/>
+                                    For User #{this.props.clarification.clarification.user_id}
+                                </ControlLabel>
+                                {' '}
+                                <ControlLabel>
+                                    <input name="reply_type" value="1" type="radio"/>
+                                    For All User
+                                </ControlLabel>
+                            </FormGroup>
+                            <FormGroup>
+                                <ControlLabel>Reply</ControlLabel>
+                                <textarea 
+                                    name="reply"
+                                    className="form-control"
+                                    defaultValue={this.props.clarification.clarification.question}
+                                    readOnly={!replyable}
+                                />
+                            </FormGroup>
+                            {
+                                replyable ? 
+                                    <FormGroup>
+                                        <Button onClick={this.putClarification}>Submit</Button>
+                                    </FormGroup> : ""
+                            }
                         </Form>
-                    </Modal.Body>                
-                    <Modal.Footer>
-                        <Button 
-                            bsStyle="warning" 
-                            onClick={this.closeNewClarificationForm}
-                        >
-                            Close
-                        </Button>
-                        <Button
-                            bsStyle="success"
-                            onClick={this.postClarification}
-                        >
-                            Submit
-                        </Button>
-                    </Modal.Footer>
-                </Modal>
-                <Table responsive striped hover >
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Question</th>
-                            <th>Reply</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        this.props.clarification.clarificationList.map((row) => (
-                            <tr key={row.id}>
-                                <td>{row.id}</td>
-                                <td className="ellipsis">{row.question}</td>
-                                <td className="ellipsis">{row.reply}</td>
-                            </tr>
-                        ))
-                    } 
-                    </tbody>
-                </Table>
+                    </Row>
+                </Grid>
             </div>
         );
     }
@@ -127,8 +102,8 @@ function mapStateToProps(state) {
     return {
         login: state.login,
         clarification: state.clarification,
-        problem: state.problem,
     };
 }
 
-export default connect(mapStateToProps)(ClarificationList);
+export default connect(mapStateToProps)(Clarification);
+

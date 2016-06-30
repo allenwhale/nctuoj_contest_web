@@ -48,7 +48,7 @@ class Contest extends Component {
                         <Panel header="Problems">
                             <ListGroup fill>
                                 {
-                                    this.props.problem.problemList.map((row) => (
+                                    this.props.problem.problemList.mapArr((row) => (
                                         <ListGroupItem key={row.id}>{row.title}</ListGroupItem> 
                                     ))
                                 }

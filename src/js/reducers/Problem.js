@@ -1,16 +1,17 @@
 import {
     handleActions
 } from 'redux-actions';
+import Config from './Config';
 import swal from 'sweetalert';
 
 const emptyProblem = {
     id: 0,
     title: '',
-    executes: [],
+    executes: {},
 };
 
 const initialState = {
-    problemList: [],
+    problemList: {},
     problem: emptyProblem,
     newProblemFormShow: false,
 };
@@ -19,30 +20,25 @@ const initialState = {
 export default handleActions({
 
     ADD_PROBLEM_EXECUTE: (state, action) => {
+        var executes = state.problem.executes;
+        executes[action.payload.id] = action.payload;
         return {
             ...state,
             problem: {
                 ...state.problem,
-                executes: state.problem.executes.concat([action.payload]),
+                executes,
             },
         };
     },
 
     DELETE_PROBLEM_EXECUTE: (state, action) => {
-        const removeProblemExecute = (executes, execute) => {
-            var res = [];
-            for(var i in executes) {
-                if(executes[i].id != execute.id) {
-                    res.push(executes[i]);
-                }
-            }
-            return res;
-        };
+        var executes = state.problem.executes;
+        delete executes[action.payload.id];
         return {
             ...state,
             problem: {
                 ...state.problem,
-                executes: removeProblemExecute(state.problem.executes, action.payload),
+                executes,
             },
         };
     },
@@ -54,7 +50,7 @@ export default handleActions({
                 ...state,
                 problem: {
                     ...state.problem,
-                    executes: action.payload.msg,
+                    executes: Config.mapArrayToObject(action.payload.msg),
                 }
             };
         },
@@ -70,14 +66,14 @@ export default handleActions({
         next(state, action) {
             return {
                 ...state,
-                problemList: action.payload.msg,
+                problemList: Config.mapArrayToObject(action.payload.msg),
             };
         },
         throw(state, action) {
             swal('Problem List Error', action.payload.msg, "error");
             return {
                 ...state,
-                problemList: [],
+                problemList: {},
             };
         }
     },
@@ -85,9 +81,11 @@ export default handleActions({
     POST_PROBLEM: {
         next(state, action) {
             swal("New Problem", "Add Problem Successfully", "success");
+            var problemList = state.problemList;
+            problemList[action.payload.msg.id] = action.payload.msg;
             return {
                 ...state,
-                problemList: state.problemList.concat([action.payload.msg]),
+                problemList,
                 newProblemFormShow: false,
             };
         },
@@ -102,23 +100,13 @@ export default handleActions({
 
     PUT_PROBLEM: {
         next(state, action) {
-            console.log('a', action);
-            const replaceProblem = (problemList, problem) => {
-                var res = [];
-                for(var i in problemList){
-                    if(problemList[i].id == problem.id){
-                        res.push(problem);
-                    } else {
-                        res.push(problemList[i]);
-                    }
-                }
-                return res;
-            }
+            var problemList = state.problemList;
+            problemList[action.payload.msg.id] = action.payload.msg;
             swal('Update Problem', 'Problem Updated Successfully', "success");
             return {
                 ...state,
                 problem: action.payload.msg,
-                problemList: replaceProblem(state.problemList, action.payload.msg),
+                problemList,
                 newProblemFormShow: false,
             };
         },

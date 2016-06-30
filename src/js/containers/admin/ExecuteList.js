@@ -102,7 +102,7 @@ class ExecuteList extends Component {
                         </thead>
                         <tbody>
                             {
-                                this.props.execute.executeList.map((row) => (
+                                this.props.execute.executeList.mapArr((row) => (
                                     <tr key={row.id}>
                                         <td>{ row.description }</td>
                                         <td>{ row.updated_at  }</td>

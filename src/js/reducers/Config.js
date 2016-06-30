@@ -1,5 +1,5 @@
 const Config = {
-    mapArrayToObject: (array, indexName) => {
+    mapArrayToObject: (array, indexName="id") => {
         var res = {};
         array.map((x) => {
             res[x[indexName]] = x;

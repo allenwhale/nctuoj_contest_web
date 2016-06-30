@@ -92,7 +92,7 @@ class Problem extends Component {
                         <Panel header="Execute Type">
                             <ListGroup>
                                 {
-                                    this.props.problem.problem.executes.map((row) => (
+                                    this.props.problem.problem.executes.mapArr((row) => (
                                         <ListGroupItem key={row.id}>{row.description}</ListGroupItem>
                                     ))
                                 }
@@ -115,7 +115,7 @@ class Problem extends Component {
                                 </thead>
                                 <tbody>
                                     {
-                                        this.props.testdata.testdataList.map((row, idx) => (
+                                        this.props.testdata.testdataList.mapArr((row, idx) => (
                                             <tr>
                                                 <td>{idx + 1}</td>
                                                 <td>{row.time_limit}</td>
