@@ -2,6 +2,7 @@ import { createAction } from 'redux-actions';
 import Clarification from './../utils/Clarification';
 
 export const getClarificationList = createAction('GET_CLARIFICATION_LIST', Clarification.getClarificationList);
+export const filterClarificationList = createAction('FILTER_CLARIFICATION_LIST');
 export const getClarification = createAction('GET_CLARIFICATION', Clarification.getClarification);
 export const postClarification = createAction('POST_CLARIFICATION', Clarification.postClarification);
 export const putClarification = createAction('PUT_CLARIFICATION', Clarification.putClarification);

@@ -8,7 +8,9 @@ import {
     Button, 
     Form, 
     FormGroup, 
-    ControlLabel 
+    ControlLabel,
+    Row,
+    Col
 } from 'react-bootstrap';
 
 import classNames from 'classnames';
@@ -22,6 +24,7 @@ class ClarificationList extends Component {
         this.postClarification = this.postClarification.bind(this);
         this.openNewClarificationForm = this.openNewClarificationForm.bind(this);
         this.closeNewClarificationForm = this.closeNewClarificationForm.bind(this);
+        this.filterClarificationList = this.filterClarificationList.bind(this);
         this.getClarificationList();
     }
 
@@ -30,6 +33,10 @@ class ClarificationList extends Component {
             token: this.props.user.account.token, 
         };
         this.props.dispatch(ClarificationActions.getClarificationList(data));
+    }
+
+    filterClarificationList() {
+        this.props.dispatch(ClarificationActions.filterClarificationList(this.refs.filter.value));
     }
 
     openNewClarificationForm() {
@@ -48,12 +55,33 @@ class ClarificationList extends Component {
     render() {
         return (
             <div>
-                <Button
-                    bsStyle="success"
-                    onClick={this.openNewClarificationForm}
-                >
-                    New
-                </Button>
+                <Row className={classNames('margin-bottom')}>
+                    <Col md={12}>
+                        <Button
+                            bsStyle="success"
+                            onClick={this.openNewClarificationForm}
+                        >
+                            New
+                        </Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={4}>
+                        <input 
+                            className="form-control" 
+                            ref="filter"
+                            placeholder="Problem ID" 
+                        />
+                    </Col>
+                    <Col md={6}>
+                        <Button
+                            bsStyle="success"
+                            onClick={this.filterClarificationList}
+                        >
+                            Filter By Problem ID
+                        </Button>
+                    </Col>
+                </Row>
                 <Modal
                     show={this.props.clarification.newClarificationShow}
                     onHide={this.closeNewClarificationForm}
@@ -114,19 +142,19 @@ class ClarificationList extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                    {
-                        this.props.clarification.clarificationList.mapArr((row) => (
-                            <tr key={row.id}>
-                                <td>{row.id}</td>
-                                <td>{row.problem_id == 0 ? "General" : this.props.problem.problemList[row.problem_id].title}</td>
-                                <td className="ellipsis">{row.question}</td>
-                                <td className="ellipsis">{row.reply}</td>
-                                <td>
-                                    <Button bsSize="xs" onClick={() => browserHistory.push(`/clarifications/${row.id}/`)}>view</Button>
-                                </td>
-                            </tr>
-                        ))
-                    } 
+                        {
+                            this.props.clarification.filterClarificationList.mapArr((row) => (
+                                <tr key={row.id}>
+                                    <td>{row.id}</td>
+                                    <td>{row.problem_id == 0 ? "General" : `${row.problem_id}. ${this.props.problem.problemList[row.problem_id].title}`}</td>
+                                    <td className="ellipsis">{row.question}</td>
+                                    <td className="ellipsis">{row.reply}</td>
+                                    <td>
+                                        <Button bsSize="xs" onClick={() => browserHistory.push(`/clarifications/${row.id}/`)}>view</Button>
+                                    </td>
+                                </tr>
+                                ))
+                        } 
                     </tbody>
                 </Table>
             </div>

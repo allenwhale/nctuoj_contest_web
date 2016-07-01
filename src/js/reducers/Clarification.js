@@ -6,6 +6,7 @@ import Config from './Config';
 
 const initialState = {
     clarificationList: {},
+    filterClarificationList: {},
     clarification: {},
     newClarificationShow: false,
 };
@@ -27,11 +28,32 @@ export default handleActions({
         };
     },
 
+    FILTER_CLARIFICATION_LIST: (state, action) => {
+        var filterClarificationList = {};
+        console.log(action.payload);
+        if(action.payload != '') {
+            for(var i in state.clarificationList) {
+                console.log(state.clarificationList[i].problem_id, action.payload);
+                if(state.clarificationList[i].problem_id == action.payload) {
+                    filterClarificationList[i] = state.clarificationList[i];
+                }
+            }
+        } else {
+            filterClarificationList = state.clarificationList;
+        }
+        return {
+            ...state,
+            filterClarificationList,
+        };
+    },
+
     GET_CLARIFICATION_LIST: {
         next(state, action) {
+            var clarificationList = Config.mapArrayToObject(action.payload.msg);
             return {
                 ...state,
-                clarificationList: Config.mapArrayToObject(action.payload.msg),
+                clarificationList,
+                filterClarificationList: clarificationList,
             };
         },
         throw(state, action) {
@@ -39,6 +61,7 @@ export default handleActions({
             return {
                 ...state,
                 clarificationList: {},
+                filterClarificationList: {},
             };
         }
     },
