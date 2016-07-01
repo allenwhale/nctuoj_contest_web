@@ -17,6 +17,7 @@ import {
     MenuItem
 } from 'react-bootstrap';
 import empty from 'is-empty';
+import Config from './../../utils/Config';
 import * as ProblemActions from './../../actions/Problem';
 import * as TestdataActions from './../../actions/Testdata';
 import classNames from 'classnames';
@@ -255,7 +256,11 @@ class Problem extends Component {
                                                 </Button>
                                             </td>
                                             <td>
-                                                <Button bsSize="sm">下載</Button>
+                                                <a
+                                                    className="btn btn-default btn-sm"
+                                                    href={`${Config.baseUrl}/api/problems/${this.props.params.id}/testdata/${row.id}/input/`}
+                                                    download="input"
+                                                >下載</a>
                                             </td>
                                             <td>
                                                 <Button
@@ -269,7 +274,11 @@ class Problem extends Component {
                                                 </Button>
                                             </td>
                                             <td>
-                                                <Button bsSize="sm">下載</Button>
+                                                <a
+                                                    className="btn btn-default btn-sm"
+                                                    href={`${Config.baseUrl}/api/problems/${this.props.params.id}/testdata/${row.id}/output/`}
+                                                    download="output"
+                                                >下載</a>
                                             </td>
                                             <td>
                                                 <input 

@@ -109,17 +109,21 @@ class ClarificationList extends Component {
                             <th className="col-md-1">#</th>
                             <th className="col-md-2">分類</th>
                             <th className="col-md-4">Question</th>
-                            <th className="col-md-5">Reply</th>
+                            <th className="col-md-4">Reply</th>
+                            <th className="col-md-1">View</th>
                         </tr>
                     </thead>
                     <tbody>
                     {
                         this.props.clarification.clarificationList.mapArr((row) => (
-                            <tr key={row.id} onClick={() => browserHistory.push(`/clarifications/${row.id}/`)}>
+                            <tr key={row.id}>
                                 <td>{row.id}</td>
                                 <td>{row.problem_id == 0 ? "General" : this.props.problem.problemList[row.problem_id].title}</td>
                                 <td className="ellipsis">{row.question}</td>
                                 <td className="ellipsis">{row.reply}</td>
+                                <td>
+                                    <Button bsSize="xs" onClick={() => browserHistory.push(`/clarifications/${row.id}/`)}>view</Button>
+                                </td>
                             </tr>
                         ))
                     } 

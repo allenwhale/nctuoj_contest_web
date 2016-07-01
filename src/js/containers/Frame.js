@@ -82,11 +82,11 @@ class Frame extends Component {
     }
 
     closeLoginForm() {
-        this.props.dispatch(UserActions.closeUserForm());
+        this.props.dispatch(UserActions.closeLoginForm());
     }
 
     openLoginForm() {
-        this.props.dispatch(UserActions.openUserForm());
+        this.props.dispatch(UserActions.openLoginForm());
     }
 
     signIn() {
@@ -129,7 +129,7 @@ class Frame extends Component {
                         </Navbar>
                         <LoginForm 
                             ref="userForm"
-                            show={this.props.user.userFormShow} 
+                            show={this.props.user.loginFormShow} 
                             onHide={this.closeLoginForm}
                             signIn={this.signIn}
                         />

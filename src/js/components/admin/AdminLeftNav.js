@@ -19,6 +19,9 @@ export default class Base extends Component {
                 <LinkContainer to="/">
                     <NavItem>Home</NavItem>
                 </LinkContainer>
+                <LinkContainer to="/admin/">
+                    <NavItem>Contest</NavItem>
+                </LinkContainer>
                 <LinkContainer to="/admin/problems/">
                     <NavItem>Problems</NavItem> 
                 </LinkContainer>

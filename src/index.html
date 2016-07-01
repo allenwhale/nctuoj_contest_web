@@ -1,11 +1,17 @@
 <!DOCTYPE html>
+<style>
+html{ height: 100%; } body{ height: 100%; padding: 0; margin: 0; } #app{ height: 100%; padding: 0; margin: 0; } #loading{ padding: 0; margin: 0; height: 100%; background-color: #bb564f; } .dot { position: absolute; top: 50%; left: 50%; width: 1em; height: 1em; border-radius: 50%; color: #f5d4a1; background-color:currentColor; font-size: 15px; box-shadow: -2em -2em,2em -2em, -2em  2em,2em  2em; -webkit-animation: loading .8s ease-in-out infinite; animation: loading .8s ease-in-out infinite; -webkit-transform: rotate(.125turn); transform: rotate(.125turn); } @-webkit-keyframes loading { to { box-shadow: -2em  2em,-2em  -2em, 2em  2em,2em  -2em; } } @keyframes loading { to { box-shadow: -2em  2em,-2em  -2em, 2em  2em,2em  -2em; } }
+</style>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
     </head>
     <body>
-        <div id="app">Rendering</div>
+        <div id="app">
+            <div id="loading"></div>
+            <div class="dot"></div>
+        </div>
         <script src="/bundle.js"></script>
     </body>
 </html>

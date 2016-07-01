@@ -16,6 +16,7 @@ import ContestLeftNav from '../components/ContestLeftNav';
 import SubmitForm from '../components/SubmitForm';
 import empty from 'is-empty';
 import classNames from 'classnames';
+import Config from './../utils/Config';
 import * as ProblemActions from './../actions/Problem';
 import * as SubmissionActions from './../actions/Submission';
 import * as TestdataActions from './../actions/Testdata';
@@ -88,7 +89,7 @@ class Problem extends Component {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <iframe src={`http://140.113.89.233:9000/${this.props.params.id}.pdf`}
+                        <iframe src={`${Config.baseUrl}/api/problems/${this.props.params.id}/pdf/?token=${this.props.user.account.token}`}
                             style={{width: '100%', height: '768px'}}
                         ></iframe>
                     </Col>

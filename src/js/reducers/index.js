@@ -8,11 +8,13 @@ import execute from './Execute';
 import testdata from './Testdata';
 import clarification from './Clarification';
 import verdict from './Verdict';
+import contest from './Contest';
 import system from './System';
 
 export default combineReducers({
     base,
     user,
+    contest,
     problem,
     submission,
     execute,
