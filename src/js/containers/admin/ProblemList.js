@@ -47,7 +47,11 @@ class ProblemList extends Component {
         return (
             <div>
                 <Row>
-                    <Button onClick={this.openNewProblemForm}>New Problem</Button>
+                    <Button 
+                        onClick={this.openNewProblemForm}
+                        bsStyle="success"
+                        className={classNames('margin-bottom')}
+                    >New Problem</Button>
                     <ListGroup>
                         {
                             this.props.problem.problemList.mapArr((row) => (

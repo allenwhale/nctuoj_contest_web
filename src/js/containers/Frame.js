@@ -57,7 +57,7 @@ class Frame extends Component {
             this.getTime();
             this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
         } else {
-            this.increaseTime();
+            //this.increaseTime();
             this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
         }
     }
@@ -133,7 +133,9 @@ class Frame extends Component {
                             onHide={this.closeLoginForm}
                             signIn={this.signIn}
                         />
+                        <div className={classNames('margin-bottom')}>
                         { this.props.children }
+                        </div>
                     </div>
                     <footer {...this.props} 
                         className={classNames(this.props.className, 'footer', 'text-center')}

@@ -93,7 +93,6 @@ class Problem extends Component {
         data.append('token', this.props.user.account.token);
         data.append('id', id);
         data.append('problem_id', this.props.params.id);
-        console.log('d', id);
         this.props.dispatch(TestdataActions.deleteTestdata(data));
     }
 
@@ -101,7 +100,7 @@ class Problem extends Component {
         return (
             <div key={this.props.problem.problem.id}>
                 <Grid fluid={true}>
-                    <Row>
+                    <Row className={classNames('margin-bottom')}>
                         <h2>
                             { this.props.problem.problem.title }
                             <Link 

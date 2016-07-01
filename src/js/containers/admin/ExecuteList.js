@@ -79,16 +79,19 @@ class ExecuteList extends Component {
                     </Modal.Footer>
                 </Modal>
                 <Row>
-                    <Button onClick={this.openNewExecute}>New Execute</Button> 
+                    <Button 
+                        bsStyle="success"
+                        onClick={this.openNewExecute}
+                    >New Execute</Button> 
                 </Row>
                 <Row>
                     <Table responsive striped hover >
                         <thead>
                             <tr>
-                                <td>Description</td>
-                                <td>Updated at</td>
-                                <td>View</td>
-                                <td>Delete</td>
+                                <th>Description</th>
+                                <th>Updated at</th>
+                                <th>View</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -37,7 +37,7 @@ class Contest extends Component {
             <div key={this.props.contest.contest.id}>
                 <Form ref="form">
                     <input type="hidden" name="token" value={this.props.user.account.token} />
-                    <Row>
+                    <Row className={classNames('margin-bottom')}>
                         <FormGroup>
                             <Col md={12}>
                                 <ControlLabel>Title</ControlLabel>
@@ -49,7 +49,7 @@ class Contest extends Component {
                             </Col>
                         </FormGroup>
                     </Row>
-                    <Row>
+                    <Row className={classNames('margin-bottom')}>
                         <FormGroup>
                             <Col md={6}>
                                 <ControlLabel>Contest Time</ControlLabel>
@@ -77,7 +77,7 @@ class Contest extends Component {
                             </Col>
                         </FormGroup>
                     </Row>
-                    <Row>
+                    <Row className={classNames('margin-bottom')}>
                         <FormGroup>
                             <Col md={12}>
                                 <ControlLabel>Description</ControlLabel>

@@ -76,7 +76,7 @@ class Problem extends Component {
                 <h1 className={classNames('text-center')}>
                     { this.props.problem.problem.title }
                 </h1>
-                <Row>
+                <Row className={classNames('margin-bottom')}>
                     <Col md={2}>
                         <Button 
                             bsClass="btn btn-default btn-sm btn-block"
@@ -87,7 +87,7 @@ class Problem extends Component {
                         <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
                     </Col>
                 </Row>
-                <Row>
+                <Row className={classNames('margin-bottom')}>
                     <Col md={12}>
                         <iframe src={`${Config.baseUrl}/api/problems/${this.props.params.id}/pdf/?token=${this.props.user.account.token}`}
                             style={{width: '100%', height: '768px'}}

@@ -90,7 +90,10 @@ class Clarification extends Component {
                             {
                                 replyable ? 
                                     <FormGroup>
-                                        <Button onClick={this.putClarification}>Submit</Button>
+                                        <Button 
+                                            onClick={this.putClarification}
+                                            bsStyle="success"
+                                        >Submit</Button>
                                     </FormGroup> : ""
                             }
                         </Form>

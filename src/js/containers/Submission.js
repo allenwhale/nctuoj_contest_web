@@ -133,7 +133,10 @@ class Submission extends Component {
                     <tbody>
                     </tbody>
                 </Table>
-                <textarea ref="code" defaultValue={this.props.submission.submission.code} />
+                <textarea 
+                    ref="code" 
+                    defaultValue={this.props.submission.submission.code} 
+                />
             </div> : <div></div>
         );
     }

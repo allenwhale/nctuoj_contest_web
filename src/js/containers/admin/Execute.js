@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import { 
-    Link,
     Button
-} from 'react-router'
+} from 'react-bootstrap'
 import AdminExecuteForm from './ExecuteForm';
 import classNames from 'classnames';
 import * as ExecuteActions from './../../actions/Execute';
@@ -34,7 +34,7 @@ class Execute extends Component {
 
     render() {
         return (
-            <div key={this.props.execute.execute.id}>
+            <div>
                 <h2>Execute #{this.props.execute.execute.id}</h2>
                 <AdminExecuteForm 
                     ref="executeForm"

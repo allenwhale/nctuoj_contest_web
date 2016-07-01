@@ -63,10 +63,14 @@ export default class SubmitForm extends Component {
                     onEntered={this.onEntered}
                     bsSize="lg"
                 >
-                    <Modal.Header>Submit Code</Modal.Header>
+                    <Modal.Header>
+                        <Modal.Title>
+                            Submit Code
+                        </Modal.Title>
+                    </Modal.Header>
                     <Modal.Body>
                         <Form inline ref="form">
-                            <FormGroup className={classNames("margin-bottom")}>
+                            <FormGroup>
                                 <ControlLabel>Execute Type: </ControlLabel>
                                 {' '}
                                 <select 
@@ -83,7 +87,7 @@ export default class SubmitForm extends Component {
                                 </select>
                             </FormGroup>
                             {' '}
-                            <FormGroup className="margin-bottom">
+                            <FormGroup>
                                 <ControlLabel>keyMap:</ControlLabel>
                                 {' '}
                                 <select onChange={this.changeKeyMap} className="form-control">
@@ -99,13 +103,15 @@ export default class SubmitForm extends Component {
                                 {' '}
                                 <input type="file" name="file" className="form-control"/>
                             </FormGroup>
-                            <Panel header={
-                                <div>
-                                    <ControlLabel>File Name: </ControlLabel>
-                                    {' '}
-                                    <input name="file_name" className="form-control" />
-                                </div>
-                                }
+                            <Panel 
+                                className={classNames('margin-top')}
+                                header={
+                                    <div>
+                                        <ControlLabel>File Name: </ControlLabel>
+                                        {' '}
+                                        <input name="file_name" className="form-control" />
+                                    </div>
+                                    }
                             >
                                 <textarea className="form-control" name="code" ref="code"/>
                             </Panel>
