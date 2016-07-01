@@ -25,9 +25,12 @@ require('./../../assets/styles/core.sass');
 
 const UPDATE_INTERVAL = 60;
 Object.defineProperty(Object.prototype, 'mapArr', {
-    value: function(f, ctx) {
-        var self = this, res = [], cnt = 0;
-        for(var key in self) {
+    value: function(f, reverse=false) {
+        var self = this, list = Object.keys(this), res = [], cnt = 0;
+        if(reverse)
+            list = list.reverse();
+        for(var i in list) {
+            var key = list[i];
             if(key !== "null" && key !== "undefined" ) {
                 res.push(f.call(self, self[key], cnt++, key, self));
             }

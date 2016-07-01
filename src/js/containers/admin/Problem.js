@@ -33,6 +33,7 @@ class Problem extends Component {
         this.postTestdata = this.postTestdata.bind(this);
         this.putTestdata = this.putTestdata.bind(this);
         this.deleteTestdata = this.deleteTestdata.bind(this);
+        this.putProblemVerdict = this.putProblemVerdict.bind(this);
         this.getProblem();
         this.getTestdataList();
     }
@@ -56,6 +57,11 @@ class Problem extends Component {
     putProblem() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.basic));
         this.props.dispatch(ProblemActions.putProblem(data));
+    }
+
+    putProblemVerdict() {
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.verdictForm));
+        this.props.dispatch(ProblemActions.putProblemVerdict(data));
     }
 
     putProblemExecute() {
@@ -148,6 +154,52 @@ class Problem extends Component {
                             </Row>
                         </Form>
                         <Button bsStyle="success" onClick={this.putProblem}>Submit</Button>
+                    </Row>
+                    <Row>
+                        <h3>Verdict</h3> 
+                        <Form ref="verdictForm">
+                            <input type="hidden" name="token" value={this.props.user.account.token} />
+                            <input type="hidden" name="id" value={this.props.params.id} />
+                            <Row>
+                                <Col md={4}>
+                                    <FormGroup>
+                                        <ControlLabel>Verdict File</ControlLabel> 
+                                    <input type="file" name="file" className="form-control"/>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup>
+                                        <ControlLabel>Execute Type</ControlLabel>
+                                        <select 
+                                            name="execute_type_id" 
+                                            className="form-control"
+                                            defaultValue={this.props.problem.problem.verdict.execute_type_id}
+                                        >
+                                            {
+                                                this.props.execute.executeList.mapArr((row) => (
+                                                    <option key={row.id} value={row.id}>
+                                                        {row.description}
+                                                    </option>
+                                                ))
+                                            }
+                                        </select>
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4}>
+                                    <FormGroup>
+                                        <ControlLabel>Current Verdict File</ControlLabel>
+                                        <a
+                                            className="btn btn-default form-control"
+                                            href={`${Config.baseUrl}/api/problems/${this.props.params.id}/verdict/file/`}
+                                            download={this.props.problem.problem.verdict.file_name}
+                                        >
+                                            {this.props.problem.problem.verdict.file_name}
+                                        </a>
+                                    </FormGroup>
+                                </Col>
+                            </Row>
+                        </Form>
+                        <Button bsStyle="success" onClick={this.putProblemVerdict}>Submit</Button>
                     </Row>
                     <Row>
                         <h3>Execute Type</h3>

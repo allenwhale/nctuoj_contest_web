@@ -11,3 +11,4 @@ export const closeProblemErrMsg = createAction('CLOSE_PROBLEM_ERR_MSG');
 export const addProblemExecute = createAction('ADD_PROBLEM_EXECUTE');
 export const deleteProblemExecute = createAction('DELETE_PROBLEM_EXECUTE');
 export const putProblemExecute = createAction('PUT_PROBLEM_EXECUTE', Problem.putProblemExecute);
+export const putProblemVerdict = createAction('PUT_PROBLEM_VERDICT', Problem.putProblemVerdict);

@@ -153,7 +153,7 @@ class ClarificationList extends Component {
                                         <Button bsSize="xs" onClick={() => browserHistory.push(`/clarifications/${row.id}/`)}>view</Button>
                                     </td>
                                 </tr>
-                                ))
+                                ), true)
                         } 
                     </tbody>
                 </Table>

@@ -8,6 +8,7 @@ const emptyProblem = {
     id: 0,
     title: '',
     executes: {},
+    verdict: {},
 };
 
 const initialState = {
@@ -61,6 +62,25 @@ export default handleActions({
                 ...state,
             };
         }
+    },
+
+    PUT_PROBLEM_VERDICT: {
+        next(state, action) {
+            swal('Update Problem Verdict', 'Update Problem Verdict Successfully', 'success');
+            return {
+                ...state,
+                problem: {
+                    ...state.problem,
+                    verdict: action.payload.msg,
+                }
+            };
+        },
+        throw(state, action) {
+            swal('Update Problem Verdict Error', action.payload.msg, 'error');
+            return {
+                ...state,
+            };
+        },
     },
 
     GET_PROBLEM_LIST: {
