@@ -16,10 +16,13 @@ import * as VerdictActions from './../actions/Verdict';
 
 import classNames from 'classnames';
 
-const map_lang_mode = {
+const mapLangMode = {
     'C': 'text/x-csrc',
-    'C++': 'text/x-c++src',
-    'Python': 'text/x-python',
+    'C++11': 'text/x-c++src',
+    'C++14': 'text/x-c++src',
+    'Python2': 'text/x-python',
+    'Python3': 'text/x-python',
+    'Jave': 'text/x-java',
 };
 
 class Submission extends Component {
@@ -48,7 +51,7 @@ class Submission extends Component {
                 indentUnit: 4,
                 indentWithTabs: true,
                 autofocus: true,
-                mode: map_lang_mode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].description],
+                mode: mapLangMode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].description],
             };
             console.log(this.refs.code, ReactDOM.findDOMNode(this.refs.code));
             this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
@@ -57,9 +60,10 @@ class Submission extends Component {
     }
 
     render() {
+        console.log(this.props.submission.submission.problem_id);
+        console.log(this.props.problem.problemList);
         return (
-            this.props.submission.submissionStatus ? 
-            <div>
+            <div key={this.props.submission.submission.id}>
                 <Row>
                     <Col md={12}>
                         <h2 className={classNames('text-center')}>
@@ -137,7 +141,7 @@ class Submission extends Component {
                     ref="code" 
                     defaultValue={this.props.submission.submission.code} 
                 />
-            </div> : <div></div>
+            </div>
         );
     }
 }

@@ -57,7 +57,7 @@ class ProblemList extends Component {
                             this.props.problem.problemList.mapArr((row) => (
                                 <ListGroupItem>
                                     <Link to={`/admin/problems/${row.id}/`}>
-                                        {row.title}
+                                        {problemTitle(row)}
                                     </Link>
                                 </ListGroupItem> 
                             ))

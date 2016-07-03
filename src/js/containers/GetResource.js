@@ -7,6 +7,7 @@ import * as UserActions from './../actions/User';
 import * as ExecuteActions from './../actions/Execute';
 import * as VerdictActions from './../actions/Verdict';
 import * as ContestActions from './../actions/Contest';
+import * as LanguageActions from './../actions/Language';
 
 class GetResource extends Component {
     constructor(props) {
@@ -16,11 +17,13 @@ class GetResource extends Component {
         this.getProblemList = this.getProblemList.bind(this);
         this.getVerdictList = this.getVerdictList.bind(this);
         this.getContest = this.getContest.bind(this);
+        this.getLanguageList = this.getLanguageList.bind(this);
         this.getExecuteList();
         this.getUserList();
         this.getProblemList();
         this.getVerdictList();
         this.getContest();
+        this.getLanguageList();
     }
 
     getContest() {
@@ -62,10 +65,23 @@ class GetResource extends Component {
         this.props.dispatch(UserActions.getUserList(data));
     }
 
+    getLanguageList() {
+        if(!this.props.user.account.isLOGIN) return;
+        var data = {
+            token: this.props.user.account.token,
+        };
+        this.props.dispatch(LanguageActions.getLanguageList(data));
+    }
+
     render() {
         return (
             <div>
-                {this.props.children}
+                {   this.props.language.languageListStatus &&
+                    this.props.problem.problemListStatus &&
+                    this.props.user.userListStatus &&
+                    this.props.execute.executeListStatus &&
+                    this.props.verdict.verdictListStatus ?
+                    this.props.children : "" }
             </div>
         );
     }
@@ -78,6 +94,7 @@ function mapStateToProps(state) {
         problem: state.problem,
         verdict: state.verdict,
         contest: state.contest,
+        language: state.language,
     };
 }
 

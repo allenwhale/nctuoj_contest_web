@@ -13,7 +13,7 @@ import {
     Table
 } from 'react-bootstrap';
 import ContestLeftNav from '../components/ContestLeftNav';
-import SubmitForm from '../components/SubmitForm';
+import SubmitForm from './SubmitForm';
 import empty from 'is-empty';
 import classNames from 'classnames';
 import Config from './../utils/Config';
@@ -25,10 +25,8 @@ class Problem extends Component {
     constructor(props) {
         super(props);
         this.getProblem = this.getProblem.bind(this);
-        this.postSubmission = this.postSubmission.bind(this);
-        this.openSubmitForm = this.openSubmitForm.bind(this);
-        this.closeSubmitForm = this.closeSubmitForm.bind(this);
         this.getTestdataList = this.getTestdataList.bind(this);
+        this.openSubmitForm = this.openSubmitForm.bind(this);
         this.getProblem();
         this.getTestdataList();
     }
@@ -46,24 +44,12 @@ class Problem extends Component {
         this.props.dispatch(ProblemActions.getProblem(data));
     }
 
-    postSubmission() {
-        var data = new FormData(ReactDOM.findDOMNode(this.refs.submitForm.refs.form));
-        data.append('problem_id', this.props.params.id);
-        data.append('token', this.props.user.account.token);
-        this.props.dispatch(SubmissionActions.postSubmission(data))
-            .then(() => browserHistory.push(`/submissions/?problem_id=${this.props.params.id}`));
-    }
-
     getTestdataList() {
         var data = {
             problem_id: this.props.params.id,
             token: this.props.user.account.token,
         };
         this.props.dispatch(TestdataActions.getTestdataList(data));
-    }
-
-    closeSubmitForm() {
-        this.props.dispatch(SubmissionActions.closeSubmitForm());
     }
 
     openSubmitForm() {
@@ -74,7 +60,7 @@ class Problem extends Component {
         return (
             <div key={this.props.problem.problem.id}>
                 <h1 className={classNames('text-center')}>
-                    { this.props.problem.problem.title }
+                    { problemTitle(this.props.problem.problem) }
                 </h1>
                 <Row className={classNames('margin-bottom')}>
                     <Col md={2}>
@@ -137,13 +123,6 @@ class Problem extends Component {
                         </Panel>
                     </Col>
                 </Row>
-                <SubmitForm 
-                    ref="submitForm" 
-                    executeList={this.props.problem.problem.executes}
-                    show={this.props.submission.submitFormShow} 
-                    onHide={this.closeSubmitForm}
-                    onSubmit={this.postSubmission}
-                />
             </div>
         );
     }

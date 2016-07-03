@@ -10,6 +10,7 @@ import clarification from './Clarification';
 import verdict from './Verdict';
 import contest from './Contest';
 import system from './System';
+import language from './Language';
 
 export default combineReducers({
     base,
@@ -21,6 +22,7 @@ export default combineReducers({
     testdata,
     clarification,
     verdict,
+    language,
     system,
     routing,
 });

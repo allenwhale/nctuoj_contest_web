@@ -108,7 +108,7 @@ class Problem extends Component {
                 <Grid fluid={true}>
                     <Row className={classNames('margin-bottom')}>
                         <h2>
-                            { this.props.problem.problem.title }
+                            { problemTitle(this.props.problem.problem) }
                             <Link 
                                 className="btn btn-default" 
                                 to="/admin/problems/"

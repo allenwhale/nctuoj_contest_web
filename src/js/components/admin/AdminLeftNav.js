@@ -16,9 +16,6 @@ export default class Base extends Component {
     render() {
         return (
             <Nav stacked>
-                <LinkContainer to="/">
-                    <NavItem>Home</NavItem>
-                </LinkContainer>
                 <LinkContainer to="/admin/">
                     <NavItem>Contest</NavItem>
                 </LinkContainer>

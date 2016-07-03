@@ -30,10 +30,8 @@ export default handleActions({
 
     FILTER_CLARIFICATION_LIST: (state, action) => {
         var filterClarificationList = {};
-        console.log(action.payload);
         if(action.payload != '') {
             for(var i in state.clarificationList) {
-                console.log(state.clarificationList[i].problem_id, action.payload);
                 if(state.clarificationList[i].problem_id == action.payload) {
                     filterClarificationList[i] = state.clarificationList[i];
                 }

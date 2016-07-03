@@ -3,6 +3,7 @@ import DevTools from './DevTools';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
+import { LinkContainer } from 'react-router-bootstrap'
 import { 
     Navbar, 
     Nav, 
@@ -14,8 +15,10 @@ import {
     Col
 } from 'react-bootstrap';
 import LoginForm from '../components/LoginForm';
+import SubmitForm from './SubmitForm';
 import classNames from 'classnames';
 import * as UserActions from '../actions/User';
+import * as SubmissionActions from './../actions/Submission';
 import * as SystemActions from '../actions/System';
 require('sweetalert/dist/sweetalert.css');
 require('codemirror/lib/codemirror.css');
@@ -23,27 +26,14 @@ require('bootstrap/dist/css/bootstrap.min.css');
 require('bootstrap/dist/css/bootstrap-theme.min.css');
 require('./../../assets/styles/core.sass');
 
-const UPDATE_INTERVAL = 60;
-Object.defineProperty(Object.prototype, 'mapArr', {
-    value: function(f, reverse=false) {
-        var self = this, list = Object.keys(this), res = [], cnt = 0;
-        if(reverse)
-            list = list.reverse();
-        for(var i in list) {
-            var key = list[i];
-            if(key !== "null" && key !== "undefined" ) {
-                res.push(f.call(self, self[key], cnt++, key, self));
-            }
-        }
-        return res;
-    }
-});
 
+const UPDATE_INTERVAL = 60;
 class Frame extends Component {
     constructor(props) {
         super(props);
         this.closeLoginForm = this.closeLoginForm.bind(this);
         this.openLoginForm = this.openLoginForm.bind(this);
+        this.openSubmitForm = this.openSubmitForm.bind(this);
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
         this.checkAccount = this.checkAccount.bind(this);
@@ -60,7 +50,7 @@ class Frame extends Component {
             this.getTime();
             this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
         } else {
-            //this.increaseTime();
+            this.increaseTime();
             this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
         }
     }
@@ -92,6 +82,10 @@ class Frame extends Component {
         this.props.dispatch(UserActions.openLoginForm());
     }
 
+    openSubmitForm() {
+        this.props.dispatch(SubmissionActions.openSubmitForm(true));
+    }
+
     signIn() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.userForm.refs.form));
         this.props.dispatch(UserActions.signIn(data));
@@ -117,6 +111,27 @@ class Frame extends Component {
                             <Navbar.Toggle />
                         </Navbar.Header>
                         <Navbar.Collapse>
+                            { this.props.user.account.isLOGIN ?
+                                <Nav>
+                                    <LinkContainer to="/submissions/">
+                                        <NavItem>Submissions</NavItem>
+                                    </LinkContainer>
+                                    <LinkContainer to="/clarifications/">
+                                        <NavItem>Clarifications</NavItem>
+                                    </LinkContainer>
+                                    <NavItem onClick={this.openSubmitForm}>
+                                        Quick Submit
+                                    </NavItem>
+                                    <LinkContainer to="/scoreboard/">
+                                        <NavItem>Scoreboard</NavItem>
+                                    </LinkContainer>
+                                    { this.props.user.account.isADMIN ? 
+                                        <LinkContainer to="/admin/">
+                                            <NavItem>Admin</NavItem>
+                                        </LinkContainer> : ""
+                                    }
+                            </Nav> : <Nav> <LinkContainer to="/scoreboard/"><NavItem>Scoreboard</NavItem></LinkContainer> </Nav>
+                            }
                             <Nav pullRight>
                                 <NavItem>
                                     {this.props.system.time.toLocaleString()}
@@ -170,6 +185,7 @@ class Frame extends Component {
                             </Row>
                         </Grid>
                     </footer>
+                    <SubmitForm />
                     { process.env.NODE_ENV !== 'production' ?  <DevTools /> : <div></div> }
                 </div>
         );

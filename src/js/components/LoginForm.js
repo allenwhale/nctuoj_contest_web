@@ -19,7 +19,11 @@ export default class LoginForm extends Component {
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.onHide}>
-                <Modal.Header>Login</Modal.Header>
+                <Modal.Header>
+                    <Modal.Title>
+                        Login
+                    </Modal.Title>
+                </Modal.Header>
                 <Modal.Body>
                     <Form ref="form" horizontal>
                         <FormGroup controlId="formHorizontalEmail">

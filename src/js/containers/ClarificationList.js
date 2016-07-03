@@ -35,8 +35,8 @@ class ClarificationList extends Component {
         this.props.dispatch(ClarificationActions.getClarificationList(data));
     }
 
-    filterClarificationList() {
-        this.props.dispatch(ClarificationActions.filterClarificationList(this.refs.filter.value));
+    filterClarificationList(e) {
+        this.props.dispatch(ClarificationActions.filterClarificationList(e.target.value));
     }
 
     openNewClarificationForm() {
@@ -67,19 +67,19 @@ class ClarificationList extends Component {
                 </Row>
                 <Row>
                     <Col md={4}>
-                        <input 
-                            className="form-control" 
-                            ref="filter"
-                            placeholder="Problem ID" 
-                        />
-                    </Col>
-                    <Col md={6}>
-                        <Button
-                            bsStyle="success"
-                            onClick={this.filterClarificationList}
+                        <select
+                            className="form-control"
+                            ref="problem_id"
+                            onChange={this.filterClarificationList}
                         >
-                            Filter By Problem ID
-                        </Button>
+                            <option value="">All</option>
+                            <option value="0">General</option>
+                            {
+                                this.props.problem.problemList.mapArr((row) => (
+                                    <option value={row.id}>{problemTitle(row)}</option>
+                                ))
+                            }
+                        </select>
                     </Col>
                 </Row>
                 <Modal
@@ -101,7 +101,7 @@ class ClarificationList extends Component {
                                     <option value="0">General</option>
                                     {
                                         this.props.problem.problemList.mapArr((row) => (
-                                            <option key={row.id} value={row.id}>{`${row.id}. ${row.title}`}</option>
+                                            <option key={row.id} value={row.id}>{problemTitle(row)}</option>
                                             ))
                                     }
                                 </select>
@@ -146,7 +146,7 @@ class ClarificationList extends Component {
                             this.props.clarification.filterClarificationList.mapArr((row) => (
                                 <tr key={row.id}>
                                     <td>{row.id}</td>
-                                    <td>{row.problem_id == 0 ? "General" : `${row.problem_id}. ${this.props.problem.problemList[row.problem_id].title}`}</td>
+                                    <td>{row.problem_id == 0 ? "General" : problemTitle(this.props.problem.problemList[row.problem_id])}</td>
                                     <td className="ellipsis">{row.question}</td>
                                     <td className="ellipsis">{row.reply}</td>
                                     <td>

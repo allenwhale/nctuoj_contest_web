@@ -89,6 +89,7 @@ class ExecuteList extends Component {
                         <thead>
                             <tr>
                                 <th>Description</th>
+                                <th>Language</th>
                                 <th>Updated at</th>
                                 <th>View</th>
                                 <th>Delete</th>
@@ -99,6 +100,7 @@ class ExecuteList extends Component {
                                 this.props.execute.executeList.mapArr((row) => (
                                     <tr key={row.id}>
                                         <td>{ row.description }</td>
+                                        <td>{ this.props.language.languageList[row.language_id].name }</td>
                                         <td>{ row.updated_at  }</td>
                                         <td>
                                             <Button bsSize="xs" >
@@ -128,6 +130,7 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         execute: state.execute,
+        language: state.language,
     };
 }
 

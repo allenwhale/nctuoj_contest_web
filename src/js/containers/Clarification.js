@@ -62,6 +62,7 @@ class Clarification extends Component {
                             <FormGroup>
                                 <ControlLabel>Question</ControlLabel>
                                 <textarea 
+                                    rows={5}
                                     className="form-control"
                                     defaultValue={this.props.clarification.clarification.question}
                                     readOnly
@@ -81,6 +82,7 @@ class Clarification extends Component {
                             <FormGroup>
                                 <ControlLabel>Reply</ControlLabel>
                                 <textarea 
+                                    rows={5}
                                     name="reply"
                                     className="form-control"
                                     defaultValue={this.props.clarification.clarification.reply}

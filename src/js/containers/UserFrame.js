@@ -5,8 +5,11 @@ import { Link } from 'react-router'
 import { 
     Grid, 
     Row, 
-    Col 
+    Col ,
+    Nav,
+    NavItem
 } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import * as ProblemActions from './../actions/Problem';
 import * as UserActions from './../actions/User';
 import ContestLeftNav from './../components/ContestLeftNav';
@@ -26,10 +29,17 @@ class UserFrame extends Component {
                     <Row>
                         <Col md={2}>
                             { this.props.user.account.isLOGIN ?
-                            <ContestLeftNav 
-                                isADMIN={this.props.user.account.isADMIN}
-                                problemList={this.props.problem.problemList}
-                            /> : "" }
+                                <Nav stacked >
+                                    {
+                                        this.props.problem.problemList.mapArr((row) => (
+                                            <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
+                                                <NavItem>
+                                                    {problemTitle(row)}
+                                                </NavItem>
+                                            </LinkContainer>
+                                            ))
+                                    }
+                                </Nav> : "" }
                         </Col> 
                         <Col md={10}>
                             { this.props.children }

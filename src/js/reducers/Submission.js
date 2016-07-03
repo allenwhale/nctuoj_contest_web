@@ -8,8 +8,10 @@ const initialState = {
     submissionList: [],
     submissionCount: 0,
     submitFormShow: false,
+    quickSubmit: false,
     submission: {},
     submissionStatus: false,
+    submitStatus: false,
 };
 
 
@@ -54,6 +56,8 @@ export default handleActions({
         next(state, action) {
             return {
                 ...state,
+                submission: action.payload.msg,
+                submitStatus: true,
                 submitFormShow: false,
             };
         },
@@ -61,6 +65,7 @@ export default handleActions({
             swal('Submit Error', action.payload.msg, 'error');
             return {
                 ...state,
+                submitStatus: false,
             };
         }
     },
@@ -69,6 +74,7 @@ export default handleActions({
         return {
             ...state,
             submitFormShow: true,
+            quickSubmit: Boolean(action.payload),
         };
     },
 

@@ -44,6 +44,20 @@ class ExecuteForm extends Component {
                             defaultValue={this.props.execute.execute.description} />
                     </FormGroup>
                     <FormGroup>
+                        <ControlLabel>Language</ControlLabel>
+                        <select
+                            name="language_id"
+                            className="form-control"
+                            defaultValue={this.props.execute.execute.language_id}
+                        >
+                            {
+                                this.props.language.languageList.mapArr((row) => (
+                                    <option value={row.id}>{row.name}</option>
+                                ))
+                            }
+                        </select>
+                    </FormGroup>
+                    <FormGroup>
                         <ControlLabel>Default File Name</ControlLabel> 
                         <input 
                             name="file_name" 
@@ -101,6 +115,7 @@ function mapStateToProps(state) {
     return {
         user: state.user,
         execute: state.execute,
+        language: state.language,
     };
 }
 

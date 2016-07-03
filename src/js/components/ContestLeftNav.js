@@ -17,31 +17,13 @@ export default class Base extends Component {
 
     render() {
         return (
-            <Nav 
-                activeKey={-1} 
-                stacked
-            >
-                <LinkContainer to="/">
-                    <NavItem>Home</NavItem>
-                </LinkContainer>
-                <LinkContainer to="/submissions/">
-                    <NavItem>Submissions</NavItem>
-                </LinkContainer>
+            <Nav stacked >
                 {
                     this.props.problemList.mapArr((row) => (
                         <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
                             <NavItem>{row.title}</NavItem>
                         </LinkContainer>
                         ))
-                }
-                <LinkContainer to="/clarifications/">
-                    <NavItem>Clarification</NavItem>
-                </LinkContainer>
-                {
-                    this.props.isADMIN ? 
-                        <LinkContainer to="/admin/">
-                            <NavItem>Admin</NavItem>
-                        </LinkContainer> : ""
                 }
             </Nav>
         );
