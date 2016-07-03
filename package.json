@@ -77,6 +77,6 @@
     "build": "NODE_ENV=production webpack -p --progress  --config ./webpack.production.config.js",
     "dev": "NODE_ENV=development node server.js"
   },
-  "author": "easy",
+  "author": "allenwhale,tocknicsu,easy",
   "license": "MIT"
 }
