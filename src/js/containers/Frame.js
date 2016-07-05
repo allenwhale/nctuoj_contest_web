@@ -36,11 +36,11 @@ class Frame extends Component {
         this.openSubmitForm = this.openSubmitForm.bind(this);
         this.signIn = this.signIn.bind(this);
         this.signOut = this.signOut.bind(this);
-        this.checkAccount = this.checkAccount.bind(this);
+        this.getUserMe = this.getUserMe.bind(this);
         this.getTime = this.getTime.bind(this);
         this.increaseTime = this.increaseTime.bind(this);
         this.updateTime = this.updateTime.bind(this);
-        this.checkAccount();
+        this.getUserMe();
         this.timeUpdateCount = 0;
         setInterval(this.updateTime, 1000);
     }
@@ -71,7 +71,6 @@ class Frame extends Component {
                 time,
             },
         });
-        //this.props.dispatch(SystemActions.increaseTime());
     }
 
     closeLoginForm() {
@@ -95,13 +94,27 @@ class Frame extends Component {
         this.props.dispatch(UserActions.signOut());
     }
 
-    checkAccount() {
-        this.props.dispatch(UserActions.checkAccount());
+    getUserMe() {
+        var account = localStorage.getItem('account');
+        if(account) {
+            try {
+                account = JSON.parse(account);
+            } catch(e) {
+                account = {};
+            }
+        } else {
+            account = {};
+        }
+        console.log(account);
+        var data = {
+            token: account.token,
+        };
+        this.props.dispatch(UserActions.getUserMe(data));
     }
 
     render() {
         return (
-            <div style={{height: '100%'}}>
+            this.props.user.checkAccountStatus ? <div style={{height: '100%'}}>
                 <div className={classNames('body')}>
                     <Navbar>
                         <Navbar.Header>
@@ -137,7 +150,7 @@ class Frame extends Component {
                                     {this.props.system.time.toLocaleString()}
                                 </NavItem>
                                 {
-                                    this.props.user.account.name ? 
+                                    this.props.user.account.isLOGIN ? 
                                         [<NavItem key="0">Hi { this.props.user.account.name }</NavItem>,
                                             <NavItem key="1" onClick={this.signOut}>Logout</NavItem>] : 
                                     <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
@@ -187,7 +200,7 @@ class Frame extends Component {
                     </footer>
                     <SubmitForm />
                     { process.env.NODE_ENV !== 'production' ?  <DevTools /> : <div></div> }
-                </div>
+                </div> : <div></div>
         );
     }
 }

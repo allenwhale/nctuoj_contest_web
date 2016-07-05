@@ -3,6 +3,10 @@ import qs from 'qs';
 import Config from './Config';
 const Users = {
 
+    getUserMe: (data) => fetch(`${Config.baseUrl}/api/users/me/?${qs.stringify(data)}`, {
+        method: 'GET',
+    }).then(Config.checkStatus),
+
     getUser: (data) => fetch(`${Config.baseUrl}/api/users/${data.id}/?${qs.stringify(data)}`, {
         method: 'GET',
     }).then(Config.checkStatus),

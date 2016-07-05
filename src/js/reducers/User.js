@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 const initialState = {
     account: {},
     user: {},
+    checkAccountStatus: false,
     userList: {},
     newUserFormShow: false,
     loginFormShow: false,
@@ -14,6 +15,26 @@ const initialState = {
 
 
 export default handleActions({
+
+    GET_USER_ME: {
+        next(state, action) {
+            if(state.user.token != action.payload.msg.token) {
+                localStorage.clear();
+            }
+            return {
+                ...state,
+                account: action.payload.msg,
+                checkAccountStatus: true,
+            };
+        },
+        throw(state, action) {
+            return {
+                ...state,
+                account: {},
+                checkAccountStatus: true,
+            };
+        },
+    },
 
     GET_USER: {
         next(state, action) {
@@ -156,23 +177,6 @@ export default handleActions({
         }
     },
 
-    CHECK_ACCOUNT(state, action) {
-        var account = localStorage.getItem("account");
-        if(account){
-            try{
-                account = JSON.parse(account);
-            } catch(e) {
-                account = {};
-            }
-        } else {
-            account = {};
-        }
-        return {
-            ...state,
-            account: account,
-        };
-    },
-
     OPEN_LOGIN_FORM: (state, action) => ({
         ...state,
         loginFormShow: true,
@@ -185,12 +189,12 @@ export default handleActions({
 
     OPEN_NEW_USER_FORM: (state, action) => ({
         ...state,
-       newUserFormShow: true,
+        newUserFormShow: true,
     }),
 
     CLOSE_NEW_USER_FORM: (state, action) => ({
         ...state,
-       newUserFormShow: false,
+        newUserFormShow: false,
     }),
 
     default: (state, action) => {
