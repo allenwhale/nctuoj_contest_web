@@ -3,6 +3,30 @@ import qs from 'qs';
 import Config from './Config';
 const Users = {
 
+    getUser: (data) => fetch(`${Config.baseUrl}/api/users/${data.id}/?${qs.stringify(data)}`, {
+        method: 'GET',
+    }).then(Config.checkStatus),
+
+    postUser: (data) => fetch(`${Config.baseUrl}/api/users/`, {
+        method: 'POST',
+        body: data,
+    }).then(Config.checkStatus),
+
+    deleteUser: (data) => fetch(`${Config.baseUrl}/api/users/${data.get('id')}/`, {
+        method: 'DELETE',
+        body: data,
+    }).then(Config.checkStatus),
+
+    postUserCsv: (data) => fetch(`${Config.baseUrl}/api/users/csv/`, {
+        method: 'POST',
+        body: data,
+    }).then(Config.checkStatus),
+
+    putUser: (data) => fetch(`${Config.baseUrl}/api/users/${data.get('id')}/`, {
+        method: 'PUT',
+        body: data,
+    }).then(Config.checkStatus),
+
     getUserList: (data) => fetch(`${Config.baseUrl}/api/users/?${qs.stringify(data)}`, {
         method: 'GET',
     }).then(Config.checkStatus),

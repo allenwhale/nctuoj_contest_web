@@ -21,6 +21,7 @@ class ProblemList extends Component {
     constructor(props) {
         super(props);
         this.postProblem = this.postProblem.bind(this);
+        this.postProblemMeta = this.postProblemMeta.bind(this);
         this.closeNewProblemForm = this.closeNewProblemForm.bind(this);
         this.openNewProblemForm = this.openNewProblemForm.bind(this);
         this.closeProblemErrMsg = this.closeProblemErrMsg.bind(this);
@@ -41,6 +42,11 @@ class ProblemList extends Component {
     postProblem() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
         this.props.dispatch(ProblemActions.postProblem(data));
+    }
+
+    postProblemMeta() {
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.metaForm));
+        this.props.dispatch(ProblemActions.postProblemMeta(data));
     }
 
     render() {
@@ -76,8 +82,20 @@ class ProblemList extends Component {
                     <Modal.Body>
                         <Grid fluid={true}>
                             <Row>
-                                <Col md={10} mdOffset={1}>
-                                    <Form ref="form" horizontal>
+                                <Col md={12}>
+                                    <Form ref="metaForm">
+                                        <input type="hidden" name="token" value={this.props.user.account.token}/>
+                                        <FormGroup>
+                                            <ControlLabel>Meta File</ControlLabel>
+                                            <input type="file" className="form-control" name="zip" />
+                                        </FormGroup>
+                                    </Form>
+                                </Col>
+                            </Row>
+                            <hr className="separator"/>
+                            <Row>
+                                <Col md={12}>
+                                    <Form ref="form">
                                         <input type="hidden" name="token" value={this.props.user.account.token}/>
                                         <FormGroup>
                                             <ControlLabel>Title</ControlLabel>
@@ -101,6 +119,12 @@ class ProblemList extends Component {
                         </Grid>
                     </Modal.Body>
                     <Modal.Footer>
+                        <Button bsStyle="warning" onClick={this.closeNewProblemForm}>
+                            Cancel
+                        </Button>
+                        <Button bsStyle="success" onClick={this.postProblemMeta}>
+                            Submit Meta
+                        </Button>
                         <Button bsStyle="success" onClick={this.postProblem}>
                             Submit
                         </Button>

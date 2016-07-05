@@ -26,6 +26,7 @@ class Problem extends Component {
     constructor(props) {
         super(props);
         this.putProblem = this.putProblem.bind(this);
+        this.putProblemMeta = this.putProblemMeta.bind(this);
         this.getProblem = this.getProblem.bind(this);
         this.putProblemExecute = this.putProblemExecute.bind(this);
         this.addProblemExecute = this.addProblemExecute.bind(this);
@@ -57,6 +58,11 @@ class Problem extends Component {
     putProblem() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.basic));
         this.props.dispatch(ProblemActions.putProblem(data));
+    }
+
+    putProblemMeta() {
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.meta));
+        this.props.dispatch(ProblemActions.putProblemMeta(data));
     }
 
     putProblemVerdict() {
@@ -119,6 +125,19 @@ class Problem extends Component {
                         </h2>
                     </Row>
                     <Row>
+                        <Form ref="meta">
+                            <input type="hidden" name="token" value={this.props.user.account.token} />
+                            <input type="hidden" name="id" value={this.props.params.id} />
+                            <h3>Update By Meta Zip</h3>
+                            <FormGroup>
+                                <ControlLabel>Meta</ControlLabel>
+                                <input type="file" name="zip" className="form-control" />
+                            </FormGroup>
+                        </Form>
+                        <Button bsStyle="success" onClick={this.putProblemMeta}>Submit</Button>
+                    </Row>
+                    <hr />
+                    <Row>
                         <Form ref="basic">
                             <input type="hidden" name="token" value={this.props.user.account.token} />
                             <input type="hidden" name="id" value={this.props.params.id} />
@@ -155,6 +174,7 @@ class Problem extends Component {
                         </Form>
                         <Button bsStyle="success" onClick={this.putProblem}>Submit</Button>
                     </Row>
+                    <hr />
                     <Row>
                         <h3>Verdict</h3> 
                         <Form ref="verdictForm">
@@ -201,6 +221,7 @@ class Problem extends Component {
                         </Form>
                         <Button bsStyle="success" onClick={this.putProblemVerdict}>Submit</Button>
                     </Row>
+                    <hr />
                     <Row>
                         <h3>Execute Type</h3>
                         <Panel header={
@@ -266,6 +287,7 @@ class Problem extends Component {
                             Submit
                         </Button>
                     </Row>
+                    <hr />
                     <Row>
                         <h3>Testdata</h3>                
                         <Form style={{display: 'none'}} ref="newTestdata">

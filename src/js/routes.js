@@ -19,6 +19,9 @@ import AdminProblemList from './containers/admin/ProblemList';
 import AdminProblem from './containers/admin/Problem';
 import AdminExecuteList from './containers/admin/ExecuteList';
 import AdminExecute from './containers/admin/Execute';
+import AdminUserList from './containers/admin/UserList';
+import AdminUser from './containers/admin/User';
+import Test from './containers/Test';
 
 export const history = browserHistory;
 
@@ -44,12 +47,15 @@ export default class Root extends Component {
                                     <Route path="problems/:id/" component={AdminProblem} />
                                     <Route path="executes/" component={AdminExecuteList}/>
                                     <Route path="executes/:id/" component={AdminExecute}/>
+                                    <Route path="users/" component={AdminUserList} />
+                                    <Route path="users/:id/" component={AdminUser} />
                                 </Route>
                             </Route>
                         </Route>
                         <Route path="special/" component={Special} />
                     </Route>
                 </Route>
+                <Route path="/test/" component={Test} />
                 <Route path="*" component={NotFound} />
             </Router>
         );

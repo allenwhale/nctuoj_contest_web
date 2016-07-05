@@ -11,6 +11,7 @@ import verdict from './Verdict';
 import contest from './Contest';
 import system from './System';
 import language from './Language';
+import test from './Test';
 
 export default combineReducers({
     base,
@@ -24,5 +25,6 @@ export default combineReducers({
     verdict,
     language,
     system,
+    test,
     routing,
 });

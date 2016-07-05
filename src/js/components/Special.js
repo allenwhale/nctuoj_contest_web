@@ -9,9 +9,9 @@ export default class Special extends Component {
     render() {
         return (
             <div>
-                KCW<br/>
-                TRUCK<br/>
-                EASY<br/>
+                KCW<br />
+                TRUCK<br />
+                EASY<br />
             </div>
         );
     }
