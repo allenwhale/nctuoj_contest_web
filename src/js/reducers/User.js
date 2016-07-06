@@ -70,7 +70,6 @@ export default handleActions({
 
     POST_USER_CSV: {
         next(state, action) {
-            //swal('Upload Users CSV', 'Upload Users CSV Successfully', 'success');
             swal({
                 title: 'Upload Users CSV',
                 text: 'Upload Users CSV Successfully',
@@ -199,11 +198,5 @@ export default handleActions({
         ...state,
         newUserFormShow: false,
     }),
-
-    default: (state, action) => {
-        return {
-            ...state
-        }
-    },
 
 }, initialState);

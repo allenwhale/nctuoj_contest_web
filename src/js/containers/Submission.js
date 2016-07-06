@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Codemirror from 'codemirror';
-
 import { 
     Panel, 
     Row, 
@@ -10,9 +9,6 @@ import {
     Table
 } from 'react-bootstrap';
 import * as SubmissionActions from './../actions/Submission';
-import * as ProblemActions from './../actions/Problem';
-import * as ExecuteActions from './../actions/Execute';
-import * as VerdictActions from './../actions/Verdict';
 
 import classNames from 'classnames';
 
@@ -52,7 +48,6 @@ class Submission extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.prevStatus, this.props.submission.submissionStatus);
         if(this.prevStatus == false && this.props.submission.submissionStatus) {
             const options = {
                 lineNumbers: true,

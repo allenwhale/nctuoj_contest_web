@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
 import classNames from 'classnames';
 import * as ProblemActions from './../actions/Problem';
 import * as UserActions from './../actions/User';

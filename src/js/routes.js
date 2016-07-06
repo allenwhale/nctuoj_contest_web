@@ -22,7 +22,6 @@ import AdminExecute from './containers/admin/Execute';
 import AdminUserList from './containers/admin/UserList';
 import AdminUser from './containers/admin/User';
 import Scoreboard from './containers/Scoreboard';
-import Test from './containers/Test';
 
 export const history = browserHistory;
 
@@ -57,7 +56,6 @@ export default class Root extends Component {
                         <Route path="special/" component={Special} />
                     </Route>
                 </Route>
-                <Route path="/test/" component={Test} />
                 <Route path="*" component={NotFound} />
             </Router>
         );

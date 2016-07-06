@@ -33,11 +33,5 @@ export default handleActions({
         }
     },
 
-    default: (state, action) => {
-        return {
-            ...state
-        }
-    },
-
 }, initialState);
 

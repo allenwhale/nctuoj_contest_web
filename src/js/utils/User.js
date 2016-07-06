@@ -3,13 +3,9 @@ import qs from 'qs';
 import Config from './Config';
 const Users = {
 
-    getUserMe: (data) => fetch(`${Config.baseUrl}/api/users/me/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getUserMe: (data) => fetch(`${Config.baseUrl}/api/users/me/?${qs.stringify(data)}`).then(Config.checkStatus),
 
-    getUser: (data) => fetch(`${Config.baseUrl}/api/users/${data.id}/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getUser: (data) => fetch(`${Config.baseUrl}/api/users/${data.id}/?${qs.stringify(data)}`).then(Config.checkStatus),
 
     postUser: (data) => fetch(`${Config.baseUrl}/api/users/`, {
         method: 'POST',
@@ -31,9 +27,7 @@ const Users = {
         body: data,
     }).then(Config.checkStatus),
 
-    getUserList: (data) => fetch(`${Config.baseUrl}/api/users/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getUserList: (data) => fetch(`${Config.baseUrl}/api/users/?${qs.stringify(data)}`).then(Config.checkStatus),
 
     signIn: (data) => fetch(`${Config.baseUrl}/api/users/signin/`, {
         method: 'POST',

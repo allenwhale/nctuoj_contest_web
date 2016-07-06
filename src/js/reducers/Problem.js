@@ -9,6 +9,7 @@ const emptyProblem = {
     title: '',
     executes: {},
     verdict: {},
+    testdata: [],
 };
 
 const initialState = {
@@ -169,12 +170,6 @@ export default handleActions({
             ...state,
             newProblemFormShow: false,
         };
-    },
-
-    default: (state, action) => {
-        return {
-            ...state
-        }
     },
 
 }, initialState);

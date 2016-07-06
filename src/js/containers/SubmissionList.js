@@ -9,7 +9,6 @@ import {
     Pagination,
     ControlLabel
 } from 'react-bootstrap';
-import ContestLeftNav from '../components/ContestLeftNav';
 import classNames from 'classnames';
 import * as SubmissionActions from './../actions/Submission';
 import qs from 'qs';

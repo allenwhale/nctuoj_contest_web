@@ -12,7 +12,6 @@ import {
 import { LinkContainer } from 'react-router-bootstrap'
 import * as ProblemActions from './../actions/Problem';
 import * as UserActions from './../actions/User';
-import ContestLeftNav from './../components/ContestLeftNav';
 
 import classNames from 'classnames';
 

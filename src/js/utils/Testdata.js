@@ -4,9 +4,7 @@ import Config from './Config';
 
 const Testdata = {
 
-    getTestdataList: (data) => fetch(`${Config.baseUrl}/api/problems/${data.problem_id}/testdata/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getTestdataList: (data) => fetch(`${Config.baseUrl}/api/problems/${data.problem_id}/testdata/?${qs.stringify(data)}`).then(Config.checkStatus),
 
     postTestdata: (data) => fetch(`${Config.baseUrl}/api/problems/${data.get('problem_id')}/testdata/`, {
         method: 'POST',

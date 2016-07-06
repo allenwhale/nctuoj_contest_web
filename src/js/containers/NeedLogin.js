@@ -34,10 +34,6 @@ class NeedUser extends Component {
 function mapStateToProps(state) {
     return {
         user: state.user,
-        execute: state.execute,
-        problem: state.problem,
-        verdict: state.verdict,
-        contest: state.contest,
     };
 }
 

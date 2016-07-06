@@ -16,7 +16,6 @@ import {
     DropdownButton,
     MenuItem
 } from 'react-bootstrap';
-import empty from 'is-empty';
 import Config from './../../utils/Config';
 import * as ProblemActions from './../../actions/Problem';
 import * as TestdataActions from './../../actions/Testdata';

@@ -10,10 +10,8 @@ import {
     ListGroup,
     ListGroupItem
 } from 'react-bootstrap';
-import ContestLeftNav from './../components/ContestLeftNav';
 import classNames from 'classnames';
 import nl2br from 'react-nl2br';
-import * as Problem from './../actions/Problem';
 
 class Contest extends Component {
 

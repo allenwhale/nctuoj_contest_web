@@ -4,13 +4,9 @@ import Config from './Config';
 
 const Execute = {
 
-    getExecuteList: (data) => fetch(`${Config.baseUrl}/api/executes/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getExecuteList: (data) => fetch(`${Config.baseUrl}/api/executes/?${qs.stringify(data)}`).then(Config.checkStatus),
 
-    getExecute: (data) => fetch(`${Config.baseUrl}/api/executes/${data.id}/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getExecute: (data) => fetch(`${Config.baseUrl}/api/executes/${data.id}/?${qs.stringify(data)}`).then(Config.checkStatus),
 
     putExecute: (data) => fetch(`${Config.baseUrl}/api/executes/${data.get('id')}/`, {
         method: 'PUT',

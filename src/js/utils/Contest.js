@@ -3,9 +3,7 @@ import qs from 'qs';
 import Config from './Config';
 
 const Contest = {
-    getContest: (data) => fetch(`${Config.baseUrl}/api/contest/?${qs.stringify(data)}`, {
-        method: 'GET',
-    }).then(Config.checkStatus),
+    getContest: (data) => fetch(`${Config.baseUrl}/api/contest/?${qs.stringify(data)}`).then(Config.checkStatus),
 
     putContest: (data) => fetch(`${Config.baseUrl}/api/contest/`, {
         method: 'PUT',

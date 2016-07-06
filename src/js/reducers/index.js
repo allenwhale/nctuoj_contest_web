@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { routeReducer as routing } from 'react-router-redux';
-import base from './base';
 import user from './User';
 import problem from './Problem';
 import submission from './Submission';
@@ -12,10 +11,8 @@ import contest from './Contest';
 import system from './System';
 import language from './Language';
 import scoreboard from './Scoreboard';
-import test from './Test';
 
 export default combineReducers({
-    base,
     user,
     contest,
     problem,
@@ -27,6 +24,5 @@ export default combineReducers({
     language,
     scoreboard,
     system,
-    test,
     routing,
 });

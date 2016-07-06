@@ -13,14 +13,11 @@ import {
     Table
 } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap'
-import ContestLeftNav from '../components/ContestLeftNav';
 import SubmitForm from './SubmitForm';
-import empty from 'is-empty';
 import classNames from 'classnames';
 import Config from './../utils/Config';
 import * as ProblemActions from './../actions/Problem';
 import * as SubmissionActions from './../actions/Submission';
-import * as TestdataActions from './../actions/Testdata';
 
 class Problem extends Component {
     constructor(props) {
@@ -111,7 +108,7 @@ class Problem extends Component {
                                 </thead>
                                 <tbody>
                                     {
-                                        this.props.testdata.testdataList.mapArr((row, idx) => (
+                                        this.props.problem.problem.testdata.map((row, idx) => (
                                             <tr>
                                                 <td>{idx + 1}</td>
                                                 <td>{row.time_limit}</td>
@@ -137,7 +134,6 @@ function mapStateToProps(state) {
         user: state.user,
         problem: state.problem,
         submission: state.submission,
-        testdata: state.testdata,
     };
 }
 

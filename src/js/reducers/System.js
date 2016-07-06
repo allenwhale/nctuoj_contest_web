@@ -23,19 +23,4 @@ export default handleActions({
         }
     },
 
-    INCREASE_TIME: (state, action) => {
-        var time = state.time;
-        time.setSeconds(time.getSeconds() + 1);
-        return {
-            ...state,
-            time: time,
-        };
-    },
-
-    default: (state, action) => {
-        return {
-            ...state
-        }
-    },
-
 }, initialState);
