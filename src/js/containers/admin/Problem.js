@@ -159,8 +159,8 @@ class Problem extends Component {
                                     <FormGroup>
                                         <ControlLabel>Score Type</ControlLabel>
                                         <select name="score_type" defaultValue={this.props.problem.problem.score_type} className="form-control">
-                                            <option value="1">sum</option>
-                                            <option value="2">min</option>
+                                            <option value="0">sum</option>
+                                            <option value="1">min</option>
                                         </select>
                                     </FormGroup>
                                 </Col>

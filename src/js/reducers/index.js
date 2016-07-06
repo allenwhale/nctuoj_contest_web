@@ -11,6 +11,7 @@ import verdict from './Verdict';
 import contest from './Contest';
 import system from './System';
 import language from './Language';
+import scoreboard from './Scoreboard';
 import test from './Test';
 
 export default combineReducers({
@@ -24,6 +25,7 @@ export default combineReducers({
     clarification,
     verdict,
     language,
+    scoreboard,
     system,
     test,
     routing,

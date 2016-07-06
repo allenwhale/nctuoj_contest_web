@@ -18,9 +18,6 @@ export default handleActions({
 
     GET_USER_ME: {
         next(state, action) {
-            if(state.user.token != action.payload.msg.token) {
-                localStorage.clear();
-            }
             return {
                 ...state,
                 account: action.payload.msg,
@@ -95,6 +92,9 @@ export default handleActions({
 
     DELETE_USER: {
         next(state, action) {
+            if(state.account.id == action.payload.msg.id) {
+                window.location = window.location;
+            }
             swal('Delete User', 'Delete User Successfully', 'success');
             var userList = state.userList;
             delete userList[action.payload.msg.id];
@@ -114,6 +114,9 @@ export default handleActions({
 
     PUT_USER: {
         next(state, action) {
+            if(state.account.id == action.payload.msg.id) {
+                window.location = window.location;
+            }
             swal('Update User', 'Update User Successfully', 'success');
             var userList = state.userList;
             userList[action.payload.msg.id] = action.payload.msg;
@@ -152,11 +155,11 @@ export default handleActions({
 
     SIGN_IN: {
         next(state, action) {
-            localStorage.setItem("account", JSON.stringify(action.payload['msg']));
+            localStorage.setItem("account", JSON.stringify(action.payload.msg));
             window.location = window.location;
             return {
                 ...state,
-                account: action.payload['msg'],
+                account: action.payload.msg,
                 loginFormShow: false,
             };
         },
