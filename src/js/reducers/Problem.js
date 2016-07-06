@@ -5,7 +5,6 @@ import Config from './Config';
 import swal from 'sweetalert';
 
 const emptyProblem = {
-    id: 0,
     title: '',
     executes: {},
     verdict: {},

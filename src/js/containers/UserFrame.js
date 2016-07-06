@@ -31,6 +31,7 @@ class UserFrame extends Component {
                                 <Nav stacked >
                                     {
                                         this.props.problem.problemList.mapArr((row) => (
+                                            console.log(row.id, row.title) ||
                                             <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
                                                 <NavItem>
                                                     {problemTitle(row)}

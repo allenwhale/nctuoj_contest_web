@@ -21,9 +21,10 @@ if (typeof(document) !== 'undefined' && window) {
             return res;
         }
     });
+    window.isNull = (x) => (x == null ? null : x);
     window.ord = (c) => c.charCodeAt(0);
     window.chr = (i) => String.fromCharCode(i);
-    window.problemTitle = (problem) => `${chr(ord('A') + problem.id - 1)}. ${problem.title}`;
+    window.problemTitle = (problem) => problem.id ? `${chr(ord('A') + problem.id - 1)}. ${problem.title}` : "";
     window.onload = () => {
         return render(
             <Provider store={store}>

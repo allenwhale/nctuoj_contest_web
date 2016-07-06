@@ -9,13 +9,27 @@ import FlipMove from 'react-flip-move';
 import * as ScoreboardActions from './../actions/Scoreboard';
 import classNames from 'classnames';
 require('./../../assets/styles/scoreboard.sass');
+const REFRESH_INTERVAL = 5000;
 
 class Scoreboard extends Component {
     constructor(props) {
         super(props);
         this.getScoreboard = this.getScoreboard.bind(this);
+        this.refreshScoreboard = this.refreshScoreboard.bind(this);
+        this.refresh = true;
         this.getScoreboard();
-        setInterval(this.getScoreboard, 5000);
+        setTimeout(this.refreshScoreboard, REFRESH_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        this.refresh = false;
+    }
+
+    refreshScoreboard() {
+        if(this.refresh) {
+            this.getScoreboard();
+            setTimeout(this.refreshScoreboard, REFRESH_INTERVAL);
+        }
     }
 
     getScoreboard() {

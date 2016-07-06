@@ -23,10 +23,8 @@ class Problem extends Component {
     constructor(props) {
         super(props);
         this.getProblem = this.getProblem.bind(this);
-        this.getTestdataList = this.getTestdataList.bind(this);
         this.openSubmitForm = this.openSubmitForm.bind(this);
         this.getProblem();
-        this.getTestdataList();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -42,13 +40,6 @@ class Problem extends Component {
         this.props.dispatch(ProblemActions.getProblem(data));
     }
 
-    getTestdataList() {
-        var data = {
-            problem_id: this.props.params.id,
-            token: this.props.user.account.token,
-        };
-        this.props.dispatch(TestdataActions.getTestdataList(data));
-    }
 
     openSubmitForm() {
         this.props.dispatch(SubmissionActions.openSubmitForm());

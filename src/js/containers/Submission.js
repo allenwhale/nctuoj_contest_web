@@ -29,14 +29,19 @@ class Submission extends Component {
         this.checkSubmissionPending = this.checkSubmissionPending.bind(this);
         this.prevStatus = false;
         this.getSubmission();
+        this.refresh = true; 
         setTimeout(this.checkSubmissionPending, 1000);
     }
 
+    componentWillUnmount() {
+        this.refresh = false;
+    }
+
     checkSubmissionPending() {
-        if(this.props.submission.submission.verdict_id <= 2) {
+        if(this.props.submission.submission.verdict_id <= 2 && this.refresh) {
             this.getSubmission();
+            setTimeout(this.checkSubmissionPending, 1000);
         }
-        setTimeout(this.checkSubmissionPending, 1000);
     }
 
     getSubmission() {
