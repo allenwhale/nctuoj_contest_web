@@ -19,6 +19,7 @@
     "history": "^2.0.0",
     "html-webpack-plugin": "^2.8.2",
     "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.0.0",
     "json-loader": "^0.5.4",
     "react": "^0.14.7",
     "react-bootstrap": "^0.29.5",

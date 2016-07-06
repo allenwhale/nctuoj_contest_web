@@ -34,7 +34,8 @@ module.exports = {
             "react-nl2br",
             "classnames",
             "history",
-            "isomorphic-fetch"
+            "isomorphic-fetch",
+            "jquery"
         ]
     },
     output: {
