@@ -166,7 +166,7 @@ class SubmissionList extends Component {
                                     <td>{row.created_at}</td>
                                     { this.props.user.account.isADMIN ? <td>{row.ip}</td> : "" }
                                 </tr>
-                                ))
+                                ), true)
                         }
                     </tbody>
                 </Table>

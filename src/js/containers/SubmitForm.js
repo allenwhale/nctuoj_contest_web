@@ -17,20 +17,22 @@ import {
 import classNames from 'classnames';
 import Codemirror from 'codemirror';
 import * as SubmissionActions from './../actions/Submission';
+import * as ProblemActions from './../actions/Problem';
 require('codemirror/mode/clike/clike');
 require('codemirror/mode/python/python');
 require('codemirror/keymap/vim');
 require('codemirror/keymap/sublime');
 require('codemirror/keymap/emacs');
 
-const mapLangMode = {
-    'C': 'text/x-csrc',
-    'C++11': 'text/x-c++src',
-    'C++14': 'text/x-c++src',
-    'Python2': 'text/x-python',
-    'Python3': 'text/x-python',
-    'Jave': 'text/x-java',
-};
+const mapLangMode = [
+    '',
+    'text/x-csrc',
+    'text/x-c++src',
+    'text/x-c++src',
+    'text/x-java',
+    'text/x-python',
+    'text/x-python',
+];
 
 class SubmitForm extends Component {
 
@@ -38,9 +40,29 @@ class SubmitForm extends Component {
         super(props);
         this.changeExecuteType = this.changeExecuteType.bind(this);
         this.changeKeyMap = this.changeKeyMap.bind(this);
-        this.onEntered = this.onEntered.bind(this);
         this.postSubmission = this.postSubmission.bind(this);
         this.closeSubmitForm = this.closeSubmitForm.bind(this);
+        this.getProblem = this.getProblem.bind(this);
+    }
+
+    getProblem() {
+        var data = {
+            token: this.props.user.account.token,
+            id: this.refs.problemId.value,
+        };
+        this.props.dispatch(ProblemActions.getProblem(data)).
+            then(() => {
+                const options = {
+                    lineNumbers: true,
+                    matchBrackets: true,
+                    tabSize: 4,
+                    indentUnit: 4,
+                    indentWithTabs: true,
+                    autofocus: true,
+                    mode: mapLangMode[this.props.problem.problem.executes[0].id]
+                };
+                this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
+            });
     }
 
     closeSubmitForm() {
@@ -57,19 +79,6 @@ class SubmitForm extends Component {
             }.bind(this));
     }
 
-    onEntered() {
-        const options = {
-            lineNumbers: true,
-            matchBrackets: true,
-            tabSize: 4,
-            indentUnit: 4,
-            indentWithTabs: true,
-            autofocus: true,
-            mode: mapLangMode[ReactDOM.findDOMNode(this.refs['execute_type']).value]
-        };
-        this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
-    }
-
     changeExecuteType(row) {
         this.code.setOption('mode', mapLangMode[row.target.value]);
     }
@@ -84,7 +93,7 @@ class SubmitForm extends Component {
                 <Modal 
                     show={this.props.submission.submitFormShow} 
                     onHide={this.closeSubmitForm}
-                    onEntered={this.onEntered}
+                    onEntered={this.getProblem}
                     bsSize="lg"
                 >
                     <Modal.Header>
@@ -102,7 +111,9 @@ class SubmitForm extends Component {
                                         <select
                                             className="form-control"
                                             name="problem_id"
+                                            ref="problemId"
                                             defaultValue={this.props.problem.problem.id}
+                                            onChange={(e) => this.getProblem()}
                                         >
                                             {
                                                 this.props.submission.quickSubmit ?

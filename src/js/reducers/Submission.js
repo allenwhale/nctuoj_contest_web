@@ -4,12 +4,16 @@ import {
 import Config from './Config';
 import swal from 'sweetalert';
 
+const emptySubmission = {
+    testdata: [],
+};
+
 const initialState = {
     submissionList: [],
     submissionCount: 0,
     submitFormShow: false,
     quickSubmit: false,
-    submission: {},
+    submission: emptySubmission,
     submissionStatus: false,
     submitStatus: false,
 };
@@ -29,7 +33,7 @@ export default handleActions({
             swal('Get Submission Error', action.payload.msg, 'error');
             return {
                 ...state,
-                submission: {},
+                submission: emptySubmission,
                 submissionStatus: false,
             };
         },

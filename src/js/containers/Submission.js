@@ -16,21 +16,31 @@ import * as VerdictActions from './../actions/Verdict';
 
 import classNames from 'classnames';
 
-const mapLangMode = {
-    'C': 'text/x-csrc',
-    'C++11': 'text/x-c++src',
-    'C++14': 'text/x-c++src',
-    'Python2': 'text/x-python',
-    'Python3': 'text/x-python',
-    'Jave': 'text/x-java',
-};
+const mapLangMode = [
+    '',
+    'text/x-csrc',
+    'text/x-c++src',
+    'text/x-c++src',
+    'text/x-java',
+    'text/x-python',
+    'text/x-python',
+];
 
 class Submission extends Component {
     constructor(props) {
         super(props);
         this.getSubmission = this.getSubmission.bind(this);
+        this.checkSubmissionPending = this.checkSubmissionPending.bind(this);
         this.prevStatus = false;
         this.getSubmission();
+        setTimeout(this.checkSubmissionPending, 1000);
+    }
+
+    checkSubmissionPending() {
+        if(this.props.submission.submission.verdict_id <= 2) {
+            this.getSubmission();
+        }
+        setTimeout(this.checkSubmissionPending, 1000);
     }
 
     getSubmission() {
@@ -51,17 +61,14 @@ class Submission extends Component {
                 indentUnit: 4,
                 indentWithTabs: true,
                 autofocus: true,
-                mode: mapLangMode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].description],
+                mode: mapLangMode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].id],
             };
-            console.log(this.refs.code, ReactDOM.findDOMNode(this.refs.code));
             this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
         }
         this.prevStatus = this.props.submission.submissionStatus;
     }
 
     render() {
-        console.log(this.props.submission.submission.problem_id);
-        console.log(this.props.problem.problemList);
         return (
             <div key={this.props.submission.submission.id}>
                 <Row>
@@ -120,7 +127,7 @@ class Submission extends Component {
                             <Row>
                                 <Col xs={4}>Compiler</Col>
                                 <Col xs={4}>{this.props.execute.executeList[this.props.submission.submission.execute_type_id].description}</Col>
-                                <Col xs={4}>{this.props.submission.submission.score}</Col>
+                                <Col xs={4}>{this.props.submission.submission.langth}</Col>
                             </Row>
                         </Panel>
                         } 
@@ -135,6 +142,17 @@ class Submission extends Component {
                         </tr> 
                     </thead>
                     <tbody>
+                        {
+                            this.props.submission.submission.testdata.map((row, idx) => (
+                                <tr key={idx}>
+                                    <td>{ idx + 1}</td>
+                                    <td>{ row.time_usage }</td>
+                                    <td>{ row.memory_usage }</td>
+                                    <td>{ this.props.verdict.verdictList[row.verdict_id].abbreviation }</td>
+                                    <td>{ row.score }</td>
+                                </tr>
+                            ))
+                        }
                     </tbody>
                 </Table>
                 <textarea 

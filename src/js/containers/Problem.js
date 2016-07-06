@@ -12,6 +12,7 @@ import {
     Panel,
     Table
 } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import ContestLeftNav from '../components/ContestLeftNav';
 import SubmitForm from './SubmitForm';
 import empty from 'is-empty';
@@ -70,7 +71,9 @@ class Problem extends Component {
                         >Submit</Button>
                     </Col>
                     <Col md={2}>
-                        <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
+                        <LinkContainer to={`/submissions/?problem_id=${this.props.params.id}`}>
+                            <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
+                        </LinkContainer>
                     </Col>
                 </Row>
                 <Row className={classNames('margin-bottom')}>
