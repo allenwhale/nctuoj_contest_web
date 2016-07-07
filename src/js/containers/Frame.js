@@ -48,11 +48,10 @@ class Frame extends Component {
     updateTime() {
         if(this.timeUpdateCount == 0) {
             this.getTime();
-            this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
         } else {
             this.increaseTime();
-            this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
         }
+        this.timeUpdateCount = (this.timeUpdateCount + 1) % UPDATE_INTERVAL;
     }
 
     getTime() {
@@ -105,7 +104,6 @@ class Frame extends Component {
         } else {
             account = {};
         }
-        console.log(account);
         var data = {
             token: account.token,
         };
