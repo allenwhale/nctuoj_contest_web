@@ -40,8 +40,7 @@ module.exports = {
     },
     output: {
         path: Path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        chunkFilename: '[id].js',
+        filename: '[name].[hash].js',
         publicPath: require('./config.js').publicPath
     },
     debug: false,
@@ -97,8 +96,8 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-        new ExtractTextPlugin("styles.css"),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
+        new ExtractTextPlugin("styles.[hash].css"),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')

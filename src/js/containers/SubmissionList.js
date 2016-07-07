@@ -6,6 +6,7 @@ import {
     Grid, 
     Row, 
     Col,
+    Button,
     Pagination,
     ControlLabel
 } from 'react-bootstrap';
@@ -84,7 +85,7 @@ class SubmissionList extends Component {
         const pageCount = Math.ceil(this.props.submission.submissionCount / (isNull(this.props.location.query.count) || 10));
         return (
             <div>
-                <Row>
+                <Row className={classNames('margin-bottom')}>
                     <Col md={3}>
                         <ControlLabel>Problem</ControlLabel>
                         <select 
@@ -142,6 +143,14 @@ class SubmissionList extends Component {
                                 ))
                             }
                         </select>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={12}>
+                        <Button
+                            bsStyle="success"
+                            onClick={() => this.getSubmissionList()}
+                        >Refresh</Button>
                     </Col>
                 </Row>
                 <Table responsive striped hover >

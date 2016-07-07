@@ -75,6 +75,10 @@ class Submission extends Component {
                     <Col md={12}>
                         <h2 className={classNames('text-center')}>
                             Submission #{this.props.params.id}
+                            {' '}
+                            { this.props.submission.submission.verdict_id <= 2 ?
+                                <span className="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> : <span></span>
+                                }
                         </h2>
                     </Col>
                 </Row>
