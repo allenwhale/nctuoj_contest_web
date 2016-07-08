@@ -152,7 +152,7 @@ export default handleActions({
         }
     },
 
-    SIGN_IN: {
+    LOGIN: {
         next(state, action) {
             localStorage.setItem("account", JSON.stringify(action.payload.msg));
             window.location = window.location;
@@ -170,7 +170,7 @@ export default handleActions({
         }
     },
 
-    SIGN_OUT(state, action) {
+    LOGOUT(state, action) {
         localStorage.clear();
         window.location = window.location;
         return {

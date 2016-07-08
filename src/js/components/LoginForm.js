@@ -25,7 +25,11 @@ export default class LoginForm extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form ref="form" horizontal>
+                    <Form 
+                        horizontal
+                        ref="form"
+                        onSubmit={(e) => e.preventDefault()}
+                    >
                         <FormGroup controlId="formHorizontalEmail">
                             <Col componentClass={ControlLabel} sm={2}>
                                 Account
@@ -45,7 +49,11 @@ export default class LoginForm extends Component {
                         </FormGroup>
                         <FormGroup>
                             <Col smOffset={2} sm={10}>
-                                <Button onClick={this.props.signIn}> Sign in </Button>
+                                <Button 
+                                    ref="submit"
+                                    onClick={this.props.login}
+                                    type="submit"
+                                > Login </Button>
                             </Col>
                         </FormGroup>
                     </Form>

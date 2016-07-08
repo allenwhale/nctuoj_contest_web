@@ -34,8 +34,8 @@ class Frame extends Component {
         this.closeLoginForm = this.closeLoginForm.bind(this);
         this.openLoginForm = this.openLoginForm.bind(this);
         this.openSubmitForm = this.openSubmitForm.bind(this);
-        this.signIn = this.signIn.bind(this);
-        this.signOut = this.signOut.bind(this);
+        this.login = this.login.bind(this);
+        this.logout = this.logout.bind(this);
         this.getUserMe = this.getUserMe.bind(this);
         this.getTime = this.getTime.bind(this);
         this.increaseTime = this.increaseTime.bind(this);
@@ -84,13 +84,13 @@ class Frame extends Component {
         this.props.dispatch(SubmissionActions.openSubmitForm(true));
     }
 
-    signIn() {
+    login() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.userForm.refs.form));
-        this.props.dispatch(UserActions.signIn(data));
+        this.props.dispatch(UserActions.login(data));
     }
 
-    signOut() {
-        this.props.dispatch(UserActions.signOut());
+    logout() {
+        this.props.dispatch(UserActions.logout());
     }
 
     getUserMe() {
@@ -148,10 +148,14 @@ class Frame extends Component {
                                     {this.props.system.time.toLocaleString()}
                                 </NavItem>
                                 {
-                                    this.props.user.account.isLOGIN ? 
-                                        [<NavItem key="0">Hi { this.props.user.account.name }</NavItem>,
-                                            <NavItem key="1" onClick={this.signOut}>Logout</NavItem>] : 
-                                    <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
+                                    this.props.user.account.isLOGIN ?  [
+                                        <LinkContainer to="/user/"> 
+                                            <NavItem key="0">
+                                                Hi { this.props.user.account.name }
+                                            </NavItem> 
+                                        </LinkContainer>, 
+                                        <NavItem key="1" onClick={this.logout}>Logout</NavItem>
+                                        ] : <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
                                     }
                                 </Nav>
                             </Navbar.Collapse>
@@ -160,7 +164,7 @@ class Frame extends Component {
                             ref="userForm"
                             show={this.props.user.loginFormShow} 
                             onHide={this.closeLoginForm}
-                            signIn={this.signIn}
+                            login={this.login}
                         />
                         <div className={classNames('margin-bottom')}>
                         { this.props.children }

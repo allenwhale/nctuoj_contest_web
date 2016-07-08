@@ -5,6 +5,7 @@ import Frame from './containers/Frame';
 import Special from './components/Special';
 import NeedLogin from './containers/NeedLogin';
 import GetResource from './containers/GetResource';
+import User from './containers/User';
 import NeedAdmin from './containers/admin/NeedAdmin';
 import UserFrame from './containers/UserFrame';
 import Contest from './containers/Contest';
@@ -34,6 +35,7 @@ export default class Root extends Component {
                         <Route path="" component={GetResource}>
                             <Route path="" component={UserFrame}>
                                 <IndexRoute component={Contest} />
+                                <Route path="user/" component={User} />
                                 <Route path="problems/:id/" component={Problem}/>
                                 <Route path="submissions/" component={SubmissionList}/>
                                 <Route path="submissions/:id/" component={Submission}/>
