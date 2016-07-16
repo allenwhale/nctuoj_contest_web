@@ -8,12 +8,6 @@ const Config = {
             return Promise.reject(res.json());
         }
     },
-    parseJson: (res) => ({
-        res: res.json(),
-        status: res.status,
-        statusText: res.statusText,
-    }),
-
 }
 
 export default Config;

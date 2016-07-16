@@ -29,8 +29,13 @@ const Users = {
 
     getUserList: (data) => fetch(`${Config.baseUrl}/api/users/?${qs.stringify(data)}`).then(Config.checkStatus),
 
-    signIn: (data) => fetch(`${Config.baseUrl}/api/users/signin/`, {
+    login: (data) => fetch(`${Config.baseUrl}/api/users/signin/`, {
         method: 'POST',
+        body: data,
+    }).then(Config.checkStatus),
+
+    putUserUpload: (data) => fetch(`${Config.baseUrl}/api/users/upload/`, {
+        method: 'PUT',
         body: data,
     }).then(Config.checkStatus),
 

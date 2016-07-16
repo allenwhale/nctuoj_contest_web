@@ -179,6 +179,21 @@ export default handleActions({
         }
     },
 
+    PUT_USER_UPLOAD: {
+        next(state, action) {
+            swal('Upload Successfully', '', 'success');
+            return {
+                ...state,
+            };
+        },
+        throw(state, action) {
+            swal('Upload Error', action.payload.msg, 'error');
+            return {
+                ...state,
+            };
+        },
+    },
+
     OPEN_LOGIN_FORM: (state, action) => ({
         ...state,
         loginFormShow: true,

@@ -12,10 +12,18 @@ import {
     ControlLabel,
     Button
 } from 'react-bootstrap';
+import Config from './../utils/Config';
+import * as UserActions from './../actions/User';
 
 class User extends Component {
     constructor(props) {
         super(props);
+        this.putUserUpload = this.putUserUpload.bind(this);
+    }
+
+    putUserUpload() {
+        var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
+        this.props.dispatch(UserActions.putUserUpload(data));
     }
 
     render() {
@@ -25,7 +33,8 @@ class User extends Component {
                     <Row>
                         <Col md={12}>
                             <h3>Upload </h3>
-                            <Form>
+                            <Form ref="form">
+                                <input type="hidden" name="token" value={this.props.user.account.token} />
                                 <FormGroup>
                                     <ControlLabel>Upload File</ControlLabel>
                                     <input type="file" className="form-control" name="file" />
@@ -33,7 +42,7 @@ class User extends Component {
                             </Form>
                             <Button
                                 bsStyle="success"
-                                onClick={() => {}}
+                                onClick={this.putUserUpload}
                             >Upload</Button>
                         </Col>
                     </Row>
@@ -42,9 +51,11 @@ class User extends Component {
                             <h3>
                                 Download Code
                                 {' '}
-                                <Button
-                                    bsStyle="success"
-                                >download</Button>
+                                <a
+                                    className="btn btn-success"
+                                    href={`${Config.baseUrl}/api/users/code/?token=${this.props.user.account.token}`}
+                                    download="code.zip"
+                                >download</a>
                             </h3>
                         </Col>
                     </Row>
