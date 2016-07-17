@@ -109,8 +109,8 @@ class ProblemList extends Component {
                                         <FormGroup>
                                             <ControlLabel>Score Type</ControlLabel>
                                             <select className="form-control" name="score_type" componentClass="select">
-                                                <option value="1">sum</option>
-                                                <option value="2">min</option>
+                                                <option value="0">sum</option>
+                                                <option value="1">min</option>
                                             </select>
                                         </FormGroup>
                                     </Form>
