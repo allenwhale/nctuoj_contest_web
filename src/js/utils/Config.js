@@ -1,6 +1,6 @@
 
 const Config = {
-    baseUrl: 'http://140.113.89.233:3019',
+    baseUrl: 'http://127.0.0.1:3019',
     checkStatus: (res) => {
         if (res.status >= 200 && res.status < 300) {
             return res.json();

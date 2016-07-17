@@ -40,6 +40,7 @@ class Clarification extends Component {
         var replyable = this.props.user.account.isADMIN &&
             typeof(this.props.clarification.clarification.reply) != 'undefined' && 
             this.props.clarification.clarification.reply.length == 0;
+        var replyto = this.props.clarification.clarification.reply_type ? "all users." : this.props.clarification.clarification.user_id;
         return (
             <div key={this.props.clarification.clarification.id}>
                 <Grid fluid={true}>
@@ -69,15 +70,23 @@ class Clarification extends Component {
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <ControlLabel>
-                                    <input name="reply_type" value="0" type="radio" defaultChecked/>
-                                    For User #{this.props.clarification.clarification.user_id}
-                                </ControlLabel>
-                                {' '}
-                                <ControlLabel>
-                                    <input name="reply_type" value="1" type="radio"/>
-                                    For All User
-                                </ControlLabel>
+                            { 
+                                replyable ? 
+                                    <div>
+                                        <ControlLabel>
+                                            <input name="reply_type" value="0" type="radio" defaultChecked/>
+                                            For User #{this.props.clarification.clarification.user_id}
+                                        </ControlLabel>
+                                        <ControlLabel>
+                                            <input name="reply_type" value="1" type="radio"/>
+                                            For All User
+                                        </ControlLabel> 
+                                    </div>
+                                : 
+                                <div>
+                                    This clarification is reply to {replyto} 
+                                </div>
+                            }
                             </FormGroup>
                             <FormGroup>
                                 <ControlLabel>Reply</ControlLabel>
