@@ -22,6 +22,8 @@ const mapLangMode = [
     'text/x-python',
 ];
 
+const REFRESH_INTERVAL = 1000;
+
 class Submission extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +32,7 @@ class Submission extends Component {
         this.prevStatus = false;
         this.getSubmission();
         this.refresh = true; 
-        setTimeout(this.checkSubmissionPending, 1000);
+        setTimeout(this.checkSubmissionPending, REFRESH_INTERVAL);
     }
 
     componentWillUnmount() {
@@ -40,7 +42,7 @@ class Submission extends Component {
     checkSubmissionPending() {
         if(this.props.submission.submission.verdict_id <= 2 && this.refresh) {
             this.getSubmission();
-            setTimeout(this.checkSubmissionPending, 1000);
+            setTimeout(this.checkSubmissionPending, REFRESH_INTERVAL);
         }
     }
 

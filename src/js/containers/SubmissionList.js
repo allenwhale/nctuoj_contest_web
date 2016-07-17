@@ -14,16 +14,25 @@ import classNames from 'classnames';
 import * as SubmissionActions from './../actions/Submission';
 import qs from 'qs';
 
+const REFRESH_INTERVAL = 5000;
+
 class SubmissionList extends Component {
     constructor(props) {
         super(props);
         this.getSubmissionList = this.getSubmissionList.bind(this);
+        this.refreshSubmissionList = this.refreshSubmissionList.bind(this);
         this.changePage = this.changePage.bind(this);
         this.changeProblemFilter = this.changeProblemFilter.bind(this);
         this.changeUserFilter = this.changeUserFilter.bind(this);
         this.changeVerdictFilter = this.changeVerdictFilter.bind(this);
         this.getCurrentFilter = this.getCurrentFilter.bind(this);
+        this.refresh = true;
         this.getSubmissionList();
+        setTimeout(this.refreshSubmissionList, REFRESH_INTERVAL);
+    }
+
+    componentWillUnmount() {
+        this.refresh = false;
     }
 
     getCurrentFilter() {
@@ -33,6 +42,13 @@ class SubmissionList extends Component {
         data.count = isNull(data.count) || 10;
         data.page = isNull(data.page) || 1;
         return data;
+    }
+
+    refreshSubmissionList() {
+        if(this.refresh) {
+            this.getSubmissionList();
+            setTimeout(this.refreshSubmissionList, REFRESH_INTERVAL);
+        }
     }
 
     getSubmissionList(args) {
