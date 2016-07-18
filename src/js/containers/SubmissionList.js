@@ -25,6 +25,7 @@ class SubmissionList extends Component {
         this.changeProblemFilter = this.changeProblemFilter.bind(this);
         this.changeUserFilter = this.changeUserFilter.bind(this);
         this.changeVerdictFilter = this.changeVerdictFilter.bind(this);
+        this.changeCountFilter = this.changeCountFilter.bind(this);
         this.getCurrentFilter = this.getCurrentFilter.bind(this);
         this.refresh = true;
         this.getSubmissionList();
@@ -97,6 +98,15 @@ class SubmissionList extends Component {
         browserHistory.push(`/submissions/?${qs.stringify(data)}`);
     }
 
+    changeCountFilter(e){
+        var data = {
+            ...this.getCurrentFilter(),
+            count: e.target.value,
+        }
+        this.getSubmissionList(data);
+        browserHistory.push(`/submissions/?${qs.stringify(data)}`);
+    }
+
     render() {
         const pageCount = Math.ceil(this.props.submission.submissionCount / (isNull(this.props.location.query.count) || 10));
         return (
@@ -118,17 +128,20 @@ class SubmissionList extends Component {
                             }
                         </select>
                     </Col>
-                    <Col md={3}>
-                        <ControlLabel>User ID</ControlLabel>
-                        <input 
-                            ref="user_id" 
-                            type="number"
-                            className="form-control"
-                            placeholder="All Users"
-                            defaultValue={this.props.location.query.user_id}
-                            onBlur={this.changeUserFilter}
-                        />
-                    </Col>
+                    { this.props.user.account.isADMIN ? 
+                        <Col md={3}>
+                            <ControlLabel>User ID</ControlLabel>
+                            <input 
+                                ref="user_id" 
+                                type="number"
+                                className="form-control"
+                                placeholder="All Users"
+                                defaultValue={this.props.location.query.user_id}
+                                onKeyUp={this.changeUserFilter}
+                            />
+                        </Col>
+                        : ""
+                    }
                     <Col md={3}>
                         <ControlLabel>Verdict</ControlLabel>
                         <select 
@@ -151,7 +164,7 @@ class SubmissionList extends Component {
                             ref="count"
                             className="form-control"
                             defaultValue={this.props.location.query.count}
-                            onChange={this.changeFilter}
+                            onChange={this.changeCountFilter}
                         >
                             {
                                 [10, 30, 50].map((row) => (
