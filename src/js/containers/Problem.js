@@ -66,7 +66,7 @@ class Problem extends Component {
                 </Row>
                 <Row className={classNames('margin-bottom')}>
                     <Col md={12}>
-                        <iframe src={`${Config.baseUrl}/api/problems/${this.props.params.id}/pdf/?token=${this.props.user.account.token}`}
+                        <iframe src={`${Config.baseUrl}/api/problems/${this.props.params.id}/pdf/?token=${this.props.user.account.token}&time=${this.props.problem.problem.updated_at}`}
                             style={{width: '100%', height: '768px'}}
                         ></iframe>
                     </Col>
