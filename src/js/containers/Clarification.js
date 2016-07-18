@@ -40,8 +40,10 @@ class Clarification extends Component {
         var replyable = this.props.user.account.isADMIN &&
             typeof(this.props.clarification.clarification.reply) != 'undefined' && 
             this.props.clarification.clarification.reply.length == 0;
-        var replyto = this.props.clarification.clarification.reply_type ? "all users." : 
-            this.props.account.isADMIN ? this.props.clarification.clarification.user_id : "you.";
+        var replyto = (
+            this.props.clarification.clarification.reply_type ? 
+                "all users." : (this.props.user.account.isADMIN ? this.props.clarification.clarification.user_id : "you.")
+                );
         return (
             <div key={this.props.clarification.clarification.id}>
                 <Grid fluid={true}>
