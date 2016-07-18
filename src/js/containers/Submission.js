@@ -133,7 +133,7 @@ class Submission extends Component {
                             <Row>
                                 <Col xs={4}>Compiler</Col>
                                 <Col xs={4}>{this.props.execute.executeList[this.props.submission.submission.execute_type_id].description}</Col>
-                                <Col xs={4}>{this.props.submission.submission.langth}</Col>
+                                <Col xs={4}>{this.props.submission.submission.length}</Col>
                             </Row>
                         </Panel>
                         } 
