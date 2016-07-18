@@ -111,24 +111,24 @@ class SubmissionList extends Component {
         const pageCount = Math.ceil(this.props.submission.submissionCount / (isNull(this.props.location.query.count) || 10));
         return (
             <div>
-                <Row className={classNames('margin-bottom')}>
-                    <Col md={3}>
-                        <ControlLabel>Problem</ControlLabel>
-                        <select 
-                            ref="problem_id"
-                            className="form-control"
-                            defaultValue={this.props.location.query.problem_id}
-                            onChange={this.changeProblemFilter}
-                        >
-                            <option value="">All Problems</option>
-                            {
-                                this.props.problem.problemList.mapArr((row) => (
-                                    <option key={row.id} value={row.id}>{problemTitle(row)}</option>
-                                ))
-                            }
-                        </select>
-                    </Col>
-                    { this.props.user.account.isADMIN ? 
+                { this.props.user.account.isADMIN ? 
+                    <Row className={classNames('margin-bottom')}>
+                        <Col md={3}>
+                            <ControlLabel>Problem</ControlLabel>
+                            <select 
+                                ref="problem_id"
+                                className="form-control"
+                                defaultValue={this.props.location.query.problem_id}
+                                onChange={this.changeProblemFilter}
+                            >
+                                <option value="">All Problems</option>
+                                {
+                                    this.props.problem.problemList.mapArr((row) => (
+                                        <option key={row.id} value={row.id}>{problemTitle(row)}</option>
+                                    ))
+                                }
+                            </select>
+                        </Col>
                         <Col md={3}>
                             <ControlLabel>User ID</ControlLabel>
                             <input 
@@ -140,48 +140,39 @@ class SubmissionList extends Component {
                                 onKeyUp={this.changeUserFilter}
                             />
                         </Col>
-                        : ""
-                    }
-                    <Col md={3}>
-                        <ControlLabel>Verdict</ControlLabel>
-                        <select 
-                            ref="verdict_id"
-                            className="form-control"
-                            defaultValue={this.props.location.query.verdict_id}
-                            onChange={this.changeVerdictFilter}
-                        >
-                            <option value="">All Verdicts</option>
-                            {
-                                this.props.verdict.verdictList.mapArr((row) => (
-                                    <option key={row.id} value={row.id}>{row.description}</option>
-                                    ), true)
-                            }    
-                        </select>
-                    </Col>
-                    <Col md={3}>
-                        <ControlLabel>Count</ControlLabel>
-                        <select 
-                            ref="count"
-                            className="form-control"
-                            defaultValue={this.props.location.query.count}
-                            onChange={this.changeCountFilter}
-                        >
-                            {
-                                [10, 30, 50].map((row) => (
-                                    <option key={row} value={row}>{row}</option>
-                                ))
-                            }
-                        </select>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={12}>
-                        <Button
-                            bsStyle="success"
-                            onClick={() => this.getSubmissionList()}
-                        >Refresh</Button>
-                    </Col>
-                </Row>
+                        <Col md={3}>
+                            <ControlLabel>Verdict</ControlLabel>
+                            <select 
+                                ref="verdict_id"
+                                className="form-control"
+                                defaultValue={this.props.location.query.verdict_id}
+                                onChange={this.changeVerdictFilter}
+                            >
+                                <option value="">All Verdicts</option>
+                                {
+                                    this.props.verdict.verdictList.mapArr((row) => (
+                                        <option key={row.id} value={row.id}>{row.description}</option>
+                                        ), true)
+                                }    
+                            </select>
+                        </Col>
+                        <Col md={3}>
+                            <ControlLabel>Count</ControlLabel>
+                            <select 
+                                ref="count"
+                                className="form-control"
+                                defaultValue={this.props.location.query.count}
+                                onChange={this.changeCountFilter}
+                            >
+                                {
+                                    [10, 30, 50].map((row) => (
+                                        <option key={row} value={row}>{row}</option>
+                                    ))
+                                }
+                            </select>
+                        </Col>
+                    </Row> : ""
+                }
                 <Table responsive striped hover >
                     <thead>
                         <tr>
@@ -228,18 +219,20 @@ class SubmissionList extends Component {
                         }
                     </tbody>
                 </Table>
-                <Pagination 
-                    key={pageCount}
-                    prev
-                    next
-                    first
-                    last
-                    ellipsis
-                    items={pageCount}
-                    activePage={parseInt(this.props.location.query.page) || 1}
-                    onSelect={this.changePage}
-                    maxButtons={5}
-                />
+                { this.props.user.account.isADMIN ? 
+                    <Pagination 
+                        key={pageCount}
+                        prev
+                        next
+                        first
+                        last
+                        ellipsis
+                        items={pageCount}
+                        activePage={parseInt(this.props.location.query.page) || 1}
+                        onSelect={this.changePage}
+                        maxButtons={5}
+                    /> : ""
+                }
             </div>
         );
     }
