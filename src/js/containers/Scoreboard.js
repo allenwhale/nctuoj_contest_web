@@ -202,7 +202,6 @@ class Scoreboard extends Component {
                                         <td>{`${problem.ac}/${problem.attempt}`}</td>
                                     ))
                                 }
-                                <td></td>
                             </tr>
                         </FlipMove>
                     </Table>
