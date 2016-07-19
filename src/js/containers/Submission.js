@@ -110,30 +110,26 @@ class Submission extends Component {
                 { this.props.user.account.isADMIN ? 
                     <Panel header={
                         <Row>
-                            <Col xs={3}>Compiler</Col>
-                            <Col xs={3}>Execute Type</Col>
-                            <Col xs={3}>Code Length</Col>
-                            <Col xs={3}>IP</Col>
+                            <Col xs={4}>Language</Col>
+                            <Col xs={4}>Code Length</Col>
+                            <Col xs={4}>IP</Col>
                         </Row>}
                     >
                         <Row>
-                            <Col xs={3}>Compiler</Col>
-                            <Col xs={3}>{this.props.execute.executeList[this.props.submission.submission.execute_type_id].description}</Col>
-                            <Col xs={3}>{this.props.submission.submission.score}</Col>
-                            <Col xs={3}>{this.props.submission.submission.ip}</Col>
+                            <Col xs={4}>{this.props.execute.executeList[this.props.submission.submission.execute_type_id].description}</Col>
+                            <Col xs={4}>{this.props.submission.submission.length}</Col>
+                            <Col xs={4}>{this.props.submission.submission.ip}</Col>
                         </Row>
                     </Panel> :
                         <Panel header={
                             <Row>
-                                <Col xs={4}>Compiler</Col>
-                                <Col xs={4}>Execute Type</Col>
-                                <Col xs={4}>Code Length</Col>
+                                <Col xs={6}>Language</Col>
+                                <Col xs={6}>Code Length</Col>
                             </Row>}
                         >
                             <Row>
-                                <Col xs={4}>Compiler</Col>
-                                <Col xs={4}>{this.props.execute.executeList[this.props.submission.submission.execute_type_id].description}</Col>
-                                <Col xs={4}>{this.props.submission.submission.length}</Col>
+                                <Col xs={6}>{this.props.execute.executeList[this.props.submission.submission.execute_type_id].description}</Col>
+                                <Col xs={6}>{this.props.submission.submission.length}</Col>
                             </Row>
                         </Panel>
                         } 

@@ -130,8 +130,8 @@ class SubmitForm extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Row>
-                                    <Col md={6}>
-                                        <ControlLabel>Execute Type: </ControlLabel>
+                                    <Col md={12}>
+                                        <ControlLabel>Language: </ControlLabel>
                                         <select 
                                             className="form-control"
                                             name="execute_type_id" 
@@ -145,29 +145,27 @@ class SubmitForm extends Component {
                                             }
                                         </select>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={6} hidden>
                                         <ControlLabel>keyMap:</ControlLabel>
                                         <select onChange={this.changeKeyMap} className="form-control">
                                             <option value="default">Normal</option>
-                                            <option value="vim">Vim</option>
-                                            <option value="sublime">Sublime</option>
-                                            <option value="emacs">Emacs</option>
                                         </select>
                                     </Col>
                                 </Row>
                             </FormGroup>
                             <FormGroup>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={6} hidden>
                                         <ControlLabel>File Name: </ControlLabel>
                                         <input name="file_name" className="form-control" />
                                     </Col>
-                                    <Col md={6}>
-                                        <ControlLabel>File:</ControlLabel>
+                                    <Col md={12}>
+                                        <ControlLabel>Upload File:</ControlLabel>
                                         <input type="file" name="file" className="form-control"/>
                                     </Col>
                                 </Row>
                             </FormGroup>
+                            <ControlLabel>Or paste your code</ControlLabel>
                             <textarea className="form-control" name="code" ref="code"/>
                         </Form>
                         <Button 
