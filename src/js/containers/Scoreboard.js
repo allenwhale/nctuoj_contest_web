@@ -84,6 +84,7 @@ class Scoreboard extends Component {
                 <Modal
                     show={this.props.scoreboard.scoreboardDetailShow}
                     onHide={this.closeScoreboardDetail}
+                    bsSize="large"
                 >
                     <Modal.Header>
                         <Modal.Title>Submissions</Modal.Title>

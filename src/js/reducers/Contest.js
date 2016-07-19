@@ -5,7 +5,9 @@ import Config from './Config';
 import swal from 'sweetalert';
 
 const initialState = {
-    contest: {},
+    contest: {
+        'title': "Online Judge System"
+    },
     contestStatus: false,
 };
 

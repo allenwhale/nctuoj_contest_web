@@ -58,11 +58,13 @@ class Problem extends Component {
                             onClick={this.openSubmitForm}
                         >Submit</Button>
                     </Col>
-                    <Col md={2}>
-                        <LinkContainer to={`/submissions/?problem_id=${this.props.params.id}`}>
-                            <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
-                        </LinkContainer>
-                    </Col>
+                    { this.props.user.account.isADMIN ? 
+                        <Col md={2}>
+                            <LinkContainer to={`/submissions/?problem_id=${this.props.params.id}`}>
+                                <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
+                            </LinkContainer>
+                        </Col> : ""
+                    }
                 </Row>
                 <Row className={classNames('margin-bottom')}>
                     <Col md={12}>

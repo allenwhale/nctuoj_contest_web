@@ -111,7 +111,7 @@ class Frame extends Component {
     }
 
     render() {
-        document.title = (this.props.contest.contest.title) || "Online Judge System";
+        document.title = this.props.contest.contest.title;
         return (
             this.props.user.checkAccountStatus ? <div style={{height: '100%'}}>
                 <div className={classNames('body')}>
