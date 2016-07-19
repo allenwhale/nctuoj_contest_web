@@ -139,7 +139,7 @@ class Scoreboard extends Component {
                             <tr>
                                 <th>Rank</th>
                                 <th>Team</th>
-                                <th>Solve</th>
+                                <th>Solved</th>
                                 <th>Penalty</th>
                                 {
                                     problems.map((row) => (
