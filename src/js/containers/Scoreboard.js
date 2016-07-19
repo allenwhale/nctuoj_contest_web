@@ -146,7 +146,6 @@ class Scoreboard extends Component {
                                         <th key={row.id}>{chr(ord('A') + row.id - 1)}</th>
                                         ))
                                 }
-                                <th>Solved / Attempts</th>
                             </tr>
                         </thead>
                         <FlipMove typeName="tbody" easing="cubic-bezier(0, 0.7, 0.8, 0.1)" enterAnimation="accordianVertical" leaveAnimation="accordianVertical">
@@ -190,7 +189,6 @@ class Scoreboard extends Component {
                                                 );
                                             })
                                         }
-                                        <td>{`${user.ac}/${user.attempt}`}</td>
                                     </tr> 
                                 ))
                             } 
