@@ -138,7 +138,7 @@ class Scoreboard extends Component {
                         <thead>
                             <tr>
                                 <th>Rank</th>
-                                <th>Name</th>
+                                <th>Team</th>
                                 <th>Solve</th>
                                 <th>Penalty</th>
                                 {
@@ -146,7 +146,7 @@ class Scoreboard extends Component {
                                         <th key={row.id}>{chr(ord('A') + row.id - 1)}</th>
                                         ))
                                 }
-                                <th>Total att/sol</th>
+                                <th>Solved / Attempts</th>
                             </tr>
                         </thead>
                         <FlipMove typeName="tbody" easing="cubic-bezier(0, 0.7, 0.8, 0.1)" enterAnimation="accordianVertical" leaveAnimation="accordianVertical">
@@ -190,13 +190,13 @@ class Scoreboard extends Component {
                                                 );
                                             })
                                         }
-                                        <td>{`${user.attempt}/${user.ac}`}</td>
+                                        <td>{`${user.ac}/${user.attempt}`}</td>
                                     </tr> 
                                 ))
                             } 
                             <tr>
                                 <td></td>
-                                <td><strong>sol/att</strong></td>
+                                <td><strong>Solved / Attempts</strong></td>
                                 <td></td>
                                 <td></td>
                                 {

@@ -26,9 +26,9 @@ require('codemirror/keymap/emacs');
 
 const mapLangMode = [
     '',
+    'text/x-c++src',
+    'text/x-c++src',
     'text/x-csrc',
-    'text/x-c++src',
-    'text/x-c++src',
     'text/x-java',
     'text/x-python',
     'text/x-python',
@@ -97,7 +97,7 @@ class SubmitForm extends Component {
                 >
                     <Modal.Header>
                         <Modal.Title>
-                            Submit Code
+                            Submit Your Code
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
