@@ -6,9 +6,11 @@ import {
     Panel, 
     Row, 
     Col,
-    Table
+    Table,
+    Button
 } from 'react-bootstrap';
 import * as SubmissionActions from './../actions/Submission';
+import * as RejudgeActions from './../actions/Rejudge';
 
 import classNames from 'classnames';
 
@@ -29,6 +31,7 @@ class Submission extends Component {
         super(props);
         this.getSubmission = this.getSubmission.bind(this);
         this.checkSubmissionPending = this.checkSubmissionPending.bind(this);
+        this.RejudgeSubmission = this.RejudgeSubmission.bind(this);
         this.prevStatus = false;
         this.getSubmission();
         this.refresh = true; 
@@ -52,6 +55,21 @@ class Submission extends Component {
             id: this.props.params.id,
         };
         this.props.dispatch(SubmissionActions.getSubmission(data));
+    }
+
+    RejudgeSubmission(id) {
+        swal({
+            title: `Rejudge Submission #${id}?`,
+            text: `Do you readly want to rejudge submission #${id}?`,
+            type: 'warning',
+            showCancelButton: true,
+            closeOnConfirm: true,
+        }, () => {
+            var data = new FormData();
+            data.append('token', this.props.user.account.token);
+            data.append('id', id);
+            this.props.dispatch(RejudgeActions.RejudgeSubmission(data));
+        });
     }
 
     componentDidUpdate() {
@@ -84,6 +102,16 @@ class Submission extends Component {
                         </h2>
                     </Col>
                 </Row>
+                { this.props.user.account.isADMIN ? 
+                    <Row>
+                        <Col md={2}>
+                            <Button 
+                                bsClass="btn btn-default btn-sm btn-block"
+                                onClick={()=>this.RejudgeSubmission(this.props.params.id)}
+                            >Rejudge</Button>
+                        </Col> 
+                    </Row> : ""
+                }
                 <Panel header={ 
                     <Row> 
                         <Col xs={2}>Problem</Col> 

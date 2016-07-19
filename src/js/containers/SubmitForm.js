@@ -73,7 +73,6 @@ class SubmitForm extends Component {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
         this.props.dispatch(SubmissionActions.postSubmission(data))
             .then(function() {
-                console.log(this.props.submission);
                 if(this.props.submission.submitStatus)
                     browserHistory.push(`/submissions/${this.props.submission.submission.id}/`);
             }.bind(this));

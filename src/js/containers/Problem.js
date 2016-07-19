@@ -18,12 +18,14 @@ import classNames from 'classnames';
 import Config from './../utils/Config';
 import * as ProblemActions from './../actions/Problem';
 import * as SubmissionActions from './../actions/Submission';
+import * as RejudgeActions from './../actions/Rejudge';
 
 class Problem extends Component {
     constructor(props) {
         super(props);
         this.getProblem = this.getProblem.bind(this);
         this.openSubmitForm = this.openSubmitForm.bind(this);
+        this.RejudgeProblem = this.RejudgeProblem.bind(this);
         this.getProblem();
     }
 
@@ -38,6 +40,24 @@ class Problem extends Component {
             token: this.props.user.account.token,
         }
         this.props.dispatch(ProblemActions.getProblem(data));
+    }
+
+    RejudgeProblem(id) {
+        swal({
+            title: `Rejudge Problem #${id}?`,
+            text: `Do you readly want to rejudge all submission of #${id}?`,
+            type: 'warning',
+            showCancelButton: true,
+            closeOnConfirm: true,
+        }, () => {
+            var data = new FormData();
+            data.append('token', this.props.user.account.token);
+            data.append('id', id);
+            this.props.dispatch(RejudgeActions.RejudgeProblem(data))
+                .then(function() {
+                    browserHistory.push(`/submissions/?problem_id=${id}`);
+                }.bind(this));
+        });
     }
 
 
@@ -63,6 +83,14 @@ class Problem extends Component {
                             <LinkContainer to={`/submissions/?problem_id=${this.props.params.id}`}>
                                 <Button bsClass="btn btn-default btn-sm btn-block">Submissions</Button>
                             </LinkContainer>
+                        </Col> : ""
+                    }
+                    { this.props.user.account.isADMIN ? 
+                        <Col md={2}>
+                            <Button 
+                                bsClass="btn btn-default btn-sm btn-block"
+                                onClick={()=>this.RejudgeProblem(this.props.params.id)}
+                            >Rejudge</Button>
                         </Col> : ""
                     }
                 </Row>
