@@ -61,7 +61,11 @@ class SubmitForm extends Component {
                     autofocus: true,
                     mode: mapLangMode[this.props.problem.problem.executes[0].id]
                 };
-                this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
+                //this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
+                //temporary remove, this code will make something wrong
+                //if you change other problem
+                //the textarea will be append
+                //and the modal will longer and longer
             });
     }
 
