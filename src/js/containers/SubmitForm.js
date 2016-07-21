@@ -174,7 +174,7 @@ class SubmitForm extends Component {
                         <Button 
                             bsStyle="success" 
                             onClick={() => {
-                                this.code.save();
+                                //this.code.save();
                                 this.postSubmission();
                             }}
                         >Submit</Button>
