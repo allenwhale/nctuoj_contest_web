@@ -4,6 +4,9 @@ import {
 import Config from './Config';
 import swal from 'sweetalert';
 
+const initialState = {
+};
+
 
 export default handleActions({
     REJUDGE_PROBLEM: {
