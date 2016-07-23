@@ -23,6 +23,7 @@ class GetResource extends Component {
         this.getVerdictList();
         this.getContest();
         this.getLanguageList();
+        console.log(window.location.pathname);
     }
 
     getContest() {
@@ -73,13 +74,16 @@ class GetResource extends Component {
     }
 
     render() {
+        const getStatus = this.props.language.languageListStatus &&
+            this.props.problem.problemListStatus &&
+            this.props.user.userListStatus &&
+            this.props.execute.executeListStatus &&
+            this.props.verdict.verdictListStatus;
+        const isIndex = window.location.pathname === '/';
         return (
             <div>
-                {   this.props.language.languageListStatus &&
-                    this.props.problem.problemListStatus &&
-                    this.props.user.userListStatus &&
-                    this.props.execute.executeListStatus &&
-                    this.props.verdict.verdictListStatus ?
+                {
+                    getStatus || isIndex ?
                     this.props.children : "" }
             </div>
         );

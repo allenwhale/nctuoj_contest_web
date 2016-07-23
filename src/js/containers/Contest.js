@@ -45,20 +45,6 @@ class Contest extends Component {
                         </Panel>
                     </Col> 
                 </Row>
-                { this.props.user.account.isLOGIN ? 
-                <Row>
-                    <Col md={12}>
-                        <Panel header="Problems">
-                            <ListGroup fill>
-                                {
-                                    this.props.problem.problemList.mapArr((row) => (
-                                        <ListGroupItem key={row.id}>{row.title}</ListGroupItem> 
-                                    ))
-                                }
-                            </ListGroup> 
-                        </Panel>
-                    </Col> 
-                </Row> : "" }
             </div>
         );
     }
