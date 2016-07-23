@@ -111,6 +111,7 @@ class Frame extends Component {
     }
 
     render() {
+        const remainMinutes = Math.floor((new Date(this.props.contest.contest.end) - this.props.system.time) / 1000 / 60);
         document.title = this.props.contest.contest.title;
         return (
             this.props.user.checkAccountStatus ? <div style={{height: '100%'}}>
@@ -146,7 +147,7 @@ class Frame extends Component {
                             }
                             <Nav pullRight>
                                 <NavItem>
-                                    {this.props.system.time.toLocaleString()}
+                                    { Math.floor(remainMinutes / 60) } hr { remainMinutes % 60 } min
                                 </NavItem>
                                 {
                                     this.props.user.account.isLOGIN ?  [
