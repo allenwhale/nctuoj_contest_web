@@ -27,6 +27,7 @@ class Contest extends Component {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
         data.append('start', this.refs.start.getValue());
         data.append('end', this.refs.end.getValue());
+        console.log(data.get('start'));
         this.props.dispatch(ContestActions.putContest(data));
     }
 
@@ -56,13 +57,15 @@ class Contest extends Component {
                                 <InputGroup>
                                     <DateTimeField 
                                         ref="start"
-                                        format='YYYY-MM-DD HH:mm:ss'
+                                        inputFormat='YYYY-MM-DD HH:mm:ss'
+                                        format="YYYY-MM-DD HH:mm:ss"
                                         defaultText={this.props.contest.contest.start}
                                     />
                                     <InputGroup.Addon>to</InputGroup.Addon>
                                     <DateTimeField
                                         ref="end" 
-                                        format='YYYY-MM-DD HH:mm:ss'
+                                        inputFormat='YYYY-MM-DD HH:mm:ss'
+                                        format="YYYY-MM-DD HH:mm:ss"
                                         defaultText={this.props.contest.contest.end}
                                     />
                                 </InputGroup>
