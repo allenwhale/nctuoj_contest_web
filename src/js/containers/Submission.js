@@ -80,7 +80,7 @@ class Submission extends Component {
                 tabSize: 4,
                 indentUnit: 4,
                 indentWithTabs: true,
-                autofocus: true,
+                autofocus: false,
                 mode: mapLangMode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].id],
             };
             this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
@@ -161,30 +161,32 @@ class Submission extends Component {
                             </Row>
                         </Panel>
                         } 
-                <Table responsive striped hover >
-                    <thead>
-                        <tr>
-                            <th>#</th> 
-                            <th>Time</th> 
-                            <th>Memory</th> 
-                            <th>Verdict</th> 
-                            <th>Score</th> 
-                        </tr> 
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.submission.submission.testdata.map((row, idx) => (
-                                <tr key={idx}>
-                                    <td>{ idx + 1}</td>
-                                    <td>{ row.time_usage }</td>
-                                    <td>{ row.memory_usage }</td>
-                                    <td>{ this.props.verdict.verdictList[row.verdict_id].abbreviation }</td>
-                                    <td>{ row.score }</td>
-                                </tr>
-                            ))
-                        }
-                    </tbody>
-                </Table>
+                { this.props.user.account.isADMIN ? 
+                    <Table responsive striped hover >
+                        <thead>
+                            <tr>
+                                <th>#</th> 
+                                <th>Time</th> 
+                                <th>Memory</th> 
+                                <th>Verdict</th> 
+                                <th>Score</th> 
+                            </tr> 
+                        </thead>
+                        <tbody>
+                            {
+                                this.props.submission.submission.testdata.map((row, idx) => (
+                                    <tr key={idx}>
+                                        <td>{ idx + 1}</td>
+                                        <td>{ row.time_usage }</td>
+                                        <td>{ row.memory_usage }</td>
+                                        <td>{ this.props.verdict.verdictList[row.verdict_id].abbreviation }</td>
+                                        <td>{ row.score }</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </Table> : ""
+                }
                 <textarea 
                     ref="code" 
                     defaultValue={this.props.submission.submission.code} 
