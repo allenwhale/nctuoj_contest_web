@@ -7,6 +7,9 @@ import * as ExecuteActions from './../actions/Execute';
 import * as VerdictActions from './../actions/Verdict';
 import * as ContestActions from './../actions/Contest';
 import * as LanguageActions from './../actions/Language';
+import swal from 'sweetalert';
+
+const CHECK_CONTEST_STATUS_INTERVAL = 1000;
 
 class GetResource extends Component {
     constructor(props) {
@@ -17,13 +20,42 @@ class GetResource extends Component {
         this.getVerdictList = this.getVerdictList.bind(this);
         this.getContest = this.getContest.bind(this);
         this.getLanguageList = this.getLanguageList.bind(this);
+        this.checkContestStatus = this.checkContestStatus.bind(this);
         this.getExecuteList();
         this.getUserList();
         this.getProblemList();
         this.getVerdictList();
         this.getContest();
         this.getLanguageList();
-        console.log(window.location.pathname);
+        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL * 5);
+    }
+
+    checkContestStatus() {
+        console.log('check', this.prevContestStatus, this.props.contest.contest.status);
+        if(this.prevContestStatus !== undefined && this.prevContestStatus != this.props.contest.contest.status) {
+            if(this.props.contest.contest.status == 0) {
+                //contest start
+                swal({
+                    title: 'Contest start',
+                    text: 'Auto refresh in 2 seconds',
+                    timer: 2000,
+                    showConfirmButton: false 
+                }, () => window.location = window.location);
+            }else if(this.props.contest.contest.status == 1) {
+                console.log('lllll');
+                //contest end
+                swal({
+                    title: 'Contest end',
+                    text: 'Auto refresh in 2 seconds',
+                    timer: 2000,
+                    showConfirmButton: false 
+                }, () => window.location = window.location);
+            }
+            window.location = window.location;
+        }
+        this.prevContestStatus = this.props.contest.contest.status;
+        this.getContest();
+        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL);
     }
 
     getContest() {
