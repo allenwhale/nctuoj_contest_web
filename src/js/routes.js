@@ -55,7 +55,9 @@ export default class Root extends Component {
                             </Route>
                         </Route>
                     </Route>
-                    <Route path="scoreboard/" component={Scoreboard}/>
+                    <Route path="scoreboard/" component={GetResource}>
+                        <IndexRoute component={Scoreboard}/>
+                    </Route>
                     <Route path="special/" component={Special} />
                 </Route>
                 <Route path="*" component={NotFound} />

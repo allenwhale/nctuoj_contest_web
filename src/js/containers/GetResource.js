@@ -42,7 +42,7 @@ class GetResource extends Component {
     }
 
     getExecuteList() {
-        if(!this.props.user.account.isLOGIN) return;
+        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -50,7 +50,7 @@ class GetResource extends Component {
     }
 
     getVerdictList() {
-        if(!this.props.user.account.isLOGIN) return;
+        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -58,7 +58,7 @@ class GetResource extends Component {
     }
 
     getUserList() {
-        if(!this.props.user.account.isLOGIN) return;
+        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -66,7 +66,7 @@ class GetResource extends Component {
     }
 
     getLanguageList() {
-        if(!this.props.user.account.isLOGIN) return;
+        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -74,17 +74,16 @@ class GetResource extends Component {
     }
 
     render() {
-        const getStatus = this.props.language.languageListStatus &&
-            this.props.problem.problemListStatus &&
+        const getStatus = 
+            (this.props.problem.problemListStatus || !this.props.user.account.isLOGIN) &&
+            this.props.language.languageListStatus &&
             this.props.user.userListStatus &&
             this.props.execute.executeListStatus &&
             this.props.verdict.verdictListStatus;
         const isIndex = window.location.pathname === '/';
         return (
             <div>
-                {
-                    getStatus || isIndex ?
-                    this.props.children : "" }
+                { getStatus || isIndex ? this.props.children : "" }
             </div>
         );
     }
