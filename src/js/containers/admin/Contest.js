@@ -57,16 +57,16 @@ class Contest extends Component {
                                 <InputGroup>
                                     <DateTimeField 
                                         ref="start"
-                                        inputFormat='YYYY-MM-DD HH:mm:ss'
+                                        inputFormat="YYYY-MM-DD HH:mm:ss"
                                         format="YYYY-MM-DD HH:mm:ss"
-                                        defaultText={this.props.contest.contest.start}
+                                        dateTime={this.props.contest.contest.start}
                                     />
                                     <InputGroup.Addon>to</InputGroup.Addon>
                                     <DateTimeField
                                         ref="end" 
                                         inputFormat='YYYY-MM-DD HH:mm:ss'
                                         format="YYYY-MM-DD HH:mm:ss"
-                                        defaultText={this.props.contest.contest.end}
+                                        dateTime={this.props.contest.contest.end}
                                     />
                                 </InputGroup>
                             </Col>
