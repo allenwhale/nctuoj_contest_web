@@ -16,6 +16,7 @@ import {
 } from 'react-bootstrap';
 import LoginForm from '../components/LoginForm';
 import SubmitForm from './SubmitForm';
+import Footer from './../components/Footer';
 import classNames from 'classnames';
 import * as UserActions from '../actions/User';
 import * as SubmissionActions from './../actions/Submission';
@@ -187,36 +188,7 @@ class Frame extends Component {
                         { this.props.children }
                         </div>
                     </div>
-                    <footer {...this.props} 
-                        className={classNames(this.props.className, 'footer', 'text-center')}
-                        style={{backgroundColor: "#E7E7E7"}}
-                    >
-                        <Grid fluid={true}>
-                            <Row>
-                                <Col md={3} mdOffset={2}>
-                                    <h3>Developer</h3>
-                                    <p>ChunKai, Chen @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
-                                    <p>Ho-Lun, Wu @ <a href="http://fogworkshop.com/" target="_blank">fogworkshop</a></p>
-                                </Col>
-                                <Col md={2}>
-                                    <h3>Contact us</h3>
-                                    <p><a href="mailto:wingemerald@gmail.com">wingemerald@gmail.com</a></p>
-                                    <p><a href="mailto:allencat850502@gmail.com">allencat850502@gmail.com</a></p>
-                                </Col>
-                                <Col md={3}>
-                                    <h3>Others</h3>
-                                    <p><Link to="/special/">Special Thanks</Link></p>
-                                    <p>Developer Diary</p>
-                                    <p>Privacy Policy</p>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md={12} className={classNames(this.props.className, 'text-center')}>
-                                    Copyright @ 2015-2016. All rights reserved.
-                                </Col>
-                            </Row>
-                        </Grid>
-                    </footer>
+                    <Footer />
                     <SubmitForm />
                     { process.env.NODE_ENV !== 'production' ?  <DevTools /> : <div></div> }
                 </div> : <div></div>
