@@ -38,6 +38,7 @@ class SubmitForm extends Component {
 
     constructor(props) {
         super(props);
+        this.resetCodemirror = true;
         this.changeExecuteType = this.changeExecuteType.bind(this);
         this.changeKeyMap = this.changeKeyMap.bind(this);
         this.postSubmission = this.postSubmission.bind(this);
@@ -46,30 +47,30 @@ class SubmitForm extends Component {
     }
 
     getProblem() {
+        if(this.resetCodemirror){
+            const options = {
+                lineNumbers: true,
+                matchBrackets: true,
+                tabSize: 4,
+                indentUnit: 4,
+                indentWithTabs: true,
+                autofocus: true,
+            };
+            this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
+            this.resetCodemirror = false;
+        }
         var data = {
             token: this.props.user.account.token,
             id: this.refs.problemId.value,
         };
         this.props.dispatch(ProblemActions.getProblem(data)).
             then(() => {
-                const options = {
-                    lineNumbers: true,
-                    matchBrackets: true,
-                    tabSize: 4,
-                    indentUnit: 4,
-                    indentWithTabs: true,
-                    autofocus: true,
-                    mode: mapLangMode[this.props.problem.problem.executes[0].id]
-                };
-                //this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
-                //temporary remove, this code will make something wrong
-                //if you change other problem
-                //the textarea will be append
-                //and the modal will longer and longer
+                this.code.setOption('mode', mapLangMode[this.props.problem.problem.executes[0].id]);
             });
     }
 
     closeSubmitForm() {
+        this.resetCodemirror = true;
         this.props.dispatch(SubmissionActions.closeSubmitForm());
     }
 
