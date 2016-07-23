@@ -31,10 +31,8 @@ class GetResource extends Component {
     }
 
     checkContestStatus() {
-        console.log('check', this.prevContestStatus, this.props.contest.contest.status);
         if(this.prevContestStatus !== undefined && this.prevContestStatus != this.props.contest.contest.status) {
             if(this.props.contest.contest.status == 0) {
-                //contest start
                 swal({
                     title: 'Contest start',
                     text: 'Auto refresh in 2 seconds',
@@ -42,8 +40,6 @@ class GetResource extends Component {
                     showConfirmButton: false 
                 }, () => window.location = window.location);
             }else if(this.props.contest.contest.status == 1) {
-                console.log('lllll');
-                //contest end
                 swal({
                     title: 'Contest end',
                     text: 'Auto refresh in 2 seconds',
@@ -74,7 +70,6 @@ class GetResource extends Component {
     }
 
     getExecuteList() {
-        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -82,7 +77,6 @@ class GetResource extends Component {
     }
 
     getVerdictList() {
-        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -90,7 +84,6 @@ class GetResource extends Component {
     }
 
     getUserList() {
-        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };
@@ -98,7 +91,6 @@ class GetResource extends Component {
     }
 
     getLanguageList() {
-        //if(!this.props.user.account.isLOGIN) return;
         var data = {
             token: this.props.user.account.token,
         };

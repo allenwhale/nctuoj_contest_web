@@ -111,8 +111,21 @@ class Frame extends Component {
     }
 
     render() {
-        const remainMinutes = Math.floor((new Date(this.props.contest.contest.end) - this.props.system.time) / 1000 / 60);
+        var timeinfo;
+        var contest_start_time = new Date(this.props.contest.contest.start);
+        var contest_end_time = new Date(this.props.contest.contest.end);
+        var system_time = this.props.system.time;
+        if(system_time < contest_start_time){
+            var remain = Math.floor((contest_start_time - system_time) / 1000 / 60);
+            timeinfo = "Start in " + Math.floor(remain / 60) + " hr " + (remain % 60) + " min ";
+        } else if(system_time < contest_end_time){
+            var remain = Math.floor((contest_end_time - system_time) / 1000 / 60);
+            timeinfo = Math.floor(remain / 60) + " hr " + (remain % 60) + " min ";
+        } else {
+            timeinfo = "End";
+        }
         document.title = this.props.contest.contest.title;
+        var show_scoreboard = this.props.contest.contest >= 0 || this.props.user.account.isADMIN;
         return (
             this.props.user.checkAccountStatus ? <div style={{height: '100%'}}>
                 <div className={classNames('body')}>
@@ -135,9 +148,11 @@ class Frame extends Component {
                                     <NavItem onClick={this.openSubmitForm}>
                                         Quick Submit
                                     </NavItem>
-                                    <LinkContainer to="/scoreboard/">
-                                        <NavItem>Scoreboard</NavItem>
-                                    </LinkContainer>
+                                    { show_scoreboard ? 
+                                        <LinkContainer to="/scoreboard/">
+                                            <NavItem>Scoreboard</NavItem>
+                                        </LinkContainer> : ""
+                                    }
                                     { this.props.user.account.isADMIN ? 
                                         <LinkContainer to="/admin/">
                                             <NavItem>Admin</NavItem>
@@ -147,7 +162,7 @@ class Frame extends Component {
                             }
                             <Nav pullRight>
                                 <NavItem>
-                                    { Math.floor(remainMinutes / 60) } hr { remainMinutes % 60 } min
+                                    {timeinfo}
                                 </NavItem>
                                 {
                                     this.props.user.account.isLOGIN ?  [
