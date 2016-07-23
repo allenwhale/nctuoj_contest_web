@@ -9,7 +9,7 @@ import * as ContestActions from './../actions/Contest';
 import * as LanguageActions from './../actions/Language';
 import swal from 'sweetalert';
 
-const CHECK_CONTEST_STATUS_INTERVAL = 1000;
+const CHECK_CONTEST_STATUS_INTERVAL = [1000, 10000];
 
 class GetResource extends Component {
     constructor(props) {
@@ -27,7 +27,7 @@ class GetResource extends Component {
         this.getVerdictList();
         this.getContest();
         this.getLanguageList();
-        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL * 5);
+        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL[0] * 5);
     }
 
     checkContestStatus() {
@@ -51,7 +51,25 @@ class GetResource extends Component {
         }
         this.prevContestStatus = this.props.contest.contest.status;
         this.getContest();
-        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL);
+        const contestStart = new Date(this.props.contest.contest.start);
+        const contestEnd = new Date(this.props.contest.contest.end);
+        var interval = 0;
+        if(this.props.system.time < contestStart) {
+            if(Math.abs(contestStart - this.props.system.time) < CHECK_CONTEST_STATUS_INTERVAL[1]) {
+                interval = 0;
+            } else {
+                interval = 1;
+            }
+        } else if(this.props.system.time < contestEnd) {
+            if(Math.abs(this.props.system.time - contestEnd) < CHECK_CONTEST_STATUS_INTERVAL[1]) {
+                interval = 0;
+            } else {
+                interval = 1;
+            }
+        } else {
+            return;
+        }
+        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL[interval]);
     }
 
     getContest() {
@@ -115,6 +133,7 @@ class GetResource extends Component {
 
 function mapStateToProps(state) {
     return {
+        system: state.system,
         user: state.user,
         execute: state.execute,
         problem: state.problem,
