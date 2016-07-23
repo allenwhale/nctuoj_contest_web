@@ -20,6 +20,15 @@ class Contest extends Component {
     }
 
     render() {
+        var freezeinfo;
+        var freeze = this.props.contest.contest.freeze;
+        if(freeze == 0){
+            freezeinfo = "No freeze";
+        } else if(freeze > 0){
+            freezeinfo = "Freeze after contest start " + freeze + " minutes.";
+        } else {
+            freezeinfo = "Freeze before contest end " + freeze + " minutes.";
+        }
         return (
             <div>
                 <Row>
@@ -35,7 +44,7 @@ class Contest extends Component {
                         <Panel header="End">{this.props.contest.contest.end}</Panel>
                     </Col>
                     <Col md={4}>
-                        <Panel header="Freeze">{this.props.contest.contest.freeze}</Panel>
+                        <Panel header="Freeze">{freezeinfo}</Panel>
                     </Col>
                 </Row>
                 <Row>
