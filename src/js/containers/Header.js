@@ -11,6 +11,7 @@ import {
 } from 'react-bootstrap';
 import * as SubmissionActions from './../actions/Submission';
 import * as UserActions from '../actions/User';
+import Timer from './Timer';
 
 class Header extends Component {
     constructor(props) {
@@ -33,19 +34,6 @@ class Header extends Component {
     }
 
     render() {
-        var timeinfo;
-        var contest_start_time = new Date(this.props.contest.contest.start);
-        var contest_end_time = new Date(this.props.contest.contest.end);
-        var system_time = this.props.system.time;
-        if(system_time < contest_start_time){
-            var remain = Math.floor((contest_start_time - system_time) / 1000 / 60);
-            timeinfo = "Start in " + Math.floor(remain / 60) + " hr " + (remain % 60) + " min ";
-        } else if(system_time < contest_end_time){
-            var remain = Math.floor((contest_end_time - system_time) / 1000 / 60);
-            timeinfo = Math.floor(remain / 60) + " hr " + (remain % 60) + " min ";
-        } else {
-            timeinfo = "End";
-        }
         var show_scoreboard = this.props.contest.contest >= 0 || this.props.user.account.isADMIN;
         return (
             <Navbar>
@@ -81,7 +69,7 @@ class Header extends Component {
                         }
                         <Nav pullRight>
                             <NavItem>
-                                {timeinfo}
+                                <Timer />
                             </NavItem>
                             {
                                 this.props.user.account.isLOGIN ?  [
