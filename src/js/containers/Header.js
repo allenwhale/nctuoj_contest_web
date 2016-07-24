@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap'
-import { Link } from 'react-router'
 import { 
     Navbar, 
     Nav, 

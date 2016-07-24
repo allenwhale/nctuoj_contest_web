@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import DevTools from './DevTools';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { Link } from 'react-router'
-import { LinkContainer } from 'react-router-bootstrap'
 import LoginForm from '../components/LoginForm';
 import SubmitForm from './SubmitForm';
 import Footer from './../components/Footer';
 import Header from './Header';
-import classNames from 'classnames';
 import * as UserActions from '../actions/User';
 require('sweetalert/dist/sweetalert.css');
 require('codemirror/lib/codemirror.css');
