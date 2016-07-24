@@ -38,7 +38,7 @@ class Header extends Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="/">Contest</Link>
+                        <LinkContainer to="/"><div>Contest</div></LinkContainer>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
