@@ -15,4 +15,4 @@ tmp-docs-repo/
 .babel-cache/
 .coverage/
 *.*.sw[op]
-utils/Config.js
+Config.js
