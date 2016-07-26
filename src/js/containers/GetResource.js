@@ -23,7 +23,6 @@ class GetResource extends Component {
         this.checkContestStatus = this.checkContestStatus.bind(this);
         this.getExecuteList();
         this.getUserList();
-        this.getProblemList();
         this.getVerdictList();
         this.getContest();
         this.getLanguageList();
@@ -76,11 +75,19 @@ class GetResource extends Component {
         var data = {
             token: this.props.user.account.token,
         };
-        this.props.dispatch(ContestActions.getContest(data));
+        this.props.dispatch(ContestActions.getContest(data))
+            .then( ()=>{
+                this.getProblemList();
+            });
     }
 
     getProblemList() {
         if(!this.props.user.account.isLOGIN) return;
+        console.log(this.props.contest.contest.status);
+        console.log(this.props.user.account.isADMIN);
+        if( this.props.contest.contest.status == -1 && !this.props.user.account.isADMIN){
+            return;
+        }
         var data = {
             token: this.props.user.account.token,
         };

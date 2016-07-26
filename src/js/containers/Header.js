@@ -33,7 +33,7 @@ class Header extends Component {
     }
 
     render() {
-        var show_scoreboard = this.props.contest.contest >= 0 || this.props.user.account.isADMIN;
+        var show = this.props.contest.contest >= 0 || this.props.user.account.isADMIN;
         return (
             <Navbar>
                 <Navbar.Header>
@@ -43,46 +43,50 @@ class Header extends Component {
                     <Navbar.Toggle />
                 </Navbar.Header>
                 <Navbar.Collapse>
-                    { this.props.user.account.isLOGIN ?
-                        <Nav>
+                    <Nav>
+                        { show ? 
                             <LinkContainer to="/submissions/">
                                 <NavItem>Submissions</NavItem>
-                            </LinkContainer>
+                            </LinkContainer> : ""
+                        }
+                        { show ? 
                             <LinkContainer to="/clarifications/">
                                 <NavItem>Clarifications</NavItem>
-                            </LinkContainer>
+                            </LinkContainer> : ""
+                        }
+                        { show ? 
                             <NavItem onClick={this.openSubmitForm}>
                                 Quick Submit
-                            </NavItem>
-                            { show_scoreboard ? 
-                                <LinkContainer to="/scoreboard/">
-                                    <NavItem>Scoreboard</NavItem>
-                                </LinkContainer> : ""
-                            }
-                            { this.props.user.account.isADMIN ? 
-                                <LinkContainer to="/admin/">
-                                    <NavItem>Admin</NavItem>
-                                </LinkContainer> : ""
-                            }
-                        </Nav> : <Nav> <LinkContainer to="/scoreboard/"><NavItem>Scoreboard</NavItem></LinkContainer> </Nav>
+                            </NavItem> : ""
                         }
-                        <Nav pullRight>
-                            <NavItem>
-                                <Timer />
-                            </NavItem>
-                            {
-                                this.props.user.account.isLOGIN ?  [
-                                    <LinkContainer to="/user/"> 
-                                        <NavItem key="0">
-                                            Hi { this.props.user.account.name }
-                                        </NavItem> 
-                                    </LinkContainer>, 
-                                    <NavItem key="1" onClick={this.logout}>Logout</NavItem>
-                                    ] : <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
-                                    }
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Navbar>
+                        { show ? 
+                            <LinkContainer to="/scoreboard/">
+                                <NavItem>Scoreboard</NavItem>
+                            </LinkContainer> : ""
+                        }
+                        { this.props.user.account.isADMIN ? 
+                            <LinkContainer to="/admin/">
+                                <NavItem>Admin</NavItem>
+                            </LinkContainer> : ""
+                        }
+                    </Nav>
+                    <Nav pullRight>
+                        <NavItem>
+                            <Timer />
+                        </NavItem>
+                        {
+                            this.props.user.account.isLOGIN ?  [
+                                <LinkContainer to="/user/"> 
+                                    <NavItem key="0">
+                                        Hi { this.props.user.account.name }
+                                    </NavItem> 
+                                </LinkContainer>, 
+                                <NavItem key="1" onClick={this.logout}>Logout</NavItem>
+                                ] : <NavItem key="2" onClick={this.openLoginForm}>Login</NavItem>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         );
     }
 };
