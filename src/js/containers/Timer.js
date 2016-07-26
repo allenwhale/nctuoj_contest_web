@@ -23,10 +23,7 @@ class Timer extends Component {
     }
 
     getTime() {
-        var data = {
-            token: this.props.user.account.token,
-        };
-        this.props.dispatch(SystemActions.getTime(data));
+        this.props.dispatch(SystemActions.getTime());
     }
 
     increaseTime() {
