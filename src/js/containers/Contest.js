@@ -29,6 +29,12 @@ class Contest extends Component {
         } else {
             freezeinfo = "Freeze before contest end " + freeze + " minutes.";
         }
+        var zip_password;
+        if(this.props.contest.contest.status == -1){
+            zip_password = "";
+        } else {
+            zip_password = this.props.contest.contest.zip_password;
+        }
         return (
             <div>
                 <Row>
@@ -37,14 +43,17 @@ class Contest extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={4}>
+                    <Col md={3}>
                         <Panel header="Start">{this.props.contest.contest.start}</Panel>
                     </Col>
-                    <Col md={4}>
+                    <Col md={3}>
                         <Panel header="End">{this.props.contest.contest.end}</Panel>
                     </Col>
-                    <Col md={4}>
+                    <Col md={3}>
                         <Panel header="Freeze">{freezeinfo}</Panel>
+                    </Col>
+                    <Col md={3}>
+                        <Panel header="Zip Password">{zip_password}</Panel>
                     </Col>
                 </Row>
                 <Row>
