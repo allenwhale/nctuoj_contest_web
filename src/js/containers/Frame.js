@@ -21,7 +21,6 @@ class Frame extends Component {
         this.login = this.login.bind(this);
         this.getUserMe = this.getUserMe.bind(this);
         this.getUserMe();
-        this.timeUpdateCount = 0;
     }
 
     closeLoginForm() {
