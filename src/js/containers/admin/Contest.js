@@ -27,12 +27,10 @@ class Contest extends Component {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
         data.append('start', this.refs.start.getValue());
         data.append('end', this.refs.end.getValue());
-        console.log(data.get('start'));
         this.props.dispatch(ContestActions.putContest(data));
     }
 
     render() {
-        console.log(this.props.contest.contest);
         return (
             this.props.contest.contestStatus ? 
             <div key={this.props.contest.contest.id}>

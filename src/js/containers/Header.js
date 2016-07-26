@@ -44,25 +44,20 @@ class Header extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        { show ? 
-                            <LinkContainer to="/submissions/">
+                        { show ? [
+                            <LinkContainer key="0" to="/submissions/">
                                 <NavItem>Submissions</NavItem>
-                            </LinkContainer> : ""
-                        }
-                        { show ? 
-                            <LinkContainer to="/clarifications/">
+                            </LinkContainer>,
+                            <LinkContainer key="1" to="/clarifications/">
                                 <NavItem>Clarifications</NavItem>
-                            </LinkContainer> : ""
-                        }
-                        { show ? 
-                            <NavItem onClick={this.openSubmitForm}>
+                            </LinkContainer>,
+                            <NavItem       key="2" onClick={this.openSubmitForm}>
                                 Quick Submit
-                            </NavItem> : ""
-                        }
-                        { show ? 
-                            <LinkContainer to="/scoreboard/">
+                            </NavItem>,
+                            <LinkContainer key="3" to="/scoreboard/">
                                 <NavItem>Scoreboard</NavItem>
-                            </LinkContainer> : ""
+                            </LinkContainer>] : ""
+
                         }
                         { this.props.user.account.isADMIN ? 
                             <LinkContainer to="/admin/">
@@ -76,8 +71,8 @@ class Header extends Component {
                         </NavItem>
                         {
                             this.props.user.account.isLOGIN ?  [
-                                <LinkContainer to="/user/"> 
-                                    <NavItem key="0">
+                                <LinkContainer key="0" to="/user/"> 
+                                    <NavItem>
                                         Hi { this.props.user.account.name }
                                     </NavItem> 
                                 </LinkContainer>, 

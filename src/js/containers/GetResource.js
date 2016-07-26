@@ -83,8 +83,6 @@ class GetResource extends Component {
 
     getProblemList() {
         if(!this.props.user.account.isLOGIN) return;
-        console.log(this.props.contest.contest.status);
-        console.log(this.props.user.account.isADMIN);
         if( this.props.contest.contest.status == -1 && !this.props.user.account.isADMIN){
             return;
         }

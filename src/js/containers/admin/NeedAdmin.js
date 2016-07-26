@@ -11,7 +11,6 @@ class NeedAdmin extends Component {
 
     checkIsAdmin() {
         if(!this.props.user.account.isADMIN) {
-            console.log('not admin');
             browserHistory.push('/');
         }
     }

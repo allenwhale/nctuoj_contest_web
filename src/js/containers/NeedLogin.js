@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router'
 
-import * as ProblemActions from './../actions/Problem';
-import * as UserActions from './../actions/User';
-import * as ExecuteActions from './../actions/Execute';
-import * as VerdictActions from './../actions/Verdict';
-import * as ContestActions from './../actions/Contest';
-
 class NeedUser extends Component {
     constructor(props) {
         super(props);
