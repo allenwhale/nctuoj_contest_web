@@ -30,45 +30,16 @@ class GetResource extends Component {
     }
 
     checkContestStatus() {
-        if(this.prevContestStatus !== undefined && this.prevContestStatus != this.props.contest.contest.status) {
-            if(this.props.contest.contest.status == 0) {
-                swal({
-                    title: 'Contest start',
-                    text: 'Auto refresh in 2 seconds',
-                    timer: 2000,
-                    showConfirmButton: false 
-                }, () => window.location = window.location);
-            }else if(this.props.contest.contest.status == 1) {
-                swal({
-                    title: 'Contest end',
-                    text: 'Auto refresh in 2 seconds',
-                    timer: 2000,
-                    showConfirmButton: false 
-                }, () => window.location = window.location);
-            }
-            window.location = window.location;
-        }
-        this.prevContestStatus = this.props.contest.contest.status;
         this.getContest();
         const contestStart = new Date(this.props.contest.contest.start);
         const contestEnd = new Date(this.props.contest.contest.end);
         var interval = 0;
         if(this.props.system.time < contestStart) {
-            if(Math.abs(contestStart - this.props.system.time) < CHECK_CONTEST_STATUS_INTERVAL[1]) {
-                interval = 0;
-            } else {
-                interval = 1;
-            }
+            setTimeout(this.checkContestStatus, contestStart - this.props.system.time);
         } else if(this.props.system.time < contestEnd) {
-            if(Math.abs(this.props.system.time - contestEnd) < CHECK_CONTEST_STATUS_INTERVAL[1]) {
-                interval = 0;
-            } else {
-                interval = 1;
-            }
         } else {
             return;
         }
-        setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL[interval]);
     }
 
     getContest() {
@@ -84,6 +55,8 @@ class GetResource extends Component {
     getProblemList() {
         if(!this.props.user.account.isLOGIN) return;
         if( this.props.contest.contest.status == -1 && !this.props.user.account.isADMIN){
+            if(window.location.pathname !== '/')
+                window.location = "/";
             return;
         }
         var data = {

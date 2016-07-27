@@ -42,17 +42,31 @@ class Timer extends Component {
         var contest_start_time = new Date(this.props.contest.contest.start);
         var contest_end_time = new Date(this.props.contest.contest.end);
         var system_time = this.props.system.time;
+        var day;
+        var hour;
+        var minute;
+        var second;
         if(system_time < contest_start_time){
-            var remain = Math.floor((contest_start_time - system_time) / 1000 / 60);
-            timeinfo = "Start in " + Math.floor(remain / 60) + " hr " + (remain % 60) + " min ";
+            timeinfo = (contest_start_time - system_time) / 1000;
         } else if(system_time < contest_end_time){
-            var remain = Math.floor((contest_end_time - system_time) / 1000 / 60);
-            timeinfo = Math.floor(remain / 60) + " hr " + (remain % 60) + " min ";
+            timeinfo = (contest_end_time - system_time) / 1000;
         } else {
             timeinfo = "End";
         }
+        if(timeinfo != "End"){
+            second = timeinfo;
+            minute = Math.floor(second / 60);
+            hour   = Math.floor(minute / 60);
+            day    = Math.floor(hour   / 24);
+            hour   = "" + hour % 24;
+            minute = "" + minute % 60;
+            second = "" + second % 60;
+            while(hour.length < 2) hour = "0" + hour;
+            while(minute.length < 2) minute = "0" + minute;
+            while(second.length < 2) second = "0" + second;
+        }
         return (
-            <div>{timeinfo}</div>
+            <div>{day} Days {hour} : {minute} : {second}</div>
         );
     }
 }

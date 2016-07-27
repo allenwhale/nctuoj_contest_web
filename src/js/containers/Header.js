@@ -33,7 +33,7 @@ class Header extends Component {
     }
 
     render() {
-        var show = this.props.contest.contest >= 0 || this.props.user.account.isADMIN;
+        var show = this.props.contest.contest.status >= 0 || this.props.user.account.isADMIN;
         return (
             <Navbar>
                 <Navbar.Header>
@@ -91,6 +91,7 @@ function mapStateToProps(state) {
         user: state.user,
         system: state.system,
         contest: state.contest,
+        routing: state.routing,
     };
 }
 

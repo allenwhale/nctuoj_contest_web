@@ -31,7 +31,7 @@ class Contest extends Component {
         }
         var zip_password;
         if(this.props.contest.contest.status == -1){
-            zip_password = "";
+            zip_password = "To be announced.";
         } else {
             zip_password = this.props.contest.contest.zip_password;
         }
