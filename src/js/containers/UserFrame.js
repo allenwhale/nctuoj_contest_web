@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router'
+import Config from './../utils/Config';
 
 import { 
     Grid, 
@@ -28,16 +29,20 @@ class UserFrame extends Component {
                     <Row>
                         <Col md={2}>
                             <Nav stacked >
-                                { this.props.problem.problemStatus ?
-                                        this.props.problem.problemList.mapArr((row) => (
-                                            <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
-                                                <NavItem>
-                                                    {problemTitle(row)}
-                                                </NavItem>
-                                            </LinkContainer>
-                                            ))
-                                     : ""
+                                { this.props.problem.problemListStatus ?
+                                    this.props.problem.problemList.mapArr((row) => (
+                                        <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
+                                            <NavItem>
+                                                {problemTitle(row)}
+                                            </NavItem>
+                                        </LinkContainer>
+                                    )) : ""
                                 }
+                                <NavItem
+                                    href={`${Config.baseUrl}/api/problems/zip/`}
+                                    download="problem.zip">
+                                    Download Zip
+                                </NavItem>
                             </Nav> 
                             
                         </Col> 

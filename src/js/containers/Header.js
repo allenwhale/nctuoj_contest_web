@@ -33,7 +33,7 @@ class Header extends Component {
     }
 
     render() {
-        var show = (this.props.contest.contest.isLOGIN && this.props.contest.contest.status >= 0) || this.props.user.account.isADMIN;
+        var show = (this.props.user.account.isLOGIN && this.props.contest.contest.status >= 0) || this.props.user.account.isADMIN;
         return (
             <Navbar>
                 <Navbar.Header>
