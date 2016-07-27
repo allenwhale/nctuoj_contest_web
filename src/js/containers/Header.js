@@ -33,7 +33,7 @@ class Header extends Component {
     }
 
     render() {
-        var show = this.props.contest.contest.status >= 0 || this.props.user.account.isADMIN;
+        var show = (this.props.contest.contest.isLOGIN && this.props.contest.contest.status >= 0) || this.props.user.account.isADMIN;
         return (
             <Navbar>
                 <Navbar.Header>
@@ -53,11 +53,13 @@ class Header extends Component {
                             </LinkContainer>,
                             <NavItem       key="2" onClick={this.openSubmitForm}>
                                 Quick Submit
-                            </NavItem>,
-                            <LinkContainer key="3" to="/scoreboard/">
+                            </NavItem>] : ""
+                        }
+                        { this.props.contest.contest.status >= 0 ? 
+                            <LinkContainer to="/scoreboard/">
                                 <NavItem>Scoreboard</NavItem>
-                            </LinkContainer>] : ""
-
+                            </LinkContainer> : ""
+                            
                         }
                         { this.props.user.account.isADMIN ? 
                             <LinkContainer to="/admin/">

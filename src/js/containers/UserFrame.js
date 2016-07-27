@@ -27,9 +27,8 @@ class UserFrame extends Component {
                 <Grid fluid={true}>
                     <Row>
                         <Col md={2}>
-                            { this.props.user.account.isLOGIN ?
-                                <Nav stacked >
-                                    {
+                            <Nav stacked >
+                                { this.props.problem.problemStatus ?
                                         this.props.problem.problemList.mapArr((row) => (
                                             <LinkContainer key={row.id} to={`/problems/${row.id}/`}>
                                                 <NavItem>
@@ -37,8 +36,10 @@ class UserFrame extends Component {
                                                 </NavItem>
                                             </LinkContainer>
                                             ))
-                                    }
-                                </Nav> : "" }
+                                     : ""
+                                }
+                            </Nav> 
+                            
                         </Col> 
                         <Col md={10}>
                             { this.props.children }

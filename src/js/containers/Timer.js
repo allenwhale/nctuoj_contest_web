@@ -66,7 +66,11 @@ class Timer extends Component {
             while(second.length < 2) second = "0" + second;
         }
         return (
-            <div>{day} Days {hour} : {minute} : {second}</div>
+            <div>
+                { timeinfo != "End" ?
+                    <div>{day} Days {hour} : {minute} : {second}</div> : "End"
+                }
+            </div>
         );
     }
 }
