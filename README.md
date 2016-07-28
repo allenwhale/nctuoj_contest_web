@@ -19,7 +19,6 @@
  - npm run build
 
 ### TODO
- - 賽前預載題目zip的連結，時間到顯示密碼（可在首頁或側邊欄）
  - 側邊欄problem list加背景色表示寫題狀態
  - 賽後scoreboard系統
  - clarification推播（含admin端）
