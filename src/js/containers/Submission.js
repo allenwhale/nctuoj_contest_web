@@ -36,6 +36,7 @@ class Submission extends Component {
         this.getSubmission();
         this.refresh = true; 
         setTimeout(this.checkSubmissionPending, REFRESH_INTERVAL);
+        this.preCode = '';
     }
 
     componentWillUnmount() {
@@ -54,7 +55,23 @@ class Submission extends Component {
             token: this.props.user.account.token,
             id: this.props.params.id,
         };
-        this.props.dispatch(SubmissionActions.getSubmission(data));
+        this.props.dispatch(SubmissionActions.getSubmission(data))
+            .then(()=>{
+                if(this.preCode != this.props.submission.submission.code){
+                    const options = {
+                        lineNumbers: true,
+                        matchBrackets: true,
+                        tabSize: 4,
+                        indentUnit: 4,
+                        indentWithTabs: true,
+                        autofocus: false,
+                        mode: mapLangMode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].id],
+                    };
+                    this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
+                    this.preCode = this.props.submission.submission.code;
+                }
+
+            });
     }
 
     RejudgeSubmission(id) {
@@ -74,16 +91,6 @@ class Submission extends Component {
 
     componentDidUpdate() {
         if(this.prevStatus == false && this.props.submission.submissionStatus) {
-            const options = {
-                lineNumbers: true,
-                matchBrackets: true,
-                tabSize: 4,
-                indentUnit: 4,
-                indentWithTabs: true,
-                autofocus: false,
-                mode: mapLangMode[this.props.execute.executeList[this.props.submission.submission.execute_type_id].id],
-            };
-            this.code = Codemirror.fromTextArea(ReactDOM.findDOMNode(this.refs.code), options);
         }
         this.prevStatus = this.props.submission.submissionStatus;
     }
