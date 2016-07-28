@@ -201,7 +201,7 @@ class Submission extends Component {
                     this.props.submission.submission.verdict_id == 4 ? 
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel>Compile Error Message</ControlLabel>
-                            <FormControl componentClass="textarea" defaultValue={this.props.submission.submission.note} />
+                            <FormControl componentClass="textarea" defaultValue={this.props.submission.submission.ce[0].note} />
                         </FormGroup> : ""
                 }
                 <textarea 
