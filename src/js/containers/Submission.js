@@ -7,7 +7,10 @@ import {
     Row, 
     Col,
     Table,
-    Button
+    Button,
+    FormGroup,
+    FormControl,
+    ControlLabel,
 } from 'react-bootstrap';
 import * as SubmissionActions from './../actions/Submission';
 import * as RejudgeActions from './../actions/Rejudge';
@@ -193,6 +196,13 @@ class Submission extends Component {
                             }
                         </tbody>
                     </Table> : ""
+                }
+                {
+                    this.props.submission.submission.verdict == 4 ? 
+                        <FormGroup controlId="formControlsTextarea">
+                            <ControlLabel>Compile Error Message</ControlLabel>
+                            <FormControl componentClass="textarea" defaultValue={this.props.submission.submission.note} />
+                        </FormGroup> : ""
                 }
                 <textarea 
                     ref="code" 
