@@ -198,7 +198,7 @@ class Submission extends Component {
                     </Table> : ""
                 }
                 {
-                    this.props.submission.submission.verdict == 4 ? 
+                    this.props.submission.submission.verdict_id == 4 ? 
                         <FormGroup controlId="formControlsTextarea">
                             <ControlLabel>Compile Error Message</ControlLabel>
                             <FormControl componentClass="textarea" defaultValue={this.props.submission.submission.note} />
