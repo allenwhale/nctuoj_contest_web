@@ -55,7 +55,7 @@ class Header extends Component {
                                 Quick Submit
                             </NavItem>] : ""
                         }
-                        { this.props.contest.contest.status >= 0 ? 
+                        { this.props.contest.contest.status >= 0 || this.props.user.account.isADMIN ? 
                             <LinkContainer to="/scoreboard/">
                                 <NavItem>Scoreboard</NavItem>
                             </LinkContainer> : ""
