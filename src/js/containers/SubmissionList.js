@@ -200,7 +200,7 @@ class SubmissionList extends Component {
                                     </td>
                                     <td>
                                         <Link to={`/problems/${row.problem_id}/`}>
-                                            {this.props.problem.problemList[row.problem_id].title}
+                                            {problemTitle(this.props.problem.problemList[row.problem_id])}
                                         </Link>
                                     </td>
                                     <td>{this.props.user.userList[row.user_id].name}</td>
