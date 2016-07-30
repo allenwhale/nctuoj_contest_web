@@ -39,17 +39,17 @@ class Timer extends Component {
 
     render() {
         var timeinfo;
-        var contest_start_time = new Date(this.props.contest.contest.start);
-        var contest_end_time = new Date(this.props.contest.contest.end);
-        var system_time = this.props.system.time;
+        var contestStartTime = new Date(this.props.contest.contest.start);
+        var contestEndTime = new Date(this.props.contest.contest.end);
+        var systimeTime = this.props.system.time;
         var day;
         var hour;
         var minute;
         var second;
-        if(system_time < contest_start_time){
-            timeinfo = (contest_start_time - system_time) / 1000;
-        } else if(system_time < contest_end_time){
-            timeinfo = (contest_end_time - system_time) / 1000;
+        if(systimeTime < contestStartTime){
+            timeinfo = (contestStartTime - systimeTime) / 1000;
+        } else if(systimeTime < contestEndTime){
+            timeinfo = (contestEndTime - systimeTime) / 1000;
         } else {
             timeinfo = "End";
         }
