@@ -27,7 +27,7 @@ const mapLangMode = [
     'text/x-python',
 ];
 
-const REFRESH_INTERVAL = 1000;
+const REFRESH_INTERVAL = 2000;
 
 class Submission extends Component {
     constructor(props) {
