@@ -34,6 +34,16 @@ class Header extends Component {
 
     render() {
         var show = (this.props.user.account.isLOGIN && this.props.contest.contest.status >= 0) || this.props.user.account.isADMIN;
+        var repliedClarification = Object.keys(this.props.clarification.clarificationList).filter(
+            (key) => {
+                if(key === "null" || key === "undefined") {
+                    return false;
+                }
+                else {
+                    return this.props.clarification.clarificationList[key].reply.length
+                }
+            }
+        ).length;
         return (
             <Navbar>
                 <Navbar.Header>
@@ -49,7 +59,7 @@ class Header extends Component {
                                 <NavItem>Submissions</NavItem>
                             </LinkContainer>,
                             <LinkContainer key="1" to="/clarifications/">
-                                <NavItem>Clarifications</NavItem>
+                                <NavItem>Clarifications <font color="red">{repliedClarification}</font></NavItem>
                             </LinkContainer>,
                             <NavItem       key="2" onClick={this.openSubmitForm}>
                                 Quick Submit
@@ -93,6 +103,7 @@ function mapStateToProps(state) {
         user: state.user,
         system: state.system,
         contest: state.contest,
+        clarification: state.clarification,
         routing: state.routing,
     };
 }

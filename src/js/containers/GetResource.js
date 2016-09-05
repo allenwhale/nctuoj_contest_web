@@ -7,6 +7,7 @@ import * as ExecuteActions from './../actions/Execute';
 import * as VerdictActions from './../actions/Verdict';
 import * as ContestActions from './../actions/Contest';
 import * as LanguageActions from './../actions/Language';
+import * as ClarificationActions from './../actions/Clarification';
 import swal from 'sweetalert';
 
 const CHECK_CONTEST_STATUS_INTERVAL = [1000, 10000];
@@ -20,6 +21,7 @@ class GetResource extends Component {
         this.getVerdictList = this.getVerdictList.bind(this);
         this.getContest = this.getContest.bind(this);
         this.getLanguageList = this.getLanguageList.bind(this);
+        this.getClarificationList = this.getClarificationList.bind(this);
         this.checkContestStatus = this.checkContestStatus.bind(this);
         this.getExecuteList();
         this.getUserList();
@@ -27,6 +29,8 @@ class GetResource extends Component {
         this.getContest();
         this.getLanguageList();
         setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL[0] * 5);
+        this.getClarificationList();
+        setInterval(this.getClarificationList, 1000 * 30);
     }
 
     checkContestStatus() {
@@ -91,6 +95,13 @@ class GetResource extends Component {
             token: this.props.user.account.token,
         };
         this.props.dispatch(LanguageActions.getLanguageList(data));
+    }
+
+    getClarificationList() {
+        var data = {
+            token: this.props.user.account.token,
+        };
+        this.props.dispatch(ClarificationActions.getClarificationList(data));
     }
 
     render() {
