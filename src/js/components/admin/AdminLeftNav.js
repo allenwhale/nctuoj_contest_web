@@ -28,6 +28,9 @@ export default class Base extends Component {
                 <LinkContainer to="/admin/executes/">
                     <NavItem>Executes</NavItem>
                 </LinkContainer>
+                <LinkContainer to="/admin/db/">
+                    <NavItem>Database</NavItem>
+                </LinkContainer>
             </Nav>
         );
     }

@@ -22,6 +22,7 @@ import AdminExecuteList from './containers/admin/ExecuteList';
 import AdminExecute from './containers/admin/Execute';
 import AdminUserList from './containers/admin/UserList';
 import AdminUser from './containers/admin/User';
+import AdminDatabase from './containers/admin/DB';
 import Scoreboard from './containers/Scoreboard';
 
 export const history = browserHistory;
@@ -51,6 +52,7 @@ export default class Root extends Component {
                                     <Route path="executes/:id/" component={AdminExecute}/>
                                     <Route path="users/" component={AdminUserList} />
                                     <Route path="users/:id/" component={AdminUser} />
+                                    <Route path="db/" component={AdminDatabase} />
                                 </Route>
                             </Route>
                         </Route>
