@@ -16,37 +16,23 @@ class DB extends Component {
     }
 
     clear(name){
-        if(name == 'problems'){
-            swal({
-                title: '清空所有商品', 
-                text: '您確定要將所有商品訂單都刪除?',
-                type: 'warning',
-                showCancelButton: true,
-                closeOnConfirm: true,
-            }, () => {
-                DBActions.deleteTable({
-                    token: this.props.user.account.token,
-                    name: 'problems',
-                });
-                DBActions.deleteTable({
-                    token: this.props.user.account.token,
-                    name: 'submissions',
-                });
-                DBActions.deleteTable({
-                    token: this.props.user.account.token,
-                    name: 'clarifications',
-                });
-            });
-        } else {
-            DBActions.deleteTable({
+        swal({
+            title: `清空所有 ${name}`,
+            text: `您確定要將所有 ${name} 都刪除?`,
+            type: 'warning',
+            showCancelButton: true,
+            closeOnConfirm: true,
+        }, () => {
+            this.props.dispatch(DBActions.deleteTable({
                 token: this.props.user.account.token,
                 name: name,
+            })).then(() => {
+                window.location = window.location;
             });
-        }
+        });
     }
 
     render() {
-        console.log(this);
         return (
             <div>
                 <Button
