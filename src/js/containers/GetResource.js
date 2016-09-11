@@ -29,8 +29,8 @@ class GetResource extends Component {
         this.getContest();
         this.getLanguageList();
         setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL[0] * 5);
-        //this.getClarificationList();
-        //setInterval(this.getClarificationList, 1000 * 30);
+        this.getClarificationList();
+        setInterval(this.getClarificationList, 1000 * 1);
     }
 
     checkContestStatus() {
@@ -98,6 +98,7 @@ class GetResource extends Component {
     }
 
     getClarificationList() {
+        if(this.props.user.account.token == undefined) return;
         var data = {
             token: this.props.user.account.token,
         };

@@ -136,8 +136,10 @@ class ClarificationList extends Component {
                         <tr>
                             <th className="col-md-1">#</th>
                             <th className="col-md-2">分類</th>
-                            <th className="col-md-4">Question</th>
-                            <th className="col-md-4">Reply</th>
+                            <th className="col-md-3">Question</th>
+                            <th className="col-md-3">Reply</th>
+                            <th className="col-md-1">created at</th>
+                            <th className="col-md-1">updated at</th>
                             <th className="col-md-1">View</th>
                         </tr>
                     </thead>
@@ -149,6 +151,8 @@ class ClarificationList extends Component {
                                     <td>{row.problem_id == 0 ? "General" : problemTitle(this.props.problem.problemList[row.problem_id])}</td>
                                     <td className="ellipsis">{row.question}</td>
                                     <td className="ellipsis">{row.reply}</td>
+                                    <td>{ row.created_at }</td>
+                                    <td>{ row.updated_at }</td>
                                     <td>
                                         <Button bsSize="xs" onClick={() => browserHistory.push(`/clarifications/${row.id}/`)}>view</Button>
                                     </td>

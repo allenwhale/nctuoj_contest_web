@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './js/stores/configureStore';
 import RootRouter from './js/routes';
+import Notify from 'notifyjs';
 
 const store = configureStore();
 
@@ -21,6 +22,11 @@ if (typeof(document) !== 'undefined' && window) {
             return res;
         }
     });
+    window.Notify = Notify.default;
+    if(window.Notify.needsPermission){
+        console.log('get permission');
+        window.Notify.requestPermission();
+    }
     window.isNull = (x) => (x == null ? null : x);
     window.ord = (c) => c.charCodeAt(0);
     window.chr = (i) => String.fromCharCode(i);

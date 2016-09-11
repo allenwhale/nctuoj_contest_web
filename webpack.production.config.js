@@ -35,7 +35,8 @@ module.exports = {
             "classnames",
             "history",
             "isomorphic-fetch",
-            "jquery"
+            "jquery",
+            "notifyjs"
         ]
     },
     output: {

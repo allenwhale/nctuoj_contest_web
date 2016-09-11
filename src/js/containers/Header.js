@@ -34,16 +34,24 @@ class Header extends Component {
 
     render() {
         var show = (this.props.user.account.isLOGIN && this.props.contest.contest.status >= 0) || this.props.user.account.isADMIN;
-        //var repliedClarification = Object.keys(this.props.clarification.clarificationList).filter(
-            //(key) => {
-                //if(key === "null" || key === "undefined") {
-                    //return false;
-                //}
-                //else {
-                    //return this.props.clarification.clarificationList[key].reply.length
-                //}
-            //}
-        //).length;
+        var repliedClarification = Object.keys(this.props.clarification.clarificationList).filter(
+            (key) => {
+                if(key === "null" || key === "undefined") {
+                    return false;
+                }
+                else {
+                    return this.props.clarification.clarificationList[key].reply.length
+                }
+            }
+        ).length;
+        if(this.lastRepliedClarification !== undefined && this.lastRepliedClarification !== repliedClarification){
+            const notify = new Notify('New Clarification', {
+                body: 'You get new clarification !!!'
+            });
+            notify.show();
+        }
+        if(this.props.clarification.clarificationList[null] !== undefined)
+            this.lastRepliedClarification = repliedClarification;
         return (
             <Navbar>
                 <Navbar.Header>
