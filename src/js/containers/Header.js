@@ -40,7 +40,11 @@ class Header extends Component {
                     return false;
                 }
                 else {
-                    return this.props.clarification.clarificationList[key].reply.length
+                    if(this.props.user.account.isADMIN){
+                        return this.props.clarification.clarificationList[key].question.length
+                    }else{
+                        return this.props.clarification.clarificationList[key].reply.length
+                    }
                 }
             }
         ).length;
@@ -67,7 +71,15 @@ class Header extends Component {
                                 <NavItem>Submissions</NavItem>
                             </LinkContainer>,
                             <LinkContainer key="1" to="/clarifications/">
-                                <NavItem>Clarifications</NavItem>
+                            <NavItem>
+                            Clarifications
+                            { repliedClarification ? 
+                                <font color="red">
+                                <strong>
+                                {' ' + repliedClarification}
+                                </strong>
+                                </font> : ""}
+                            </NavItem>
                             </LinkContainer>,
                             <NavItem       key="2" onClick={this.openSubmitForm}>
                                 Quick Submit
