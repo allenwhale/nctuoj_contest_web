@@ -32,11 +32,13 @@ class User extends Component {
                 <Grid fluid={true}>
                     <Row>
                         <Col md={12}>
-                            <h3>Upload </h3>
+                            <h3>Upload Photo</h3>
                             <Form ref="form">
                                 <input type="hidden" name="token" value={this.props.user.account.token} />
                                 <FormGroup>
-                                    <ControlLabel>Upload File</ControlLabel>
+                                    <ControlLabel>
+                                        Take a photo of your team during the contest
+                                    </ControlLabel>
                                     <input type="file" className="form-control" name="file" />
                                 </FormGroup>
                             </Form>
