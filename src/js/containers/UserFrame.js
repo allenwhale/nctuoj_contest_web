@@ -38,11 +38,13 @@ class UserFrame extends Component {
                                         </LinkContainer>
                                     )) : ""
                                 }
-                                <NavItem
+                                { this.props.user.account.isLOGIN ? 
+                                    <NavItem
                                     href={`${Config.baseUrl}/api/problems/zip/`}
                                     download="problem.zip">
                                     Download Zip
-                                </NavItem>
+                                    </NavItem> : ""
+                                }
                             </Nav> 
                             
                         </Col> 
