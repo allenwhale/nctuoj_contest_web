@@ -12,6 +12,9 @@ import {
 } from 'react-bootstrap';
 import classNames from 'classnames';
 import nl2br from 'react-nl2br';
+import MDReactComponent from 'markdown-react-js';
+import { mdReact } from 'markdown-react-js';
+import marked from 'marked';
 
 class Contest extends Component {
 
@@ -58,8 +61,9 @@ class Contest extends Component {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <Panel header="Description">
-                            { nl2br(this.props.contest.contest.description) }
+                        <Panel header="Description" >
+                        { this.props.contest.contest.description ? 
+                            <MDReactComponent text={this.props.contest.contest.description}></MDReactComponent>:""}
                         </Panel>
                     </Col> 
                 </Row>
