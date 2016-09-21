@@ -41,7 +41,7 @@ class Header extends Component {
                 }
                 else {
                     if(this.props.user.account.isADMIN){
-                        return this.props.clarification.clarificationList[key].question.length
+                        return this.props.clarification.clarificationList[key].reply.length === 0
                     }else{
                         return this.props.clarification.clarificationList[key].reply.length
                     }
