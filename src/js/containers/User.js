@@ -24,6 +24,10 @@ class User extends Component {
 
     putUserUpload() {
         var data = new FormData(ReactDOM.findDOMNode(this.refs.form));
+        if(data.get('new_team') === null)
+            data.set('new_team', '0')
+        if(data.get('follow_rule') === null)
+            data.set('follow_rule', '0')
         this.props.dispatch(UserActions.putUserUpload(data));
     }
 
@@ -33,7 +37,7 @@ class User extends Component {
                 <Grid fluid={true}>
                     <Row>
                         <Col md={12}>
-                            <Form ref="form">
+                            <Form ref="form" onSubmit={(e) => {e.preventDefault(); this.putUserUpload()}}>
                                 <input type="hidden" name="token" value={this.props.user.account.token} />
                                 <FormGroup>
                                     <ControlLabel>
@@ -42,13 +46,13 @@ class User extends Component {
                                     <input type="file" className="form-control" name="file" />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Checkbox name="follow_rule" inline>
+                                    <Checkbox name="follow_rule" value="1" inline>
                                         We abide the rules during the contest.
                                         (You must check this item if you would like to receive the prize.)
                                     </Checkbox>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Checkbox name="new_team" inline>
+                                    <Checkbox name="new_team" value="1" inline>
                                         We never participated the ACM-ICPC.
                                         (You must check this item if you would like to receive the <b>newcomer prize</b>.)
                                     </Checkbox>
