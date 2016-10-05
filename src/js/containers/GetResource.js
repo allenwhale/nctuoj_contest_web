@@ -30,7 +30,7 @@ class GetResource extends Component {
         this.getLanguageList();
         setTimeout(this.checkContestStatus, CHECK_CONTEST_STATUS_INTERVAL[0] * 5);
         this.getClarificationList();
-        setInterval(this.getClarificationList, 1000 * 1);
+        setInterval(this.getClarificationList, 1000 * 10);
     }
 
     checkContestStatus() {

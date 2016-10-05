@@ -14,7 +14,7 @@ import * as UserActions from './../actions/User';
 import * as VerdictActions from './../actions/Verdict';
 import classNames from 'classnames';
 require('./../../assets/styles/scoreboard.sass');
-const REFRESH_INTERVAL = 5000;
+const REFRESH_INTERVAL = 10000;
 
 class Scoreboard extends Component {
     constructor(props) {

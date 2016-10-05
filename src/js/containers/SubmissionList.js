@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import * as SubmissionActions from './../actions/Submission';
 import qs from 'qs';
 
-const REFRESH_INTERVAL = 5000;
+const REFRESH_INTERVAL = 10000;
 
 class SubmissionList extends Component {
     constructor(props) {
