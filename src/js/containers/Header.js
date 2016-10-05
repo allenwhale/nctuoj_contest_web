@@ -105,7 +105,7 @@ class Header extends Component {
                             this.props.user.account.isLOGIN ?  [
                                 <LinkContainer key="0" to="/user/"> 
                                     <NavItem>
-                                        Hi { this.props.user.account.name }
+                                        Agreement
                                     </NavItem> 
                                 </LinkContainer>, 
                                 <NavItem key="1" onClick={this.logout}>Logout</NavItem>

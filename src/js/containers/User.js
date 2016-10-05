@@ -10,7 +10,8 @@ import {
     Form,
     FormGroup,
     ControlLabel,
-    Button
+    Button,
+    Checkbox,
 } from 'react-bootstrap';
 import Config from './../utils/Config';
 import * as UserActions from './../actions/User';
@@ -32,7 +33,6 @@ class User extends Component {
                 <Grid fluid={true}>
                     <Row>
                         <Col md={12}>
-                            <h3>Upload Photo</h3>
                             <Form ref="form">
                                 <input type="hidden" name="token" value={this.props.user.account.token} />
                                 <FormGroup>
@@ -41,11 +41,29 @@ class User extends Component {
                                     </ControlLabel>
                                     <input type="file" className="form-control" name="file" />
                                 </FormGroup>
+                                <FormGroup>
+                                    <Checkbox name="follow_rule" inline>
+                                        We abide the rules during the contest.
+                                        (You must check this item if you would like to receive the prize.)
+                                    </Checkbox>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Checkbox name="new_team" inline>
+                                        We never participated the ACM-ICPC.
+                                        (You must check this item if you would like to receive the <b>newcomer prize</b>.)
+                                    </Checkbox>
+                                </FormGroup>
+                                <FormGroup>
+                                    <ControlLabel>
+                                        * Password
+                                    </ControlLabel>
+                                    <input type="password" className="form-control" name="password" required />
+                                </FormGroup>
                             </Form>
                             <Button
                                 bsStyle="success"
                                 onClick={this.putUserUpload}
-                            >Upload</Button>
+                            >Submit</Button>
                         </Col>
                     </Row>
                     <Row>
