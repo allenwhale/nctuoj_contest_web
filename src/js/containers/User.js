@@ -28,6 +28,8 @@ class User extends Component {
             data.set('new_team', '0')
         if(data.get('follow_rule') === null)
             data.set('follow_rule', '0')
+        let team = prompt('Please enter your team name on the scoreboard');
+        data.set('team', team)
         this.props.dispatch(UserActions.putUserUpload(data));
     }
 
@@ -43,31 +45,21 @@ class User extends Component {
                                     <ControlLabel>
                                         Take a photo of your team during the contest
                                     </ControlLabel>
-                                    <input type="file" className="form-control" name="file" />
+                                    <input type="file" className="form-control" name="file" onChange={this.putUserUpload}/>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Checkbox name="follow_rule" value="1" inline>
+                                <Checkbox name="follow_rule" value="1" defaultChecked={this.props.user.account.follow_rule} onChange={this.putUserUpload} inline>
                                         We abide the rules during the contest.
                                         (You must check this item if you would like to receive the prize.)
                                     </Checkbox>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Checkbox name="new_team" value="1" inline>
+                                    <Checkbox name="new_team" value="1" defaultChecked={this.props.user.account.new_team} onChange={this.putUserUpload} inline>
                                         We never participated the ACM-ICPC.
                                         (You must check this item if you would like to receive the <b>newcomer prize</b>.)
                                     </Checkbox>
                                 </FormGroup>
-                                <FormGroup>
-                                    <ControlLabel>
-                                        * Password
-                                    </ControlLabel>
-                                    <input type="password" className="form-control" name="password" required />
-                                </FormGroup>
                             </Form>
-                            <Button
-                                bsStyle="success"
-                                onClick={this.putUserUpload}
-                            >Submit</Button>
                         </Col>
                     </Row>
                     <Row>
