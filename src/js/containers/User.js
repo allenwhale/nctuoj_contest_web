@@ -46,6 +46,7 @@ class User extends Component {
                                         Take a photo of your team during the contest
                                     </ControlLabel>
                                     <input type="file" className="form-control" name="file" onChange={this.putUserUpload}/>
+                                    { this.props.user.account.photo.length != 0 ?  <img style={{maxWidth: '50%'}} src="/api/users/photo/" /> : ''}
                                 </FormGroup>
                                 <FormGroup>
                                 <Checkbox name="follow_rule" value="1" defaultChecked={this.props.user.account.follow_rule} onChange={this.putUserUpload} inline>
