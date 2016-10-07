@@ -47,7 +47,7 @@ class User extends Component {
                                     </ControlLabel>
                                     <input type="file" className="form-control" name="file" onChange={this.putUserUpload}/>
                                     { this.props.user.account.photo ?  <img style={{maxWidth: '50%'}} 
-                                        src=`${Config.baseUrl}/api/users/photo/?token=${this.props.user.account.token}&time=${this.props.user.account.updated_at}` /> : ''}
+                                        src={`${Config.baseUrl}/api/users/photo/?token=${this.props.user.account.token}&time=${this.props.user.account.updated_at}`} /> : ''}
                                 </FormGroup>
                                 <FormGroup>
                                 <Checkbox name="follow_rule" value="1" defaultChecked={this.props.user.account.follow_rule} onChange={this.putUserUpload} inline>
