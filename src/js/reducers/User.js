@@ -181,13 +181,24 @@ export default handleActions({
 
     PUT_USER_UPLOAD: {
         next(state, action) {
-            swal('Upload Successfully', '', 'success');
+            swal({
+                title: 'Upload Suceessfully',
+                type: 'success'
+            },() => {
+                location.href = location.href;
+            })
             return {
                 ...state,
             };
         },
         throw(state, action) {
-            swal('Upload Error', action.payload.msg, 'error');
+            swal({
+                title: 'Upload Error',
+                text: action.payload.msg,
+                type: 'error'
+            }, () => {
+                location.href = location.href;
+            })
             return {
                 ...state,
             };

@@ -43,7 +43,7 @@ class User extends Component {
                                 <input type="hidden" name="token" value={this.props.user.account.token} />
                                 <FormGroup>
                                     <ControlLabel>
-                                        Take a photo of your team during the contest
+                                        Take a photo of your team during the contest. Upload it to prove your participation.
                                     </ControlLabel>
                                     <input type="file" className="form-control" name="file" onChange={this.putUserUpload}/>
                                     { this.props.user.account.photo ?  <img style={{maxWidth: '50%'}} 
