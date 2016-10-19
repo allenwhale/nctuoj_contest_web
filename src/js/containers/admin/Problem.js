@@ -330,7 +330,7 @@ class Problem extends Component {
                                             <td>
                                                 <a
                                                     className="btn btn-default btn-sm"
-                                                    href={`${Config.baseUrl}/api/problems/${this.props.params.id}/testdata/${row.id}/input/`}
+                                                    href={`${Config.baseUrl}/api/problems/${this.props.params.id}/testdata/${row.id}/input/?token=${this.props.user.account.token}`}
                                                     download="input"
                                                 >下載</a>
                                             </td>
@@ -348,7 +348,7 @@ class Problem extends Component {
                                             <td>
                                                 <a
                                                     className="btn btn-default btn-sm"
-                                                    href={`${Config.baseUrl}/api/problems/${this.props.params.id}/testdata/${row.id}/output/`}
+                                                    href={`${Config.baseUrl}/api/problems/${this.props.params.id}/testdata/${row.id}/output/?token=${this.props.user.account.token}`}
                                                     download="output"
                                                 >下載</a>
                                             </td>
